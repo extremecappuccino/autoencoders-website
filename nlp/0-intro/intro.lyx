@@ -1,0 +1,533 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{hyperref}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+A Brief Introduction to Autoencoders in Deep Learning for Natural Language
+ Processing
+\end_layout
+
+\begin_layout Author
+Jordan Spooner
+\end_layout
+
+\begin_layout Section
+Deep Learning
+\end_layout
+
+\begin_layout Quote
+See [Neural Networks]
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Deep Learning
+\emph default
+ is a branch of machine learning that studies models which involve a large
+ amount of composition of learned functions or concepts 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Goodfellow2016"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Most machine learning algorithms require a large amount of human input in
+ the form of selecting 
+\emph on
+features
+\emph default
+ that cluster data in the desired way.
+ Often, designing features and representations requires an in-depth knowledge
+ of the data and its subject, and features that may work well for one specific
+ set of data are not guaranteed to work for a different, even similar, set.
+ 
+\emph on
+Representation learning
+\emph default
+ attempts to learn good features and representations, removing this barrier.
+ 
+\emph on
+Deep learning
+\emph default
+ algorithms (usually deep neural networks) then learn multiple levels of
+ representation at different levels of abstraction.
+ Each concept is defined in terms of simpler ones, and more abstract representat
+ions are computed from less abstract ones.
+ This is what makes deep learning algorithms particularly powerful, especially
+ in difficult tasks such as computer vision and natural language processing
+ (NLP) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2014"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The 
+\emph on
+Autoencoder 
+\emph default
+and its role in Deep Learning
+\end_layout
+
+\begin_layout Quote
+See [Autoencoders] [Stacked Autoencoders] [Pretraining Neural Networks]
+\end_layout
+
+\begin_layout Quote
+// Autoencoder Diagram
+\end_layout
+
+\begin_layout Standard
+On the following pages, we will mainly discuss applications of the 
+\emph on
+autoencoder
+\emph default
+ (AE) in NLP.
+ An autoencoder is a good example of a representation learning algorithm.
+ An autoencoder combines an encoder function and a decoder function, in
+ such a way that preserves as much input as possible, but is trained to
+ make the new representation have useful properties 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ng"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The autoencoder was used as a building block for deep networks, and indeed
+ a deep architecture is possible by simply `stacking' autoencoders, as described
+ by Vincent et al in 2008 and 2010.
+ Autoencoders are often used for the 
+\emph on
+pre-training
+\emph default
+ of deep networks.
+ This is done by training the hidden layers of a neural network individually
+ using autoencoders, then adding a final layer, such as for example a softmax
+ layer for classification problems.
+ This method has been shown to lead to a considerable increase in accuracy,
+ since the stacked autoencoder learns an optimal representation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vincent2008"
+
+\end_inset
+
+.
+ However, it should be noted that the use of rectified linear units (ReLUs),
+ as proposed by Glorot et al in 2011, has made pre-training largely unnecessary
+ in recent years 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glorot2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The 
+\emph on
+Recursive Autoencoder
+\end_layout
+
+\begin_layout Quote
+See [Recursive Autoencoders]
+\end_layout
+
+\begin_layout Quote
+// Recursive Autoencoder Diagram
+\end_layout
+
+\begin_layout Standard
+Many of the examples that follow make use of 
+\emph on
+recursive autoencoders
+\emph default
+ (RAE).
+ Say we have a representation for words, and want to deduce from this a
+ representation for a sentence.
+ We first build a binary tree structure for our sentence.
+ From this, we generate a 
+\emph on
+sequence
+\emph default
+ of representations.
+ For the first step, an autoencoder attempts to reconstruct two `leaf' inputs.
+ At each further step, the autoencoder attempts to reconstruct both the
+ input vector and the hidden vector from the previous step.
+ This should result in a final encoding that has been built in such a way
+ as to allow as much as possible the reconstruction of every input of the
+ sequence 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tan2014"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Natural Language Processing
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Natural Language Processing
+\emph default
+ (NLP) is a field of study which is interested in problems that involve
+ computers understanding human language.
+ NLP encompasses some of the oldest and most-difficult problems in computer
+ science.
+ In recent yeras, deep learning has allowed for promising advancements in
+ some of these semingly intractable problems, as demonstrated below 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2016"
+
+\end_inset
+
+.
+ All examples below can make use of autoencoders, as can be seen on their
+ individual pages in more detail:
+\end_layout
+
+\begin_layout Subsection
+Word Embeddings
+\end_layout
+
+\begin_layout Quote
+See [Word Embeddings and Phrase Representation]
+\end_layout
+
+\begin_layout Quote
+// Word Embedding Diagram
+\end_layout
+
+\begin_layout Standard
+In order to model a language, we need to be able to take words, sentences,
+ and paragraphs and map them to vectors.
+ Here, we consider the process of converting words to vectors.
+ There are several methods for doing so.
+\end_layout
+
+\begin_layout Standard
+The simplest method is arguably a one-hot representation.
+ This is where each word is represented by a vector containing a single
+ entry of 1 and all other entries are 0.
+ Clearly, this is an extremely wasteful representation (we would need many
+ thousands of dimensions for even a simple model).
+ Furthermore, such a representation is not able to show when words have
+ similar meanings.
+\end_layout
+
+\begin_layout Standard
+A solution to this is representing a word in terms of its most common neighbours.
+ For example the words `screen' and `display' are always used in similar
+ contexts and so should end up with similar representations.
+ We may either consider a window of 
+\begin_inset Formula $n$
+\end_inset
+
+ neighbouring words, where 
+\begin_inset Formula $n$
+\end_inset
+
+ generally ranges between 5 and 10, or consider all the words within a document.
+ We can then reduce the dimension of vectors, usually by singular value
+ decomposition (SVD), in order to produce a small representation (usually
+ to the order of 100 dimensions) which encaptures much of the meaning of
+ a word.
+ 
+\end_layout
+
+\begin_layout Standard
+Currently the best implementations use neural networks which attempt to
+ predict surrounding words (called the 
+\emph on
+skip-gram
+\emph default
+ model) paired with 
+\emph on
+negative sampling
+\emph default
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chaubard2016"
+
+\end_inset
+
+.
+ We will explain this implementation in further detail, as well as how autoencod
+ers can be used to compute representations for phrases.
+\end_layout
+
+\begin_layout Subsection
+Machine Translation
+\end_layout
+
+\begin_layout Quote
+See [Bilingual Word and Phrase Embeddings]
+\end_layout
+
+\begin_layout Quote
+// Varquois Pyramid
+\end_layout
+
+\begin_layout Standard
+Machine translation (MT) is an incredibely difficult problem, which has
+ been studied since the 1950s and is believed to be `AI-complete' (equivalent
+ to creating artificial general intelligence).
+ The aim is to accurately translate text from one human language to another.
+\end_layout
+
+\begin_layout Standard
+Traditional approaches included word-for-word (direct) translation.
+ This, as you might expect, produced very poor results, due in part to significa
+nt syntactic (structural) differences between most modern languages.
+ The solution to this was to analyse the syntax in the input language, produce
+ a parse tree, and then perform the translation producing a new parse tree
+ which can be used to generate the text in the output language.
+\end_layout
+
+\begin_layout Standard
+Still, errors occur due to homonyms: words can take very different meanings
+ in different contexts.
+ The solution to this is to analyse the semantics (meaning) in the source
+ language, and then generate the target text from this meaning.
+ This meaning can be encoded in the form of word, sentence and paragraph
+ vectors.
+\end_layout
+
+\begin_layout Standard
+These different methods are shown by a Varquois pyramid.
+ In general, the greater the depth of the intermediary representation, the
+ higher the quality of translation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2016"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We will discuss how autoencoders can be used to build bilingual word and
+ phrase representations.
+\end_layout
+
+\begin_layout Subsection
+Document Clustering
+\end_layout
+
+\begin_layout Quote
+See [Document Clustering]
+\end_layout
+
+\begin_layout Quote
+// Document Clustering
+\end_layout
+
+\begin_layout Standard
+Document classification is the problem of assigning documents (such as a
+ web page or news story) to categories.
+ In particular, we will discuss unsupervised document classification (document
+ clustering).
+ The challenge here is to represent documents in such a way that they can
+ be easily and accurately clustered.
+\end_layout
+
+\begin_layout Standard
+Approaches generally involve producing a vector with an entry for each word,
+ set to the number of times for which that word occurs in a given document.
+ This vector will of course have a very high dimensionality (one dimension
+ for each possible word), so its dimensionality will be reduced by means
+ of, for example, principle component analysis (PCA) along with various
+ other optimisations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Andrews2007"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We will study how autoencoders allow for a better representation than what
+ is achievable using methods such as PCA.
+\end_layout
+
+\begin_layout Subsection
+Sentiment Analysis
+\end_layout
+
+\begin_layout Quote
+See [Sentiment Analysis]
+\end_layout
+
+\begin_layout Standard
+We will look at the most basic task in sentiment analysis: determining the
+ 
+\emph on
+polarity
+\emph default
+ of a statement.
+ In other words, we want to tell whether a given text is positive, neutral
+ or negative.
+ This kind of sentiment analysis has significant applications in business,
+ such as for stock prediction and in product research and marketing.
+\end_layout
+
+\begin_layout Standard
+Early approaches simply look for positive or negative words and predict
+ the sentiment from this alone.
+ For example a review containing the word 
+\begin_inset Quotes eld
+\end_inset
+
+good
+\begin_inset Quotes erd
+\end_inset
+
+ is likely to be positive.
+ This approach can be implemented to be very fast, and for this reason is
+ still used by several companies that perform sentiment analysis on large
+ amounts of data in real time.
+ However, such strategies can be innaccurate (most studies have found this
+ method to be accurate for approximately 60-80% of the test data).
+ For example, they may fail to make the correct conclusion for texts with
+ negation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Turney2002"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We will discuss how approaches using vector word representations and recursive
+ autoencoders can achieve a much greater accuracy.
+\end_layout
+
+\begin_layout Subsection
+Paraphrase Detection
+\end_layout
+
+\begin_layout Quote
+See [Paraphrase Detection]
+\end_layout
+
+\begin_layout Standard
+Often in English, two phrases that look very different can have exactly
+ the same meaning.
+ We will continue from the previous page on word and phrase representation,
+ and show how deep learning allows for accurate detection of such phrases.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "intro"
+options "vancouver"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
