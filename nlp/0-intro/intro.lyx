@@ -77,8 +77,7 @@
 \begin_body
 
 \begin_layout Title
-A Brief Introduction to Autoencoders in Deep Learning for Natural Language
- Processing
+Applications of Autoencoders in Natural Language Processing
 \end_layout
 
 \begin_layout Author
@@ -86,7 +85,7 @@ Jordan Spooner
 \end_layout
 
 \begin_layout Section
-Deep Learning
+Autoencoders for Representation and Deep Learning
 \end_layout
 
 \begin_layout Quote
@@ -128,7 +127,7 @@ Representation learning
 \emph on
 Deep learning
 \emph default
- algorithms (usually deep neural networks) then learn multiple levels of
+ algorithms (such as deep neural networks) then learn multiple levels of
  representation at different levels of abstraction.
  Each concept is defined in terms of simpler ones, and more abstract representat
 ions are computed from less abstract ones.
@@ -147,13 +146,11 @@ key "Socher2014"
 \begin_layout Subsection
 The 
 \emph on
-Autoencoder 
-\emph default
-and its role in Deep Learning
+Autoencoder
 \end_layout
 
 \begin_layout Quote
-See [Autoencoders] [Stacked Autoencoders] [Pretraining Neural Networks]
+See [Autoencoders]
 \end_layout
 
 \begin_layout Quote
@@ -167,45 +164,12 @@ autoencoder
 \emph default
  (AE) in NLP.
  An autoencoder is a good example of a representation learning algorithm.
- An autoencoder combines an encoder function and a decoder function, in
- such a way that preserves as much input as possible, but is trained to
- make the new representation have useful properties 
+ It combines an encoder function and a decoder function, but is trained
+ in such a way to preserve the input as much as possible, whilst making
+ the new representation have useful properties 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Ng"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-The autoencoder was used as a building block for deep networks, and indeed
- a deep architecture is possible by simply `stacking' autoencoders, as described
- by Vincent et al in 2008 and 2010.
- Autoencoders are often used for the 
-\emph on
-pre-training
-\emph default
- of deep networks.
- This is done by training the hidden layers of a neural network individually
- using autoencoders, then adding a final layer, such as for example a softmax
- layer for classification problems.
- This method has been shown to lead to a considerable increase in accuracy,
- since the stacked autoencoder learns an optimal representation 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Vincent2008"
-
-\end_inset
-
-.
- However, it should be noted that the use of rectified linear units (ReLUs),
- as proposed by Glorot et al in 2011, has made pre-training largely unnecessary
- in recent years 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Glorot2011"
 
 \end_inset
 
@@ -239,7 +203,7 @@ recursive autoencoders
 \emph on
 sequence
 \emph default
- of representations.
+ of `hidden' representations.
  For the first step, an autoencoder attempts to reconstruct two `leaf' inputs.
  At each further step, the autoencoder attempts to reconstruct both the
  input vector and the hidden vector from the previous step.
@@ -255,8 +219,58 @@ key "Tan2014"
 .
 \end_layout
 
+\begin_layout Subsection
+Deep Learning with 
+\emph on
+Stacked Autoencoders
+\end_layout
+
+\begin_layout Quote
+[Stacked Autoencoders] [Digit Classification Example]
+\end_layout
+
+\begin_layout Quote
+// Stacked Autoencoder Diagram
+\end_layout
+
+\begin_layout Standard
+We will demonstrate how deep networks can be built with stacked autoencoders.
+ This is done by training individual autoencoders in turn, fine-tuning using
+ backpropogation, then adding a final layer, such as for example a softmax
+ layer for classification problems 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "AndrewNg"
+
+\end_inset
+
+.
+ The method of training layers individually has been shown to lead to a
+ considerable increase in accuracy 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Vincent2008"
+
+\end_inset
+
+.
+ However, it should be noted that the use of rectified linear units (ReLUs),
+ as proposed by Glorot et al in 2011, has made this form of 
+\emph on
+pre-training
+\emph default
+ largely unnecessary in recent years 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Glorot2011"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
-Natural Language Processing
+Applications in Natural Language Processing
 \end_layout
 
 \begin_layout Standard

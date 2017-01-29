@@ -1,0 +1,270 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{hyperref}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Recursive Autoencoders
+\end_layout
+
+\begin_layout Author
+Jordan Spooner
+\end_layout
+
+\begin_layout Quote
+[Autoencoders]
+\end_layout
+
+\begin_layout Standard
+As we know, autoencoders learn a (usually reduced dimensional) representation
+ of their inputs.
+ On this page, we will discuss how recursive autoencoders can take a sequence
+ of representation vectors, and return a useful (reduced dimensional) representa
+tion for that sequence.
+\end_layout
+
+\begin_layout Paragraph
+Vector Representations for Sequences
+\end_layout
+
+\begin_layout Standard
+Suppose we have a matrix 
+\begin_inset Formula $\mathbf{L}$
+\end_inset
+
+ of representation vectors and an ordered sequence of 
+\begin_inset Formula $m$
+\end_inset
+
+ elements, each with an index 
+\begin_inset Formula $k$
+\end_inset
+
+ which is used to get the element's vector representation in 
+\begin_inset Formula $\mathbf{L}$
+\end_inset
+
+.
+ Our look-up operation is then a simple projection, using a binary vector
+ 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+, with zero in every position except for the 
+\begin_inset Formula $k$
+\end_inset
+
+th index:
+\begin_inset Formula 
+\[
+\mathbf{x}_{i}=\mathbf{L}\mathbf{b}_{k}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can now express our ordered sequence of 
+\begin_inset Formula $m$
+\end_inset
+
+ elements as a sequence of 
+\begin_inset Formula $m$
+\end_inset
+
+ vector representations, namely 
+\begin_inset Formula $\left(\mathbf{x}_{1},\dots,\mathbf{x}_{m}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Applying Autoencoders Recursively
+\end_layout
+
+\begin_layout Standard
+We will now introduce a binary tree structure that allows for recursion,
+ by introducing a number of hidden respresentations.
+ Each parent node has two children.
+ In the base case, both children are vector representations for two sequence
+ elements, here we will use 
+\begin_inset Formula $x_{m}$
+\end_inset
+
+ and 
+\begin_inset Formula $x_{m-1}$
+\end_inset
+
+.
+ In every further case, we have one child as a hidden representation of
+ the sequence so far, say 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+, and the next 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ in our sequence to be processed.
+ Such a tree structure is shown in figure ??.
+ It should be noted that every hidden representation will have the same
+ dimensionality as the elements of the sequence.
+\end_layout
+
+\begin_layout Quote
+// Binary tree structure
+\end_layout
+
+\begin_layout Standard
+In order to compute a parent representation 
+\begin_inset Formula $\mathbf{p}$
+\end_inset
+
+, we consider its two children 
+\begin_inset Formula $\mathbf{c}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{c}_{2}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{p}=f\left(\mathbf{W}\left[\mathbf{c}_{1};\mathbf{c}_{2}\right]+\mathbf{b}\right)
+\]
+
+\end_inset
+
+Here we multiply a matrix of parameters 
+\begin_inset Formula $W\in\mathbb{R}^{n\times2n}$
+\end_inset
+
+ by the concatenation of the two children and add a bias term 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ We finally apply an activation function 
+\begin_inset Formula $f$
+\end_inset
+
+, usually a sigmoidal function such as 
+\begin_inset Formula $\tanh$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We then attempt to reconstruct the children from the parent vector in a
+ reconstruction layer:
+\begin_inset Formula 
+\[
+\left[\mathbf{c}_{1}';\mathbf{c}_{2}'\right]=\mathbf{W}'\mathbf{p}+\mathbf{b}'
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Benefits of Recursive Autoencoders for Representing Sequences
+\end_layout
+
+\begin_layout Standard
+Better than RAAM model, recurrent neural networks since sigmoid units are
+ continuous...
+ Pollock manually defined threshold to binarize vectors...
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "intro"
+options "vancouver"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
