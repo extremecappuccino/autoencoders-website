@@ -80,14 +80,6 @@
 Recursive Autoencoders
 \end_layout
 
-\begin_layout Author
-Jordan Spooner
-\end_layout
-
-\begin_layout Quote
-[Autoencoders]
-\end_layout
-
 \begin_layout Standard
 As we know, autoencoders learn a (usually reduced dimensional) representation
  of their inputs.
@@ -151,11 +143,26 @@ We can now express our ordered sequence of
 \begin_inset Formula $\left(\mathbf{x}_{1},\dots,\mathbf{x}_{m}\right)$
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pollack"
+
+\end_inset
+
 .
 \end_layout
 
 \begin_layout Paragraph
 Applying Autoencoders Recursively
+\end_layout
+
+\begin_layout Quote
+[Autoencoders]
+\end_layout
+
+\begin_layout Quote
+// ?? Binary tree structure
 \end_layout
 
 \begin_layout Standard
@@ -164,31 +171,42 @@ We will now introduce a binary tree structure that allows for recursion,
  Each parent node has two children.
  In the base case, both children are vector representations for two sequence
  elements, here we will use 
-\begin_inset Formula $x_{m}$
+\begin_inset Formula $\mathbf{x}_{1}$
 \end_inset
 
  and 
-\begin_inset Formula $x_{m-1}$
+\begin_inset Formula $\mathbf{x}_{2}$
 \end_inset
 
 .
  In every further case, we have one child as a hidden representation of
  the sequence so far, say 
-\begin_inset Formula $y_{i}$
+\begin_inset Formula $\mathbf{y}_{j}$
 \end_inset
 
 , and the next 
-\begin_inset Formula $x_{i}$
+\begin_inset Formula $\mathbf{x}_{i}$
 \end_inset
 
  in our sequence to be processed.
  Such a tree structure is shown in figure ??.
  It should be noted that every hidden representation will have the same
- dimensionality as the elements of the sequence.
+ dimensionality as the elements of the sequence, here called 
+\begin_inset Formula $n$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Tan"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Quote
-// Binary tree structure
+// Single autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -213,7 +231,7 @@ In order to compute a parent representation
 \end_inset
 
 Here we multiply a matrix of parameters 
-\begin_inset Formula $W\in\mathbb{R}^{n\times2n}$
+\begin_inset Formula $\mathbf{W}\in\mathbb{R}^{n\times2n}$
 \end_inset
 
  by the concatenation of the two children and add a bias term 
@@ -221,7 +239,7 @@ Here we multiply a matrix of parameters
 \end_inset
 
 .
- We finally apply an activation function 
+ We finally apply an element-wise activation function 
 \begin_inset Formula $f$
 \end_inset
 
@@ -245,20 +263,152 @@ We then attempt to reconstruct the children from the parent vector in a
 
 \end_layout
 
-\begin_layout Paragraph
-Benefits of Recursive Autoencoders for Representing Sequences
+\begin_layout Quote
+[Backpropogation]
 \end_layout
 
 \begin_layout Standard
-Better than RAAM model, recurrent neural networks since sigmoid units are
- continuous...
- Pollock manually defined threshold to binarize vectors...
+We can then calculate the reconstruction error by simply calculating the
+ Euclidean distance between the children and their reconstruction:
+\begin_inset Formula 
+\[
+E=0.5\left\Vert \left[\mathbf{c}_{1};\mathbf{c}_{2}\right]-\left[\mathbf{c}_{1}';\mathbf{c}_{2}'\right]\right\Vert ^{2}
+\]
+
+\end_inset
+
+We then backpropogate the error as usual, finding a representation that
+ encodes the children as well as possible.
+\end_layout
+
+\begin_layout Standard
+After computing the reconstruction 
+\begin_inset Formula $\left[\mathbf{c}_{1}';\mathbf{c}_{2}'\right]$
+\end_inset
+
+, if one of the children (say 
+\begin_inset Formula $\mathbf{c}_{2}'$
+\end_inset
+
+) is a non-terminal node (some 
+\begin_inset Formula $\mathbf{y}_{i}$
+\end_inset
+
+), we can again compute the reconstruction error of that 
+\begin_inset Formula $\mathbf{y}_{i}$
+\end_inset
+
+ using the reconstruction 
+\begin_inset Formula $\mathbf{c}_{2}'$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+This process is repeated for each parent node until we have constructed
+ the full tree, and calculated the reconstuction error for each element
+ in the original sequence 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Modifying our Recursive Autoencoder
+\end_layout
+
+\begin_layout Standard
+There are several adjustments we can make to optimise recursive autoencoders:
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Choosing a good tree structure
+\emph default
+: Note that there are many ways of building the binary tree structure.
+ One method of determining a good tree structure is to try a greedy algorithm
+ that tests each possibility at each step, and chooses the children nodes
+ that give the lowest reconstruction error.
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Choosing a good reconstruction error
+\emph default
+: We want our reconstruction error to penalise any representation that looses
+ the meaning of the sequence.
+ As such, it may be a good idea to penalise more heavily a reconstruction
+ error on a node that encodes lots of children (i.e.
+ many elements of the sequence), than a reconstruction error on a node that
+ represents fewer children.
+ We can implement this easily, by altering 
+\begin_inset Formula $E$
+\end_inset
+
+ to take into account the number of elements 
+\begin_inset Formula $n_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $n_{2}$
+\end_inset
+
+ underneath the child nodes 
+\begin_inset Formula $\mathbf{c}_{1}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{c}_{2}$
+\end_inset
+
+ respectively:
+\begin_inset Formula 
+\[
+E=\frac{n_{1}}{n_{1}+n_{2}}\left\Vert \mathbf{c}_{1}-\mathbf{c}_{1}'\right\Vert ^{2}+\frac{n_{2}}{n_{1}+n_{2}}\left\Vert \mathbf{c}_{2}-\mathbf{c}_{2}'\right\Vert ^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+
+\emph on
+Length normalisation
+\emph default
+: Recursive autoencoders compute the hidden representations that they then
+ reconstruct.
+ In order to minimise the reconstruction error, the RAE may compute a hidden
+ representation which is very small in magnitude, which will decrease the
+ reconstruction error, but is clearly undesirable as we will lose the meaning
+ of the sequence.
+ We can alleviate this effect by forcing the length of each node to have
+ length 1, through setting 
+\begin_inset Formula $\mathbf{p}=\mathbf{p}/\left\Vert \mathbf{p}\right\Vert $
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Li2013"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "intro"
+bibfiles "rae"
 options "vancouver"
 
 \end_inset
