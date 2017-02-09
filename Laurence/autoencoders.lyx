@@ -1,0 +1,226 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass RJournal
+\use_default_options true
+\begin_modules
+knitr
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package none
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine natbib
+\cite_engine_type authoryear
+\biblio_style plainnat
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Section
+Visualizing Trained Autoencoders
+\end_layout
+
+\begin_layout Standard
+Consider the case of a trained autoencoder on 20x20 black and white images,
+ so the number of input neurons to the network is 400.
+ To gain a better understanding on the inner workings of the network we
+ can try to visualize the input which maximizes any given hidden layer neuron.
+ We can now derive a formula for generating these images.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $a_{i}$
+\end_inset
+
+be the state of each hidden layer neuron, 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+the input neuron, 
+\begin_inset Formula $W_{ij}$
+\end_inset
+
+the weight between input 
+\begin_inset Formula $j$
+\end_inset
+
+ and hidden 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+the bias for hidden 
+\begin_inset Formula $i$
+\end_inset
+
+ and 
+\begin_inset Formula $f(x)$
+\end_inset
+
+ the chosen increasing activation function.
+ Each hidden neuron computes its inner state to be:
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size larger
+\begin_inset Formula $a_{i}=$
+\end_inset
+
+
+\begin_inset Formula $f(\sum_{j=1}^{400}W_{ij}x_{j}+b_{i})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Assuming the input to be constrained between -1 and 1 and ignoring the bias
+ term we can see that letting
+\end_layout
+
+\begin_layout Standard
+\align center
+
+\size larger
+\begin_inset Formula $x_{j}=\frac{W_{ij}}{\sqrt{\sum_{j=1}^{400}(W_{ij})^{2}}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Will lead to a highly activated function, as 
+\begin_inset Formula $(W_{ij})^{2}$
+\end_inset
+
+ is guaranteed to be positive and dividing by the squared allows 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+to maintain the constraint between -1 and 1.
+ We can then plot 
+\begin_inset Formula $x_{j}$
+\end_inset
+
+(the input) for each hidden layer to show what the neuron responds to from
+ the input.
+ In this case on a network trained on images of natural images with 100
+ hidden neurons can be visualized as this:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Laurence/Pictures/ExampleSparseAutoencoderWeights.png
+	lyxscale 50
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Visualization of the hidden layers in an autoencoder
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Each square shows the input required to activate each hidden layer neuron,
+ we can see that the network has trained to respond strongly to straight
+ edges of different sizes and orientations.
+ These features are not surprising as representing an image by a combination
+ of edges is a useful representation for the real world.
+ When trained on different images or other inputs (such as audio or some
+ abstract input type) the network will also learn a useful representation
+ like this.
+\end_layout
+
+\begin_layout Section
+R code chunks
+\end_layout
+
+\end_body
+\end_document
