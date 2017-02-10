@@ -83,8 +83,10 @@ Introduction to Autoencoders
 Nikolai Smirnov
 \end_layout
 
-\begin_layout Section
-Introduction
+\begin_layout Standard
+
+\series bold
+1 Introduction
 \end_layout
 
 \begin_layout Standard
@@ -113,29 +115,31 @@ Through an unsupervised learning algorithm, the autoencoder will try to
 .
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 
 \series bold
-History
+2 History
 \end_layout
 
 \begin_layout Standard
 LeCun 1987, Boulard and Kamp 1987, Zemel and Hinton 1994
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 
 \series bold
-Structure
+3 Structure
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 
 \series bold
-Variations
+4 Variations
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
+
+\series bold
 References
 \end_layout
 
