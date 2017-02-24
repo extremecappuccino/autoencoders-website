@@ -90,12 +90,31 @@ Qiang Feng
 Structure
 \end_layout
 
+\begin_layout Standard
+An artificial neuron in a neural network is essentially a mathematical function.
+ It recieves inputs from neurons in a previous layer (or, in the case of
+ the input layer, directly from a file or outside signal), performs a mathematic
+al function on it, and generates an output.
+\end_layout
+
 \begin_layout Section
 Activation Functions
 \end_layout
 
 \begin_layout Section
 Transfer Functions
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "neurons"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

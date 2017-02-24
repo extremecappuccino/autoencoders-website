@@ -192,8 +192,8 @@ key "LeslieSmith2008"
  The brain consists of billions of neurons, which may have connections in
  the form of synapses.
  In computer science, this is modelled as a weighted graph, consisting of
- nodes (which resemble the neurons) and arcs connecting one node to another
- (this resembles the synapses) 
+ nodes (which resemble the neurons) and directed arcs connecting one node
+ to another (this resembles the synapses) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "KevinGurneyIntro"
@@ -299,20 +299,137 @@ s of the output information (for example, there may be a node to output
 
 \begin_layout Standard
 Between the input and output layers, there may exist a number of hidden
- layers, which are used to perform more complicated data manipulation 
+ layers 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "BasicPaperNN"
 
 \end_inset
 
-.
+, which are used to perform more complicated data manipulation.
  For example, in a hidden layer, there may be a node which is used to detect
  a wheel in an image.
 \end_layout
 
 \begin_layout Section
 Types of Neural Networks
+\end_layout
+
+\begin_layout Standard
+Most neural networks follow the same general structure as the one described
+ above.
+ The difference between them comes from the ways they learn.
+ The most basic type of neural network is a feed-forward network.
+\end_layout
+
+\begin_layout Subsection
+Feed-Forward Neural Network
+\end_layout
+
+\begin_layout Standard
+In this type of neural network, there are no cycles (i.e.
+ there are no connections between neurons in the same layer) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "MULFeedForward"
+
+\end_inset
+
+, so information flows only flows forward - from the input nodes, through
+ any nodes in hidden layers, and finally to the output nodes.
+\end_layout
+
+\begin_layout Standard
+Feed-forward neural networks are generally used for classifying data that
+ is not dependent on time.
+ An example usage is shown below - in this case, it is used to classify
+ Cartesian coordinates.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename res/tf-ffnn.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:TensorFlowFFNN"
+
+\end_inset
+
+ Example of a Feed-Forward NN in TensorFlow Playground 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "TensorFlow"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Recurrent Neural Network
+\end_layout
+
+\begin_layout Standard
+In some situations, the data being input into the neural network is time-depende
+nt (i.e.
+ the inputs are entered in a certain order which needs to be preserved in
+ order to obtain the correct output).
+ This is where standard feed-forward networks cannot help, as the algorithms
+ used in calculating the output does not take time into account.
+\end_layout
+
+\begin_layout Standard
+In a recurrent neural network, information may flow both ways - i.e.
+ from layer 
+\begin_inset Formula $i$
+\end_inset
+
+ to layer 
+\begin_inset Formula $(i+x)$
+\end_inset
+
+, and also from layer 
+\begin_inset Formula $(i+x)$
+\end_inset
+
+ to layer 
+\begin_inset Formula $i$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
