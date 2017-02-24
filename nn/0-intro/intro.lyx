@@ -213,12 +213,9 @@ status open
 \begin_layout Plain Layout
 \noindent
 \align center
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-Neural Network Model
-\end_layout
+\begin_inset Graphics
+	filename res/nn-model.png
+	width 100text%
 
 \end_inset
 
@@ -229,10 +226,17 @@ Neural Network Model
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Example of a Neural Network
+Example of a Neural Network 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:Example-NN"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ModelNN"
 
 \end_inset
 
@@ -350,7 +354,7 @@ Feed-forward neural networks are generally used for classifying data that
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -368,13 +372,14 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+Example of a Feed-Forward NN in TensorFlow Playground 
 \begin_inset CommandInset label
 LatexCommand label
 name "fig:TensorFlowFFNN"
 
 \end_inset
 
- Example of a Feed-Forward NN in TensorFlow Playground 
+
 \begin_inset CommandInset citation
 LatexCommand cite
 key "TensorFlow"
