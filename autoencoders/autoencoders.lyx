@@ -1,10 +1,11 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
-\save_transient_properties true
-\origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -19,12 +20,12 @@
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100 100
-\font_tt_scale 100 100
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \default_output_format default
 \output_sync 0
-\bibtex_command bibtex
+\bibtex_command default
 \index_command default
 \paperfontsize default
 \spacing single
@@ -41,8 +42,8 @@
 \use_package stackrel 0
 \use_package stmaryrd 0
 \use_package undertilde 0
-\cite_engine natbib
-\cite_engine_type authoryear
+\cite_engine basic
+\cite_engine_type default
 \biblio_style plainnat
 \use_bibtopic false
 \use_indices false
@@ -140,7 +141,7 @@ the bias for hidden
 \end_inset
 
 
-\begin_inset Formula $f(\sum_{j=1}^{400}W_{ij}x_{j}+b_{i})$
+\begin_inset Formula $f(\sum_{j=1}^{400}W_{ij}x_{j})+b_{i}$
 \end_inset
 
 
@@ -189,18 +190,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename C:/Users/Laurence/Pictures/ExampleSparseAutoencoderWeights.png
-	lyxscale 50
-	scale 50
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -226,10 +215,36 @@ Each square shows the input required to activate each hidden layer neuron,
  When trained on different images or other inputs (such as audio or some
  abstract input type) the network will also learn a useful representation
  like this.
+ This kind of representation of images can be found in many other types
+ of nerual networks, particulary convulation nerual networks as they are
+ also tasked with processing natural image data and so develop similiar
+ latent representations of the input image 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "karpathyStanford"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
-R code chunks
+Image In-painting
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "autoencoders"
+options "vancouver"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
