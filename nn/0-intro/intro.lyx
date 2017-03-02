@@ -7,7 +7,6 @@
 \textclass article
 \begin_preamble
 \usepackage[hidelinks]{hyperref}
-\usepackage{tikz}
 \end_preamble
 \use_default_options true
 \begin_modules
@@ -208,7 +207,7 @@ key "KevinGurneyIntro"
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \noindent
@@ -320,9 +319,18 @@ Types of Neural Networks
 \end_layout
 
 \begin_layout Standard
-Most neural networks follow the same general structure as the one described
- above.
- The difference between them comes from the ways they learn.
+There are many types of neural networks, however, neural networks follow
+ the same general structure as the one described above.
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+The difference between them comes from the ways they learn.
+\end_layout
+
+\end_inset
+
  The most basic type of neural network is a feed-forward network.
 \end_layout
 
@@ -332,7 +340,7 @@ Feed-Forward Neural Network
 
 \begin_layout Standard
 In this type of neural network, there are no cycles (i.e.
- there are no connections between neurons in the same layer) 
+ there are no connections between neurons to itself) 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "MULFeedForward"
@@ -347,11 +355,12 @@ key "MULFeedForward"
 Feed-forward neural networks are generally used for classifying data that
  is not dependent on time.
  An example usage is shown below - in this case, it is used to classify
- Cartesian coordinates.
+ which Cartesian coordinates lie within a certain area.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -413,32 +422,113 @@ nt (i.e.
  the inputs are entered in a certain order which needs to be preserved in
  order to obtain the correct output).
  This is where standard feed-forward networks cannot help, as the algorithms
- used in calculating the output does not take time into account.
+ used in calculating the output does not take time into account, and does
+ not know what the previous input was.
 \end_layout
 
 \begin_layout Standard
-In a recurrent neural network, information may flow both ways - i.e.
- from layer 
-\begin_inset Formula $i$
+In a recurrent neural network, information may flow forwards, just like
+ a standard feed-forward network, but the network also maintains an internal
+ state - e.g.
+ the state may know what numbers have been input previously.
+ Information may flow from a neuron at a time step 
+\begin_inset Formula $t_{1}$
 \end_inset
 
- to layer 
-\begin_inset Formula $(i+x)$
+ to itself in the time step 
+\begin_inset Formula $t_{2}$
 \end_inset
 
-, and also from layer 
-\begin_inset Formula $(i+x)$
-\end_inset
-
- to layer 
-\begin_inset Formula $i$
+ where 
+\begin_inset Formula $t_{1}<t_{2}$
 \end_inset
 
 .
+ This way, at time 
+\begin_inset Formula $t$
+\end_inset
+
+ the neural network can take into account what was input into it at 
+\begin_inset Formula $t-1$
+\end_inset
+
+, hence these types of networks are good for predicting and learning from
+ sequential information - for example, speech recognition.
 \end_layout
 
-\begin_layout Section
-Uses of Neural Networks
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename res/rnn-model.png
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of a RNN model 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:RNN-Model"
+
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ModelRNN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:RNN-Model"
+
+\end_inset
+
+ shows a recurrent neural network with 1 hidden layer (A), unfolded to show
+ the network at different time steps.
+\end_layout
+
+\begin_layout Subsubsection
+Time Step
+\end_layout
+
+\begin_layout Standard
+A time step is simply an enumerated way of distinguishing between the internal
+ states of a neuron in a recurrent neural network.
 \end_layout
 
 \begin_layout Standard
