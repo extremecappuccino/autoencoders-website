@@ -6,7 +6,9 @@
 \origin unavailable
 \textclass article
 \begin_preamble
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
+\usepackage{tikz}
+\usepackage{pgfplots}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -92,25 +94,485 @@ Structure
 
 \begin_layout Standard
 An artificial neuron in a neural network is essentially a mathematical function.
- It recieves inputs from neurons in a previous layer (or, in the case of
- the input layer, directly from a file or outside signal), performs a mathematic
-al function on it, and generates an output.
+ It receives inputs from neurons in a previous layer (or, in the case of
+ the input layer, directly from a file or outside signal).
+ It then performs the summation:
+\begin_inset Formula 
+\[
+v=\sum w_{i}x_{i}
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ is the weight assigned to the arc the information is travelling through
+ and 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+ is the information passed through the arc 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ This is then passed through an activation function 
+\begin_inset Formula $f$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+v=f(\sum w_{i}x_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After the activation function, a bias 
+\begin_inset Formula $b_{i}$
+\end_inset
+
+ is added to 
+\begin_inset Formula $v$
+\end_inset
+
+ where 
+\begin_inset Formula $b$
+\end_inset
+
+ is the bias for input 
+\begin_inset Formula $i$
+\end_inset
+
+ for this neuron:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+v=f(\sum w_{i}x_{i})+b
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The result 
+\begin_inset Formula $v$
+\end_inset
+
+ is then output from this neuron.
+\end_layout
+
+\begin_layout Subsection
+Information
+\end_layout
+
+\begin_layout Standard
+All data passed into the neural network need to be in the form of vectors,
+ all of the same dimension 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DataForDeepLearningDL4J"
+
+\end_inset
+
+.
+ This is so that mathematical operations such as the one above can be performed
+ on the data.
+\end_layout
+
+\begin_layout Subsection
+Weights
+\end_layout
+
+\begin_layout Standard
+A weight is a number associated with an arc which carries information from
+ one neuron to another.
+ It is used to represent the fact that certain pairs of neurons have a stronger
+ connection (which is represented using a weight of higher absolute value),
+ and others have very weak to no connection at all (represented using a
+ weight 
+\begin_inset Formula $\left|w\right|\rightarrow0$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Biases
+\end_layout
+
+\begin_layout Standard
+A bias a constant (for a particular neuron) that is added onto the output
+ of the activation function.
+ Essentially, it is a measure of how easy it is for the neuron to activate
+ - the larger the bias, the easier it is to fire the neuron at a high rate)
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NNDLC1"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
-Activation Functions
+Activation Function
 \end_layout
 
-\begin_layout Section
-Transfer Functions
+\begin_layout Standard
+The purpose of the activation function is to decide whether or not the inputs
+ are significant enough to activate the neuron (i.e.
+ whether or not to activate the neuron, and also how active this neuron
+ should be) 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "CS231nCNN"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Unit Step
+\end_layout
+
+\begin_layout Standard
+The simplest activation function is the step function.
+ When the sum of the inputs with weights is greater than or equal 0, it
+ returns 1 (equivalent of the neuron firing).
+ Otherwise it returns 0 (the neuron remains inactive.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\begin{cases}
+1 & x\geq0\\
+0 & x<0
+\end{cases}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+addplot[mark=none,domain=-1:0]{0};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+addplot[mark=none,domain=0:1]{1};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+draw[solid] (axis cs:0,0) -- (axis cs:0,1);
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Sigmoid
+\end_layout
+
+\begin_layout Standard
+The Sigmoid activation function has a smooth transition from the 0 to 1,
+ so small changes in weights and biases result in small changes in the output
+ value.
+ This particular property of this function makes it useful for training
+ the neural network.
+ Using a learning algorithm such as Back Propagation, we can make small
+ changes in the weights of the arcs connecting to this neuron to get small
+ changes in the output, in order to reduce the error (the difference between
+ the expected and actual output).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\frac{1}{1+e^{-x}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+addplot[mark=none,domain=-5:5]{1/(1+e^-x)};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If the step function was used, the small changes in biases and weights would
+ not guarantee the change in output to be small, so it could affect the
+ entire network drastically 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NNDLC1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Tanh
+\end_layout
+
+\begin_layout Standard
+This function is very similar to the Sigmoid activation function.
+ However, it the range of this function is 
+\begin_inset Formula $[-1,1]$
+\end_inset
+
+ whereas the range of the Sigmoid function is 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\tanh(x)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+addplot[mark=none,domain=-5:5]{tanh(x)};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+ReLU (Rectified Linear Unit)
+\end_layout
+
+\begin_layout Standard
+This was the most popular non linear activation function in 2015 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NatureDL"
+
+\end_inset
+
+.
+ This is due to multi-layer neural networks (i.e.
+ multiple hidden layers) learning much faster than when using smooth activation
+ functions such as Tanh and Sigmoid.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(x)=\max(0,x)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+\align center
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{tikzpicture}
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+addplot[mark=none,domain=-5:5]{max(0,x)};
+\end_layout
+
+\begin_layout Plain Layout
+
+	
+\backslash
+end{axis}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{tikzpicture}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-btprint "btPrintAll"
 bibfiles "neurons"
-options "plain"
+options "vancouver"
 
 \end_inset
 
