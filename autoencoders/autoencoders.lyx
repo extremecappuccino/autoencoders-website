@@ -91,8 +91,16 @@ Visualising Trained Autoencoders
 \begin_layout Standard
 Consider the case of a trained autoencoder on 20x20 black and white images,
  so the number of input neurons to the network is 400.
+ The network has been trained to output the same image but has a constraint
+ on the number of hidden neurons in order to force the image to be compressed
+ to a more efficient internal representation.
+ This would be useful for other applications as reducing the input parameters
+ with minimal loss in reconstruction error (infomation loss) means that
+ other systems have less redundant inputs.
  To gain a better understanding on the inner workings of the network we
  can try to visualize the input which maximizes any given hidden layer neuron.
+ This will reveal exactly what kind of input each hidden neuron is responding
+ too, and so how the network has learned to represent the input.
  We can now derive a formula for generating these images.
 \end_layout
 
@@ -171,7 +179,15 @@ Will lead to a highly activated function, as
 \begin_inset Formula $x_{j}$
 \end_inset
 
-to maintain the constraint between -1 and 1.
+to maintain the constraint between -1 and 1 and offers a useful comparison
+ between inputs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "visualizingStanford"
+
+\end_inset
+
+.
  We can then plot 
 \begin_inset Formula $x_{j}$
 \end_inset
@@ -209,7 +225,14 @@ Visualization of the hidden layers in an autoencoder
 \begin_layout Standard
 Each square shows the input required to activate each hidden layer neuron,
  we can see that the network has trained to respond strongly to straight
- edges of different sizes and orientations.
+ edges of different sizes and orientations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "plottingMathworks"
+
+\end_inset
+
+.
  These features are not surprising as representing an image by a combination
  of edges is a useful representation for the real world.
  When trained on different images or other inputs (such as audio or some
@@ -230,10 +253,6 @@ key "karpathyStanford"
 
 \begin_layout Section
 Image In-painting
-\end_layout
-
-\begin_layout Standard
-
 \end_layout
 
 \begin_layout Standard
