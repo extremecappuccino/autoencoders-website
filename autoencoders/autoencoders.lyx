@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage[hidelinks]{hyperref}
@@ -12,16 +14,16 @@
 \language_package none
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default""
+\font_sans "" "default""
+\font_typewriter "" "default""
+\font_math "" "auto""
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -139,6 +141,10 @@ the bias for hidden
 
  the chosen increasing activation function.
  Each hidden neuron computes its inner state to be:
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -158,6 +164,10 @@ the bias for hidden
 \begin_layout Standard
 Assuming the input to be constrained between -1 and 1 and ignoring the bias
  term we can see that letting
+\begin_inset Separator latexpar
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -206,6 +216,15 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename imgs/ExampleSparseAutoencoderWeights.png
+	lyxscale 70
+	scale 70
+	rotateOrigin centerTop
+
+\end_inset
+
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -253,6 +272,97 @@ key "karpathyStanford"
 
 \begin_layout Section
 Image In-painting
+\end_layout
+
+\begin_layout Standard
+Image inpainting is the problem of restoring lost infomation from images,
+ classicaly a black sqaure has been overlayed on a random region of the
+ image causing permenant loss of infomation from the image.
+ The objective of image inpaiting is to restore this infomation by 
+\begin_inset Quotes eld
+\end_inset
+
+painting
+\begin_inset Quotes erd
+\end_inset
+
+ the lost region back in, so not only does the region of image loss need
+ to be identified it also needs to be restored by using infomation about
+ the surrounding regions of the image.
+ This problem has large scale applications in video and photo editing as
+ well as compression and image processing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "inpainting"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Autoencoders can be applied to solve this problem due to their abilities
+ in image processing and unsupervised training.
+ By stacking autoencorders into multiple layers (eg having 2 or more layers
+ in the encoding section of the network) this allows the network to learn
+ more abstract features and can be trained quickly by training the first
+ layer as an autoencoder, and then training the second layer seperately
+ before finally joing them together 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "inpaintingAutoEncoders"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The results of training on a 5 layer are shown below (right) with other
+ techniques in the middle and the original and corrupted image on the left.
+ The network has not only filled in the correct colour but has also re-establish
+ed basic features such as the shape of the eye.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imgs/inpainting.PNG
+	rotateOrigin centerTop
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Inpainting results for portrait photos.
+ From left to right, original image, corrupted image, iterative training
+ (3 layers), normal training (3 layer), iterative training (5 layer), normal
+ training (5 layer).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
