@@ -14,10 +14,10 @@
 \language_package none
 \inputencoding auto
 \fontencoding global
-\font_roman "" "default""
-\font_sans "" "default""
-\font_typewriter "" "default""
-\font_math "" "auto""
+\font_roman "" "default"
+\font_sans "" "default"
+\font_typewriter "" "default"
+\font_math "" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
@@ -97,7 +97,7 @@ Consider the case of a trained autoencoder on 20x20 black and white images,
  on the number of hidden neurons in order to force the image to be compressed
  to a more efficient internal representation.
  This would be useful for other applications as reducing the input parameters
- with minimal loss in reconstruction error (infomation loss) means that
+ with minimal loss in reconstruction error (information loss) means that
  other systems have less redundant inputs.
  To gain a better understanding on the inner workings of the network we
  can try to visualize the input which maximizes any given hidden layer neuron.
@@ -141,10 +141,6 @@ the bias for hidden
 
  the chosen increasing activation function.
  Each hidden neuron computes its inner state to be:
-\begin_inset Separator latexpar
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -164,10 +160,6 @@ the bias for hidden
 \begin_layout Standard
 Assuming the input to be constrained between -1 and 1 and ignoring the bias
  term we can see that letting
-\begin_inset Separator latexpar
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -213,13 +205,15 @@ key "visualizingStanford"
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
-	filename imgs/ExampleSparseAutoencoderWeights.png
+	filename res/ExampleSparseAutoencoderWeights.png
 	lyxscale 70
-	scale 70
+	width 65text%
 	rotateOrigin centerTop
 
 \end_inset
@@ -258,9 +252,9 @@ key "plottingMathworks"
  abstract input type) the network will also learn a useful representation
  like this.
  This kind of representation of images can be found in many other types
- of nerual networks, particulary convulation nerual networks as they are
- also tasked with processing natural image data and so develop similiar
- latent representations of the input image 
+ of neural networks, particularly convolution neural networks as they are
+ also tasked with processing natural image data and so develop similar latent
+ representations of the input image 
 \begin_inset CommandInset citation
 LatexCommand citet
 key "karpathyStanford"
@@ -275,10 +269,10 @@ Image In-painting
 \end_layout
 
 \begin_layout Standard
-Image inpainting is the problem of restoring lost infomation from images,
- classicaly a black sqaure has been overlayed on a random region of the
- image causing permenant loss of infomation from the image.
- The objective of image inpaiting is to restore this infomation by 
+Image in-painting is the problem of restoring lost information from images,
+ classically a black square has been overlayed on a random region of the
+ image causing permanent loss of information from the image.
+ The objective of image in-painting is to restore this information by 
 \begin_inset Quotes eld
 \end_inset
 
@@ -287,7 +281,7 @@ painting
 \end_inset
 
  the lost region back in, so not only does the region of image loss need
- to be identified it also needs to be restored by using infomation about
+ to be identified it also needs to be restored by using information about
  the surrounding regions of the image.
  This problem has large scale applications in video and photo editing as
  well as compression and image processing 
@@ -304,11 +298,11 @@ key "inpainting"
 \begin_layout Standard
 Autoencoders can be applied to solve this problem due to their abilities
  in image processing and unsupervised training.
- By stacking autoencorders into multiple layers (eg having 2 or more layers
- in the encoding section of the network) this allows the network to learn
- more abstract features and can be trained quickly by training the first
- layer as an autoencoder, and then training the second layer seperately
- before finally joing them together 
+ By stacking autoencoders into multiple layers (e.g.
+ having 2 or more layers in the encoding section of the network) this allows
+ the network to learn more abstract features and can be trained quickly
+ by training the first layer as an autoencoder, and then training the second
+ layer separately before finally joining them together 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "inpaintingAutoEncoders"
@@ -327,13 +321,16 @@ ed basic features such as the shape of the eye.
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
+\noindent
+\align center
 \begin_inset Graphics
-	filename imgs/inpainting.PNG
+	filename res/inpainting.png
 	rotateOrigin centerTop
 
 \end_inset
@@ -345,7 +342,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Inpainting results for portrait photos.
+In-painting results for portrait photos.
  From left to right, original image, corrupted image, iterative training
  (3 layers), normal training (3 layer), iterative training (5 layer), normal
  training (5 layer).
