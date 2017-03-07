@@ -1,0 +1,47 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@Electronic{https://blog.keras.io/building-autoencoders-in-keras.html,
+  Title                    = {Building Autoencoders in Keras},
+  Author                   = {Francois Chollet},
+  Month                    = {May},
+  Organization             = {Keras Blogs},
+  Url                      = {https://blog.keras.io/building-autoencoders-in-keras.html},
+  Year                     = {2016},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.02.28}
+}
+
+@Article{ERHAN2010,
+  Title                    = {Why Does Unsupervised Pre-training Help Deep Learning?},
+  Author                   = {ERHAN, BENGIO, COURVILLE, MANZAGOL, VINCENT AND BENGIO},
+  Journal                  = {Journal of Machine Learning Research 11},
+  Year                     = {2010},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.03.07}
+}
+
+@InProceedings{G.E.Hinton2006,
+  Title                    = {Reducing the Dimensionality of Data with Neural Networks},
+  Author                   = {G. E. Hinton, R. R. Salakhutdinov},
+  Booktitle                = {Science},
+  Year                     = {2006},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.02.28}
+}
+
+@Article{QianLeng2015,
+  Title                    = {One-Class Classification with Extreme Learning Machine},
+  Author                   = {Qian Leng, Honggang Qi, Jun Miao, Wentao Zhu, Guiping Su1},
+  Journal                  = {Mathematical Problems in Engineering},
+  Year                     = {2015},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.03.07},
+  Url                      = {https://www.hindawi.com/journals/mpe/2015/412957/}
+}
+
