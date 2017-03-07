@@ -6,7 +6,7 @@
 \origin unavailable
 \textclass article
 \begin_preamble
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -79,11 +79,22 @@
 \begin_body
 
 \begin_layout Title
-Dropout
+Optimisers
 \end_layout
 
 \begin_layout Author
-Qiang Feng
+Laurence Squires
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "optimisers"
+options "vancouver"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

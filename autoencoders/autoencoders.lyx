@@ -5,16 +5,19 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
 \language_package none
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default"
+\font_sans "" "default"
+\font_typewriter "" "default"
+\font_math "" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
@@ -24,7 +27,7 @@
 \graphics default
 \default_output_format default
 \output_sync 0
-\bibtex_command bibtex
+\bibtex_command default
 \index_command default
 \paperfontsize default
 \spacing single
@@ -41,8 +44,8 @@
 \use_package stackrel 0
 \use_package stmaryrd 0
 \use_package undertilde 0
-\cite_engine natbib
-\cite_engine_type authoryear
+\cite_engine basic
+\cite_engine_type default
 \biblio_style plainnat
 \use_bibtopic false
 \use_indices false
@@ -90,8 +93,16 @@ Visualising Trained Autoencoders
 \begin_layout Standard
 Consider the case of a trained autoencoder on 20x20 black and white images,
  so the number of input neurons to the network is 400.
+ The network has been trained to output the same image but has a constraint
+ on the number of hidden neurons in order to force the image to be compressed
+ to a more efficient internal representation.
+ This would be useful for other applications as reducing the input parameters
+ with minimal loss in reconstruction error (information loss) means that
+ other systems have less redundant inputs.
  To gain a better understanding on the inner workings of the network we
  can try to visualize the input which maximizes any given hidden layer neuron.
+ This will reveal exactly what kind of input each hidden neuron is responding
+ too, and so how the network has learned to represent the input.
  We can now derive a formula for generating these images.
 \end_layout
 
@@ -140,7 +151,7 @@ the bias for hidden
 \end_inset
 
 
-\begin_inset Formula $f(\sum_{j=1}^{400}W_{ij}x_{j}+b_{i})$
+\begin_inset Formula $f(\sum_{j=1}^{400}W_{ij}x_{j})+b_{i}$
 \end_inset
 
 
@@ -170,7 +181,15 @@ Will lead to a highly activated function, as
 \begin_inset Formula $x_{j}$
 \end_inset
 
-to maintain the constraint between -1 and 1.
+to maintain the constraint between -1 and 1 and offers a useful comparison
+ between inputs 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "visualizingStanford"
+
+\end_inset
+
+.
  We can then plot 
 \begin_inset Formula $x_{j}$
 \end_inset
@@ -186,21 +205,20 @@ to maintain the constraint between -1 and 1.
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
+\noindent
 \align center
 \begin_inset Graphics
-	filename C:/Users/Laurence/Pictures/ExampleSparseAutoencoderWeights.png
-	lyxscale 50
-	scale 50
+	filename res/ExampleSparseAutoencoderWeights.png
+	lyxscale 70
+	width 65text%
+	rotateOrigin centerTop
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -220,16 +238,139 @@ Visualization of the hidden layers in an autoencoder
 \begin_layout Standard
 Each square shows the input required to activate each hidden layer neuron,
  we can see that the network has trained to respond strongly to straight
- edges of different sizes and orientations.
+ edges of different sizes and orientations 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "plottingMathworks"
+
+\end_inset
+
+.
  These features are not surprising as representing an image by a combination
  of edges is a useful representation for the real world.
  When trained on different images or other inputs (such as audio or some
  abstract input type) the network will also learn a useful representation
  like this.
+ This kind of representation of images can be found in many other types
+ of neural networks, particularly convolution neural networks as they are
+ also tasked with processing natural image data and so develop similar latent
+ representations of the input image 
+\begin_inset CommandInset citation
+LatexCommand citet
+key "karpathyStanford"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
-R code chunks
+Image In-painting
+\end_layout
+
+\begin_layout Standard
+Image in-painting is the problem of restoring lost information from images,
+ classically a black square has been overlayed on a random region of the
+ image causing permanent loss of information from the image.
+ The objective of image in-painting is to restore this information by 
+\begin_inset Quotes eld
+\end_inset
+
+painting
+\begin_inset Quotes erd
+\end_inset
+
+ the lost region back in, so not only does the region of image loss need
+ to be identified it also needs to be restored by using information about
+ the surrounding regions of the image.
+ This problem has large scale applications in video and photo editing as
+ well as compression and image processing 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "inpainting"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Autoencoders can be applied to solve this problem due to their abilities
+ in image processing and unsupervised training.
+ By stacking autoencoders into multiple layers (e.g.
+ having 2 or more layers in the encoding section of the network) this allows
+ the network to learn more abstract features and can be trained quickly
+ by training the first layer as an autoencoder, and then training the second
+ layer separately before finally joining them together 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "inpaintingAutoEncoders"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The results of training on a 5 layer are shown below (right) with other
+ techniques in the middle and the original and corrupted image on the left.
+ The network has not only filled in the correct colour but has also re-establish
+ed basic features such as the shape of the eye.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename res/inpainting.png
+	rotateOrigin centerTop
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+In-painting results for portrait photos.
+ From left to right, original image, corrupted image, iterative training
+ (3 layers), normal training (3 layer), iterative training (5 layer), normal
+ training (5 layer).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "autoencoders"
+options "vancouver"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
