@@ -1,9 +1,7 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
-\save_transient_properties true
-\origin unavailable
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
@@ -19,8 +17,8 @@
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100 100
-\font_tt_scale 100 100
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -88,21 +86,36 @@ Introduction
 \end_layout
 
 \begin_layout Standard
+
+\series bold
+1.0 Intro
+\end_layout
+
+\begin_layout Standard
 An autoencoder is a neural network that is trained to copy its input to
- its output, with the typical purpose of dimenson reduction.
- It features an encoder function to create a hidden layer which contains
- a code to describe the input.
- There is also then a decoder which creates a reconstruciton of the input
- from the hidden layer.
+ its output, with the typical purpose of dimenson reduction - the process
+ of reducing the number of random variables under consideration.
+ It features an encoder function to create a smaller hidden layer (or multiple
+ layers) which contains a code to describe the input.
+ There is then a decoder which creates a reconstruciton of the input from
+ the hidden layer.
  An autoencoder can then become useful by only approximately copying the
  input to the output, when restricted to only learn useful properties of
  the data.
- 
+ This facilitates the classsification, visulization, communication and storage
+ of data.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "G.E.Hinton2006"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Through an unsupervised learning algorithm, the autoencoder will try to
- learn a fuction 
+ learn a fuction
 \begin_inset Formula $h_{W,b}(x)\approx x$
 \end_inset
 
@@ -111,6 +124,31 @@ Through an unsupervised learning algorithm, the autoencoder will try to
 \end_inset
 
 .
+ We can obtain optimum weights for this by starting wtih random weights
+ and calculating a gradient.
+ This is done by using the chain rule to backpropogate [LINK TO QIANG] error
+ derivatives through the decoder network and then the encoder network.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /homes/ns4516/Downloads/Screenshot-from-2014-05-09-233355.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+https://blog.keras.io/building-autoencoders-in-keras.html
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "intro"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -161,6 +199,17 @@ https://www.cs.toronto.edu/~hinton/absps/cvq.pdf
 
 \begin_layout Standard
 http://ai.stanford.edu/~quocle/tutorial2.pdf - autoencoders vs data compression
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "intro"
+options "vancouver"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
