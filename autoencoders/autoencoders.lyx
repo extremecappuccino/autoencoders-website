@@ -205,7 +205,7 @@ key "visualizingStanford"
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -324,7 +324,7 @@ ed basic features such as the shape of the eye.
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -371,6 +371,134 @@ options "vancouver"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Gradient Descent
+\end_layout
+
+\begin_layout Standard
+Gradient descent is the general purpose way to minimize a cost function
+ 
+\begin_inset Formula $J(\text{𝜃})$
+\end_inset
+
+ with 
+\begin_inset Formula $\text{𝜃}$
+\end_inset
+
+ being the parameters of the model (such as weights and biases).
+ The learning rate 
+\begin_inset Formula $\text{𝜂}$
+\end_inset
+
+ determines the speed at which it learns, and the step size we take at each
+ update interval, too slow a learning rate and convergence to the minimum
+ takes too long, too high the learning rate and the parameters will not
+ reach the minimum as they will not get fine-tuned.
+\end_layout
+
+\begin_layout Standard
+There are three main ways to do gradient descent, and choosing the correct
+ one depends on the amount of data and the trade-off the user makes between
+ speed and accuracy.
+\end_layout
+
+\begin_layout Subsection
+
+\series bold
+Batch gradient descent
+\end_layout
+
+\begin_layout Standard
+This is the most basic type of gradient descent and works well for small
+ data sets.
+ It computes the gradient of the cost function with respect to the parameters
+ of the model for the entire model.
+ This version of gradient descent is very slow and very expensive as the
+ entire data set needs to be processed for one update.
+ Furthermore, using this version on modern machine learning frameworks doesn't
+ support the adding of new examples (on-the-fly learning) as the model is
+ training, the reason for this is because the input is the entire data set
+ the model is designed to take inputs of that size, and any change to the
+ size of the inputs requires reloading of the model.
+\end_layout
+
+\begin_layout Subsection
+Stochastic gradient descent
+\end_layout
+
+\begin_layout Standard
+Stochastic gradient descent (SGD) is gradient descent performed for each
+ input, so each update interval occurs after one input has been processed
+ through the network.
+ This is a faster way of training the model than batch gradient descent
+ as batch will perform redundant computations for each update cycle as it
+ computes the whole data set and so the update is not granted to affect
+ the performance of a single input.
+ In addition, SGD allows for on the fly learning as the input size isn't
+ changed by adding more examples to the data set.
+ The downside is that while training the model the cost function will fluctuate
+ wildly as each input is different from each other.
+ This is shown in the graph below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename res/Stogra.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Wild fluctuation in the SGD cost function while training
+\begin_inset CommandInset citation
+LatexCommand cite
+key "sgdTraining"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Mini-batch gradient descent
+\end_layout
+
+\begin_layout Standard
+Mini-batch gradient descent is a mixture of the two previous methods.
+ Instead of training the network on the entire data set, the data set is
+ partitioned into batches of fixed size and then fed into the model for
+ training.
+ This enables it the converge fast like SGD but can also be computed faster,
+ most modern day machine learning libraries take advantage of the GPU and
+ its ability to perform large matrix calculations quickly, by fixing the
+ input size bigger than 1 (such as in SGD) this enables the entire input
+ to be generalized and stored in memory as a tensor (higher dimensional
+ matrix) and then computed through the model very quickly by the GPU.
+ This method then utilizes the best of the previous methods and is normally
+ the chosen method for practical machine learning.
 \end_layout
 
 \end_body
