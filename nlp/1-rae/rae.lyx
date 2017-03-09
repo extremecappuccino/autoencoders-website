@@ -80,6 +80,10 @@
 Recursive Autoencoders
 \end_layout
 
+\begin_layout Author
+Jordan Spooner
+\end_layout
+
 \begin_layout Standard
 As we know, autoencoders learn a (usually reduced dimensional) representation
  of their inputs.
@@ -143,6 +147,7 @@ We can now express our ordered sequence of
 \begin_inset Formula $\left(\mathbf{x}_{1},\dots,\mathbf{x}_{m}\right)$
 \end_inset
 
+.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -150,11 +155,11 @@ key "Pollack"
 
 \end_inset
 
-.
+
 \end_layout
 
-\begin_layout Paragraph
-Applying Autoencoders Recursively
+\begin_layout Section
+Unsupervised Recursive Autoencoders
 \end_layout
 
 \begin_layout Quote
@@ -195,6 +200,7 @@ We will now introduce a binary tree structure that allows for recursion,
 \begin_inset Formula $n$
 \end_inset
 
+.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -202,7 +208,7 @@ key "Tan"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Quote
@@ -308,18 +314,19 @@ After computing the reconstruction
 \begin_layout Standard
 This process is repeated for each parent node until we have constructed
  the full tree, and calculated the reconstuction error for each element
- in the original sequence 
+ in the original sequence.
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Socher2011"
 
 \end_inset
 
-.
+
 \end_layout
 
-\begin_layout Paragraph
-Modifying our Recursive Autoencoder
+\begin_layout Subsection
+Optimisations
 \end_layout
 
 \begin_layout Standard
@@ -395,6 +402,7 @@ Length normalisation
 \begin_inset Formula $\mathbf{p}=\mathbf{p}/\left\Vert \mathbf{p}\right\Vert $
 \end_inset
 
+.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -402,7 +410,7 @@ key "Li2013"
 
 \end_inset
 
-.
+
 \end_layout
 
 \begin_layout Standard
