@@ -88,9 +88,9 @@ Qiang Feng
 
 \begin_layout Standard
 Over fitting is a problem where the neural network performs very good when
- training data is used, however, when unseen data is input into the network,
- it performs poorly and the actual output is hugely different to the expected
- output 
+ training data is used, and performs poorly when unseen data is input into
+ the network (the actual output is hugely different to the expected output)
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "NikhilBudumaDL"
@@ -172,6 +172,12 @@ Dropout
 \end_layout
 
 \begin_layout Standard
+Dropout is a technique where certain neurons in a neural network are temporarily
+ disabled during the training phase.
+ This prevents the neural network from being dependent upon certain neurons.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -216,9 +222,42 @@ key "Dropout"
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
+
+\begin_layout Subsection
+Implementation
+\end_layout
+
+\begin_layout Itemize
+During 
+\series bold
+training
+\series default
+ time: each neuron in all hidden layers has a probability 
+\begin_inset Formula $p$
+\end_inset
+
+ which is determines to be the probability of it being enabled
+\end_layout
+
+\begin_layout Itemize
+During 
+\series bold
+use
+\series default
+: every neuron (in hidden layers) is always enabled, but all the output
+ arc weights are multiplied with with 
+\begin_inset Formula $p$
+\end_inset
+
+ (to ensure that the neuron outputs during use are the same as during training)
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dropout"
 
 \end_inset
 
