@@ -371,9 +371,9 @@ key "Chaubard2016"
 \end_layout
 
 \begin_layout Standard
-We will consider another implementation, proposed by Lebret and Collobert
- in 2015, which uses autoencoders to learn representations for words and
- phrases concurrently.
+We will consider a very simple implementation, proposed by Lebret and Collobert
+ in 2015, which uses autoencoders to jointly learn representations for words
+ and phrases.
 \end_layout
 
 \begin_layout Subsection
