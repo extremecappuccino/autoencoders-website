@@ -6,7 +6,7 @@
 \origin unavailable
 \textclass article
 \begin_preamble
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -94,6 +94,91 @@ In order for the neural network to learn, we need a learning algorithm so
 
 \begin_layout Section
 Back-Propagation
+\end_layout
+
+\begin_layout Standard
+Consider a cost function 
+\begin_inset Formula $J(\theta)$
+\end_inset
+
+ defined to be the error (i.e.
+ the difference between the expected and the actual output), where 
+\begin_inset Formula $\theta$
+\end_inset
+
+ is the parameters of the neural network (weights, biases etc).
+\end_layout
+
+\begin_layout Standard
+During training, training data is input into the neural network, and then
+ the output is compared with the expected output.
+ We then use 
+\begin_inset Formula $J$
+\end_inset
+
+ to determine the error of each neuron in the neural network.
+\end_layout
+
+\begin_layout Standard
+We then have an error term for each neuron, and a weight for each input
+ into that neuron, so we can then compute the partial derivative 
+\begin_inset Formula $\frac{\partial J}{\partial w}$
+\end_inset
+
+ where 
+\begin_inset Formula $w$
+\end_inset
+
+ is the weight of the output arc from that particular node.
+ This allows for the computation of the gradient of the cost function 
+\begin_inset Formula $J$
+\end_inset
+
+, which is then allows the optimisation method (such as gradient descent,
+ which will be discussed later on) to update the weight 
+\begin_inset Formula $w$
+\end_inset
+
+ for that output arc 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "NNDL"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Note that in order to work out 
+\begin_inset Formula $\frac{\partial J}{\partial w}$
+\end_inset
+
+, 
+\begin_inset Formula $J$
+\end_inset
+
+ must be differentiable, hence the activation function must also be differentiab
+le 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "RojasNN"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "learning"
+options "vancouver"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
