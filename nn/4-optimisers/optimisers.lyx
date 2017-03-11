@@ -1,9 +1,7 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
-\save_transient_properties true
-\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage[hidelinks]{hyperref}
@@ -22,8 +20,8 @@
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100 100
-\font_tt_scale 100 100
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -216,6 +214,147 @@ Mini-batch gradient descent is a mixture of the two previous methods.
  matrix) and then computed through the model very quickly by the GPU.
  This method then utilizes the best of the previous methods and is normally
  the chosen method for practical machine learning.
+\end_layout
+
+\begin_layout Section
+Optimisers
+\end_layout
+
+\begin_layout Standard
+For all the previous examples we have used the simplest form of the gradient
+ descent algorithm.
+ Simply calculating the gradient of the cost function, multiplying it by
+ a constant learning rate and then subtracting it from the current the parameter
+s so our parameters take a tiny step in the direction we hope minimises
+ the cost function.
+ This is shown in the update algorhtim below.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\text{𝜃}=\text{𝜃}-\text{\text{𝜂}∇J(𝜃)}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+Momentum
+\end_layout
+
+\begin_layout Standard
+The normal gradient descent algorithm has difficulty dealing with ravines,
+ or places with much sharper surface curves in one dimension.
+ This causes our parameters to constantly 
+\begin_inset Quotes eld
+\end_inset
+
+roll
+\begin_inset Quotes erd
+\end_inset
+
+ from one side of the ravine to the other as the gradient in these places
+ is much larger than the gradient leading us to the optimal solution.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename res/without_momentum.gif
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The update steps without momentum
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Momentum is a method that helps deal with this problem by simply adding
+ a momentum to the update step.
+ It achieves this by adding a fraction of the past update vector to the
+ current vector.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $v_{t}=0.9*v_{t-1}+\text{𝜂}\text{∇}J(\text{𝜃})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\text{𝜃 =𝜃 -v_{t}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+Therefore, our updates accumulate momentum in the correct direction and
+ reach the optimal solution much faster, as shown in this diagram.
+ This is similiar to how a ball rolls down a hill or ravine, accumulating
+ velocity in the direction towards the lowest point.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename res/with_momentum.gif
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The update step with momentum
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \begin_layout Standard
