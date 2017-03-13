@@ -1,9 +1,7 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
-\save_transient_properties true
-\origin unavailable
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
@@ -11,16 +9,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100 100
-\font_tt_scale 100 100
+\font_sf_scale 100
+\font_tt_scale 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -77,12 +75,6 @@
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-2.1 Denoising introduction
-\end_layout
-
-\begin_layout Standard
 The principle behind denoising autoencoders is to be able to reconstruct
  data from an input of corrupted data.
  After giving the autoencoder the corrupted data, we force the hidden layer
@@ -104,17 +96,7 @@ We can train a denoising autoencoder by stochastically corrupting data sets
  The autoencoder can then be trained against the original data.
  One way to corrupt the data would be simply to randomly remove some parts
  of the data, so that the autoencoder is trying to predict the missing input.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-2.2 Denoising for images
-\end_layout
-
-\begin_layout Standard
-An example of this is shown below, with the image an autoencoder is trained
+ An example of this is shown below, with the image an autoencoder is trained
  on being on the left, and a reconstruction of the middle image on the right.
 \end_layout
 
@@ -136,79 +118,6 @@ key "http://www.opendeep.org/v0.0.5/docs/tutorial-your-first-model"
 
 \begin_layout Standard
 
-\series bold
-2.3 Denoising autoencoders for learning Deep Networks
-\end_layout
-
-\begin_layout Standard
-By using a stacked autoencoder [LINK TO STACKED AUTOENCODERS] in an unsupervised
- manner, we can learn starting weights prior to the supervised fine-tuning
- training procedure with deep learning.
- A regularization effect is then created as a result of the pre-training
- procedure creating an initialization point, to which the parameters are
- restricted to a small volume of parameter space that is delineated by the
- boundry of the local basin of attraction [LINK TO SOMETHING THAT LETS THIS
- MAKE SENSE].
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ERHAN2010"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename ../0-intro/Pretraining Deep Networks.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Pre-training example visualisation
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The above image, created by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ERHAN2010"
-
-\end_inset
-
- is a 2D visulaization generated with ISOMAP of the functions represented
- by 50 networks with and 50 networks without pre-traning, for supervised
- training over MNIST (handwritten digits database) with 2 hidden layers.
- The colours from deep blue to cyan represent the progression in iterations.
- As the image shows, the pre-training models all start in a small region
- of space and decrease in variance, towards a basin of attraction [SOMEONE
- CONFIRM PLEASE].
- The traning was also quicker by pre-training the functions.
 \end_layout
 
 \begin_layout Standard

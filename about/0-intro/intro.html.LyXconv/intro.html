@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta name="generator" content="http://www.nongnu.org/elyxer/"/>
+<meta name="create-date" content="2017-03-10"/>
+<link rel="stylesheet" href="http://elyxer.nongnu.org/lyx.css" type="text/css" media="all"/>
+<title>Introduction to Autoencoders</title>
+</head>
+<body>
+<div id="globalWrapper">
+<h1 class="title">
+Introduction to Autoencoders
+</h1>
+<h2 class="author">
+Nikolai Smirnov
+</h2>
+<h1 class="Section">
+<a class="toc" name="toc-Section-1">1</a> Introduction
+</h1>
+<div class="Standard">
+<b>1.0 Intro</b>
+</div>
+<div class="Standard">
+An autoencoder is a neural network that is trained to copy its input to its output, with the typical purpose of dimenson reduction - the process of reducing the number of random variables under consideration. It features an encoder function to create a smaller hidden layer (or multiple layers) which contains a code to describe the input. There is then a decoder which creates a reconstruciton of the input from the hidden layer. An autoencoder can then become useful by only approximately copying the input to the output, when restricted to only learn useful properties of the data. This facilitates the classsification, visulization, communication and storage of data.<span class="bibcites">[<a class="bibliocite" name="cite-5" href="#biblio-5"><span class="bib-index">5</span></a>]</span>
+</div>
+<div class="Standard">
+Through an unsupervised learning algorithm, the autoencoder will try to learn a fuction<span class="formula"><i>h</i><sub><i>W</i>, <i>b</i></sub>(<i>x</i>) ≈ <i>x</i></span>, so as to minimise the mean square difference <span class="formula"><span class="limits"><span class="limit">∑</span></span>(<i>x</i> − <i>h</i><sub><i>W</i>, <i>b</i></sub>(<i>x</i>))<sup>2</sup></span>. We can obtain optimum weights for this by starting wtih random weights and calculating a gradient. This is done by using the chain rule to backpropogate [LINK TO QIANG] error derivatives through the decoder network and then the encoder network.
+</div>
+<div class="Standard">
+<div class="float">
+<a class="Label" name="Figure-1"> </a><div class="figure">
+<div class="caption">
+Figure 1 Layers in a autoencoder
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Standard">
+https://blog.keras.io/building-autoencoders-in-keras.html
+</div>
+<div class="Standard">
+<b>1.1 Uses</b>
+</div>
+<div class="Standard">
+The most intuative application of autoencoders is data compression [LINK TO DATA COMPRESSION]. Given an 256x256px image for example, a representation of a 28x28px may be learnt, which is easier to handle. We can also use denoising autoencoders [LINK TO DENOISING] to reconstruct corrupted data, often in the form of images. 
+</div>
+<div class="Standard">
+Another use is to pre-train deep networks [LINK TO DEEP NETWORKS]. By using a stacked autoencoder [LINK TO STACKED AUTOENCODERS] in an unsupervised manner, we can learn starting weights prior to the supervised fine-tuning training procedure with deep learning. A regularization effect is then created as a result of the pre-training procedure creating an initialization point, to which the parameters are restricted to a small volume of parameter space that is delineated by the boundry of the local basin of attraction [LINK TO SOMETHING THAT LETS THIS MAKE SENSE]. <span class="bibcites">[<a class="bibliocite" name="cite-4" href="#biblio-4"><span class="bib-index">4</span></a>]</span>
+</div>
+<div class="Standard">
+<div class="float">
+<a class="Label" name="Figure-2"> </a><div class="figure">
+<div class="center">
+<img class="embedded" src="Pretraining Deep Networks.png" alt="figure Pretraining Deep Networks.png" style="max-width: 426px; max-height: 366px;"/>
+
+</div>
+<div class="caption">
+Figure 2 Pre-training example visualisation
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="Standard">
+The above image, created by <span class="bibcites">[<a class="bibliocite" name="cite-4" href="#biblio-4"><span class="bib-index">4</span></a>]</span> is a 2D visulaization generated with ISOMAP of the functions represented by 50 networks with and 50 networks without pre-traning, for supervised training over MNIST (handwritten digits database) with 2 hidden layers. The colours from deep blue to cyan represent the progression in iterations. As the image shows, the pre-training models all start in a small region of space and decrease in variance, towards a basin of attraction [SOMEONE CONFIRM PLEASE]. The traning was also quicker by pre-training the functions.
+</div>
+<div class="Standard">
+Autoencoders can also be used to solve the one-class classifcation problem with raw data. This is where a neural network must be trained to identify an object from a specific class, but learning from a tranining set containing only objects of that class, for example to test if a nuclear power plant is peforming normally, since there have been few power plant accidents. Unlike other deep-learning architectures, autoencoders can be trained on one type of data and create a threshold, based on the maximum reconstruction error in the training set, to determine if a sample is a member of the class. <span class="bibcites">[<a class="bibliocite" name="cite-6" href="#biblio-6"><span class="bib-index">6</span></a>]</span>
+</div>
+<div class="Standard">
+<h1 class="biblio">
+References
+</h1>
+<p class="biblio">
+<span class="entry">[<a class="biblioentry" name="biblio-1"><span class="bib-index">1</span></a>] </span> <span class="bib-authors">BENGIO ERHAN</span>. <span class="bib-title">Why Does Unsupervised Pre-training Help Deep Learning?</span>. <i><span class="bib-journal">Journal of Machine Learning Research 11</span></i>, <span class="bib-year">2010</span>.
+</p>
+<p class="biblio">
+<span class="entry">[<a class="biblioentry" name="biblio-2"><span class="bib-index">2</span></a>] </span> <span class="bib-authors">R. R. Salakhutdinov G. E. Hinton</span>. <span class="bib-title">Reducing the Dimensionality of Data with Neural Networks</span>.  <i><span class="bib-booktitle">Science</span></i>, <span class="bib-year">2006</span>.
+</p>
+<p class="biblio">
+<span class="entry">[<a class="biblioentry" name="biblio-3"><span class="bib-index">3</span></a>] </span> <span class="bib-authors">Michael G. Madden Shehroz S. Khan</span>. <span class="bib-title">One-class classification: taxonomy of study and review of techniques</span>. <i><span class="bib-journal">The Knowledge Engineering Review</span></i>, <span class="bib-year">2014</span>.
+</p>
+
+</div>
+<h1 class="Section">
+<a class="toc" name="toc-Section-2">2</a> <b>History</b>
+</h1>
+<div class="Standard">
+LeCun 1987, Boulard and Kamp 1987, Zemel and Hinton 1994
+</div>
+<h1 class="Section">
+<a class="toc" name="toc-Section-3">3</a> <b>Structure</b>
+</h1>
+<h1 class="Section">
+<a class="toc" name="toc-Section-4">4</a> <b>Variations</b>
+</h1>
+<h1 class="Section">
+<a class="toc" name="toc-Section-5">5</a> References
+</h1>
+<div class="Standard">
+http://science.sciencemag.org/content/313/5786/504.full
+</div>
+<div class="Standard">
+http://www.deeplearningbook.org/contents/autoencoders.html
+</div>
+<div class="Standard">
+http://yann.lecun.com/ex/research/
+</div>
+<div class="Standard">
+http://ace.cs.ohiou.edu/~razvan/courses/dl6890/papers/bourlard-kamp88.pdf
+</div>
+<div class="Standard">
+https://www.cs.toronto.edu/~hinton/absps/cvq.pdf
+</div>
+<div class="Standard">
+http://ai.stanford.edu/~quocle/tutorial2.pdf - autoencoders vs data compression
+</div>
+<div class="Standard">
+<h1 class="biblio">
+References
+</h1>
+<p class="biblio">
+<span class="entry">[<a class="biblioentry" name="biblio-4"><span class="bib-index">4</span></a>] </span> <span class="bib-authors">BENGIO ERHAN</span>. <span class="bib-title">Why Does Unsupervised Pre-training Help Deep Learning?</span>. <i><span class="bib-journal">Journal of Machine Learning Research 11</span></i>, <span class="bib-year">2010</span>.
+</p>
+<p class="biblio">
+<span class="entry">[<a class="biblioentry" name="biblio-5"><span class="bib-index">5</span></a>] </span> <span class="bib-authors">R. R. Salakhutdinov G. E. Hinton</span>. <span class="bib-title">Reducing the Dimensionality of Data with Neural Networks</span>; <span class="bib-year">2006</span>.
+</p>
+<p class="biblio">
+<span class="entry">[<a class="biblioentry" name="biblio-6"><span class="bib-index">6</span></a>] </span> <span class="bib-authors">Michael G. Madden Shehroz S. Khan</span>. <span class="bib-title">One-class classification: taxonomy of study and review of techniques</span>. <i><span class="bib-journal">The Knowledge Engineering Review</span></i>, <span class="bib-year">2014</span>.
+</p>
+
+</div>
+
+</div>
+</body>
+</html>

@@ -2,6 +2,17 @@
 % Encoding: UTF-8
 
 
+@Article{Bourlard1988,
+  Title                    = {Auto-Association by Multilayer Perceptrons and Singular Value Decomposition},
+  Author                   = {Bourlard, Kamp},
+  Journal                  = {Biologicall Cybernetics},
+  Year                     = {1988},
+
+  Owner                    = {nik},
+  Timestamp                = {2017.03.11},
+  Url                      = {http://ace.cs.ohiou.edu/~razvan/courses/dl6890/papers/bourlard-kamp88.pdf}
+}
+
 @Electronic{https://blog.keras.io/building-autoencoders-in-keras.html,
   Title                    = {Building Autoencoders in Keras},
   Author                   = {Francois Chollet},
@@ -43,5 +54,27 @@
   Owner                    = {ns4516},
   Timestamp                = {2017.03.07},
   Url                      = {https://www.hindawi.com/journals/mpe/2015/412957/}
+}
+
+@Article{Rumelhrt1986,
+  Title                    = {Learning internal representations by error propogation},
+  Author                   = {Rumelhrt, Hinton, Williams},
+  Journal                  = {Parallel distributed processing:; explorations in the microstructure of congition},
+  Year                     = {1986},
+
+  Owner                    = {nik},
+  Timestamp                = {2017.03.11},
+  Url                      = {http://dl.acm.org/citation.cfm?id=104293}
+}
+
+@Article{ShehrozS.Khan2014,
+  Title                    = {One-class classification: taxonomy of study and
+review of techniques},
+  Author                   = {Shehroz S. Khan, Michael G. Madden},
+  Journal                  = {The Knowledge Engineering Review},
+  Year                     = {2014},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.03.07}
 }
 

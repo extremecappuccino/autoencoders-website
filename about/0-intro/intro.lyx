@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
@@ -9,16 +11,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default"
+\font_sans "" "default"
+\font_typewriter "" "default"
+\font_math "" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -73,16 +75,10 @@
 
 \begin_body
 
-\begin_layout Title
-Introduction to Autoencoders
-\end_layout
+\begin_layout Standard
 
-\begin_layout Author
-Nikolai Smirnov
-\end_layout
-
-\begin_layout Section
-Introduction
+\series bold
+1 - Introduction
 \end_layout
 
 \begin_layout Standard
@@ -110,7 +106,10 @@ key "G.E.Hinton2006"
 
 \end_inset
 
-
+.
+ Autoencoders are a form of unsupervised learning, meaning that an autoencoder
+ only needs unlabeled data - just a set of input data rather than input-output
+ pairs.
 \end_layout
 
 \begin_layout Standard
@@ -131,8 +130,30 @@ Through an unsupervised learning algorithm, the autoencoder will try to
 \end_layout
 
 \begin_layout Standard
-\begin_inset Graphics
-	filename /homes/ns4516/Downloads/Screenshot-from-2014-05-09-233355.png
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Layers in a autoencoder
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
 
 \end_inset
 
@@ -154,77 +175,19 @@ The most intuative application of autoencoders is data compression [LINK
  TO DATA COMPRESSION].
  Given an 256x256px image for example, a representation of a 28x28px may
  be learnt, which is easier to handle.
- We can also use denoising autoencoders [LINK TO DENOISING] to reconstruct
+\end_layout
+
+\begin_layout Standard
+We can also use denoising autoencoders [LINK TO DENOISING] to reconstruct
  corrupted data, often in the form of images.
  
 \end_layout
 
 \begin_layout Standard
-Another use is to pre-train deep networks [LINK TO DEEP NETWORKS].
- By using a stacked autoencoder [LINK TO STACKED AUTOENCODERS] in an unsupervise
-d manner, we can learn starting weights prior to the supervised fine-tuning
- training procedure with deep learning.
- A regularization effect is then created as a result of the pre-training
- procedure creating an initialization point, to which the parameters are
- restricted to a small volume of parameter space that is delineated by the
- boundry of the local basin of attraction [LINK TO SOMETHING THAT LETS THIS
- MAKE SENSE].
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ERHAN2010"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename Pretraining Deep Networks.png
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-The above image, created by 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ERHAN2010"
-
-\end_inset
-
- is a 2D visulaization generated with ISOMAP of the functions represented
- by 50 networks with and 50 networks without pre-traning, for supervised
- training over MNIST (handwritten digits database) with 2 hidden layers.
- The colours from deep blue to cyan represent the progression in iterations.
- As the image shows, the pre-training models all start in a small region
- of space and decrease in variance, towards a basin of attraction [SOMEONE
- CONFIRM PLEASE].
- The traning was also quicker by pre-training the functions.
-\end_layout
-
-\begin_layout Standard
-Autoencoders can also be used to solve the one-class classifcation problem
- with raw data.
- This is where a neural network must be trained to identify an object from
- a specific class, but learning from a tranining set containing only objects
- of that class, for example to test if a nuclear power plant is peforming
- normally, since there have been few power plant accidents.
- Unlike other deep-learning architectures, autoencoders can be trained on
- one type of data and create a threshold, based on the maximum reconstruction
- error in the training set, to determine if a sample is a member of the
- class.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ShehrozS.Khan2014"
-
-\end_inset
-
-
+Another use is to pre-train deep networks [LINK TO DEEP NETWORKS] [LINK
+ TO PRE-TRAINING] with stacked denoising autoencoders.
+ This is allows us to optimise deep learning solutions and avoid being stuck
+ in local minima as we might be with random initialization of weights.
 \end_layout
 
 \begin_layout Standard
@@ -238,54 +201,57 @@ options "plain"
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 
 \series bold
-History
+1.2 History
 \end_layout
 
 \begin_layout Standard
-LeCun 1987, Boulard and Kamp 1987, Zemel and Hinton 1994
-\end_layout
+The idea of autoencoders was first mentioned in 1986, in an article extensively
+ analysing backpropogation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rumelhrt1986"
 
-\begin_layout Section
+\end_inset
 
-\series bold
-Structure
-\end_layout
+.
+ In following years, the idea resurfaced in more research papers.
+ A 1988 paper by Boulard and Kamp on auto-association showed that 
+\begin_inset Quotes eld
+\end_inset
 
-\begin_layout Section
+for auto-association with linear output units, the optimal weight values
+ can be derived by standard linear algebra ...
+ making thus the nonlinear functions at the hidden layer completely unnecessary
+\begin_inset Quotes erd
+\end_inset
 
-\series bold
-Variations
-\end_layout
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bourlard1988"
 
-\begin_layout Section
-References
-\end_layout
+\end_inset
 
-\begin_layout Standard
-http://science.sciencemag.org/content/313/5786/504.full
-\end_layout
+.
+ Another notable paper is by Hinton and Zemel from 1994 which describes
+ a new objective function for training autoencoders that allows them to
+ discover non-linear, factorial representations
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton1994"
 
-\begin_layout Standard
-http://www.deeplearningbook.org/contents/autoencoders.html
-\end_layout
+\end_inset
 
-\begin_layout Standard
-http://yann.lecun.com/ex/research/
-\end_layout
-
-\begin_layout Standard
-http://ace.cs.ohiou.edu/~razvan/courses/dl6890/papers/bourlard-kamp88.pdf
-\end_layout
-
-\begin_layout Standard
-https://www.cs.toronto.edu/~hinton/absps/cvq.pdf
-\end_layout
-
-\begin_layout Standard
-http://ai.stanford.edu/~quocle/tutorial2.pdf - autoencoders vs data compression
+.
+ However, it is hard to attribute the ideas about autoencoders because the
+ literature is diverse and terminology has evolved over time.
+ A currently emerging learning algorithm is the extreme learning machine,
+ where the hidden node parameters are randomly generated and the output
+ weights are computed thus learning a linear model, in a way faster than
+ with backpropogation.
 \end_layout
 
 \begin_layout Standard
