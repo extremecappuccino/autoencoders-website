@@ -321,16 +321,6 @@ Types of Neural Networks
 \begin_layout Standard
 There are many types of neural networks, however, neural networks follow
  the same general structure as the one described above.
- 
-\begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-The difference between them comes from the ways they learn.
-\end_layout
-
-\end_inset
-
  The most basic type of neural network is a feed-forward network.
 \end_layout
 
