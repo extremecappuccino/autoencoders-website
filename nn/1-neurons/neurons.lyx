@@ -118,7 +118,27 @@ where
 \end_inset
 
 .
- This is then passed through an activation function 
+ A bias 
+\begin_inset Formula $b$
+\end_inset
+
+ is added on to this sum:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+v=\sum w_{i}x_{i}+b
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+After the bias is added, it is then passed through an activation function
+ 
 \begin_inset Formula $f$
 \end_inset
 
@@ -128,38 +148,7 @@ where
 \begin_layout Standard
 \begin_inset Formula 
 \[
-v=f(\sum w_{i}x_{i})
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-After the activation function, a bias 
-\begin_inset Formula $b_{i}$
-\end_inset
-
- is added to 
-\begin_inset Formula $v$
-\end_inset
-
- where 
-\begin_inset Formula $b$
-\end_inset
-
- is the bias for input 
-\begin_inset Formula $i$
-\end_inset
-
- for this neuron:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-v=f(\sum w_{i}x_{i})+b
+v=f(\sum w_{i}x_{i}+b)
 \]
 
 \end_inset
@@ -215,8 +204,8 @@ Biases
 \end_layout
 
 \begin_layout Standard
-A bias a constant (for a particular neuron) that is added onto the output
- of the activation function.
+A bias a constant (for a particular neuron) that is added onto the summation,
+ before it is passed to the activation function.
  Essentially, it is a measure of how easy it is for the neuron to activate
  - the larger the bias, the easier it is to fire the neuron at a high rate)
  
