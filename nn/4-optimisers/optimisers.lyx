@@ -1,5 +1,5 @@
 #LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+\lyxformat 508
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -14,10 +14,10 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "" "default"
-\font_sans "" "default"
-\font_typewriter "" "default"
-\font_math "" "auto"
+\font_roman "" " "
+\font_sans "" " "
+\font_typewriter "" " "
+\font_math "" " "
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
@@ -235,7 +235,7 @@ s so our parameters take a tiny step in the direction we hope minimises
 \begin_layout Standard
 \noindent
 \align center
-\begin_inset Formula $\text{𝜃}=\text{𝜃}-\text{\text{𝜂}∇J(𝜃)}$
+\begin_inset Formula $\theta=\theta-\eta\nabla J(\theta)$
 \end_inset
 
 
@@ -307,7 +307,7 @@ Momentum is a method that helps deal with this problem by simply adding
 \begin_layout Standard
 \noindent
 \align center
-\begin_inset Formula $v_{t}=0.9*v_{t-1}+\text{𝜂}\text{∇}J(\text{𝜃})$
+\begin_inset Formula $v_{t}=0.9\times v_{t-1}+\eta\nabla J(\theta)$
 \end_inset
 
 
