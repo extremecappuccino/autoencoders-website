@@ -116,7 +116,13 @@ During training, training data is input into the neural network, and then
 \begin_inset Formula $J$
 \end_inset
 
- to determine the error of each neuron in the neural network.
+ to determine the error of each output neuron in the last layer (output
+ layer) of the neural network.
+ Once this error has been calculated we can also calculate the error of
+ the previous layer as we have the error associated with each node and the
+ weight of each arc to that node.
+ This can be repeated for each layer of neurons in the network and so the
+ error is "back-propagated" through the network.
 \end_layout
 
 \begin_layout Standard

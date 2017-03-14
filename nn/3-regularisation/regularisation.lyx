@@ -174,7 +174,8 @@ Dropout
 \begin_layout Standard
 Dropout is a technique where certain neurons in a neural network are temporarily
  disabled during the training phase.
- This prevents the neural network from being dependent upon certain neurons.
+ This prevents the neural network from being dependent upon certain neurons
+ too much.
 \end_layout
 
 \begin_layout Standard
