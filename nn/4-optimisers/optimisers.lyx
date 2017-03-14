@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage[hidelinks]{hyperref}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default""
+\font_sans "" "default""
+\font_typewriter "" "default""
+\font_math "" "auto""
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -227,14 +229,16 @@ For all the previous examples we have used the simplest form of the gradient
  a constant learning rate and then subtracting it from the current the parameter
 s so our parameters take a tiny step in the direction we hope minimises
  the cost function.
- This is shown in the update algorhtim below.
+ This is shown in the update algorithm below.
 \end_layout
 
 \begin_layout Standard
+\noindent
+\align center
 \begin_inset Formula $\text{𝜃}=\text{𝜃}-\text{\text{𝜂}∇J(𝜃)}$
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Subsection
@@ -299,6 +303,8 @@ Momentum is a method that helps deal with this problem by simply adding
 \end_layout
 
 \begin_layout Standard
+\noindent
+\align center
 \begin_inset Formula $v_{t}=0.9*v_{t-1}+\text{𝜂}\text{∇}J(\text{𝜃})$
 \end_inset
 
@@ -306,16 +312,18 @@ Momentum is a method that helps deal with this problem by simply adding
 \end_layout
 
 \begin_layout Standard
-\begin_inset Formula $\text{𝜃 =𝜃 -v_{t}}$
+\noindent
+\align center
+\begin_inset Formula $\theta=\theta-v_{t}$
 \end_inset
 
- 
+
 \end_layout
 
 \begin_layout Standard
 Therefore, our updates accumulate momentum in the correct direction and
  reach the optimal solution much faster, as shown in this diagram.
- This is similiar to how a ball rolls down a hill or ravine, accumulating
+ This is similar to how a ball rolls down a hill or ravine, accumulating
  velocity in the direction towards the lowest point.
 \end_layout
 
