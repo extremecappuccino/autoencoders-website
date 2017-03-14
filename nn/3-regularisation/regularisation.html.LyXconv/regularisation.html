@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Regularisation</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="regularisation.tex"> 
+<meta name="date" content="2017-03-14 12:13:00"> 
+<link rel="stylesheet" type="text/css" href="regularisation.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Regularisation</h2>
+<div class="author" ><span 
+class="cmr-12">Qiang Feng</span></div>
+<br />
+<div class="date" ><span 
+class="cmr-12">March 14, 2017</span></div>
+</div>Over fitting is a problem where the neural network performs very good when training data is used, and performs
+poorly when unseen data is input into the network (the actual output is hugely different to the expected output) <span class="cite">[<a 
+href="#XNikhilBudumaDL">1</a>]</span>
+- i.e. the network is trying to match to the training data exactly. An illustration of this is shown in Figure
+<a 
+href="#x1-2r1">1<!--tex4ht:ref: fig:overfitting --></a>.
+<!--l. 36--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-2r1"></a>
+                                                                                         
+                                                                                         
+<!--l. 37--><p class="noindent" > <img 
+src="0_home_jordanspooner_Documents_163_Computing_To___website_nn_3-regularisation_res_overfitting.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">An example where over fitting has occurred </span></div><!--tex4ht:label?: x1-2r1 -->
+                                                                                         
+                                                                                         
+<!--l. 42--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 45--><p class="noindent" >The complex blue line is over fitted to the training data set, whereas the red line shows what an ideal match <span 
+class="cmti-10">should</span>
+be.
+<!--l. 48--><p class="noindent" >Regularisation is used to prevent over fitting. There are different regularisation techniques such as L1 and L2,
+however we will be looking at the Dropout technique in particular.
+<h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Dropout</h3>
+<!--l. 55--><p class="noindent" >Dropout is a technique where certain neurons in a neural network are temporarily disabled during the training
+phase. This prevents the neural network from being dependent upon certain neurons.
+<!--l. 59--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-1001r2"></a>
+                                                                                         
+                                                                                         
+<!--l. 60--><p class="noindent" > <img 
+src="1_home_jordanspooner_Documents_163_Computing_To___ers-website_nn_3-regularisation_res_dropout.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">A neural network before and after applying dropout  <span class="cite">[<a 
+href="#XDropout">2</a>]</span></span></div><!--tex4ht:label?: x1-1001r2 -->
+                                                                                         
+                                                                                         
+<!--l. 66--><p class="noindent" ></div><hr class="endfigure">
+<h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Implementation</h4>
+     <ul class="itemize1">
+     <li class="itemize">During <span 
+class="cmbx-10">training </span>time: each neuron in all hidden layers has a probability <span 
+class="cmmi-10">p </span>which is determines to be
+     the probability of it being enabled
+     </li>
+     <li class="itemize">During <span 
+class="cmbx-10">use</span>: every neuron (in hidden layers) is always enabled, but all the output arc weights are
+     multiplied with with <span 
+class="cmmi-10">p </span>(to ensure that the neuron outputs during use are the same as during training)
+     <span class="cite">[<a 
+href="#XDropout">2</a>]</span></li></ul>
+<!--l. 1--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-30001.1"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNikhilBudumaDL"></a>Buduma       N.       Deep       Learning       in       a       Nutshell;.                  Available       from:
+   <a 
+href="http://nikhilbuduma.com/2014/12/29/deep-learning-in-a-nutshell" class="url" ><span 
+class="cmtt-10">http://nikhilbuduma.com/2014/12/29/deep-_learning-_in-_a-_nutshell</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XDropout"></a>Srivastava                                  N,                                  Hinton                                  G,
+   Krizhevsky A, Sutskever I, Salakhutdinov R. Dropout: A Simple Way to Prevent Neural Networks from
+   Overfitting;. Available from: <a 
+href="http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf" class="url" ><span 
+class="cmtt-10">http://www.cs.toronto.edu/</span><span 
+class="cmtt-10">~</span><span 
+class="cmtt-10">rsalakhu/papers/srivastava14a.pdf</span></a>.
+</p>
+   </div>
+ 
+</body></html> 
+
+                                                                                         
+
+

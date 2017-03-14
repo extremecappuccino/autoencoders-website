@@ -1,0 +1,4 @@
+*.lyx~
+*.bak
+.*
+!/.gitignore

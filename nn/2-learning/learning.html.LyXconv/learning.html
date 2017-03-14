@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>How the Neural Network Learns</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="learning.tex"> 
+<meta name="date" content="2017-03-14 12:12:00"> 
+<link rel="stylesheet" type="text/css" href="learning.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">How the Neural Network Learns</h2>
+<div class="author" ><span 
+class="cmr-12">Qiang Feng</span></div>
+<br />
+<div class="date" ><span 
+class="cmr-12">March 14, 2017</span></div>
+</div>In order for the neural network to learn, we need a learning algorithm so that the weights and biases can be updated
+to improve the output. One of the most popular algorithms is Back Propagation.
+<h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Back-Propagation</h3>
+<!--l. 34--><p class="noindent" >Consider a cost function <span 
+class="cmmi-10">J</span>(<span 
+class="cmmi-10">&#x03B8;</span>) defined to be the error (i.e. the difference between the expected and the actual
+output), where <span 
+class="cmmi-10">&#x03B8; </span>is the parameters of the neural network (weights, biases etc).
+<!--l. 39--><p class="noindent" >During training, training data is input into the neural network, and then the output is compared with the expected
+output. We then use <span 
+class="cmmi-10">J </span>to determine the error of each neuron in the neural network.
+<!--l. 43--><p class="noindent" >We then have an error term for each neuron, and a weight for each input into that neuron, so we can then compute
+the partial derivative <img 
+src="learning0x.png" alt="&part;J
+&part;w--"  class="frac" align="middle"> where <span 
+class="cmmi-10">w </span>is the weight of the output arc from that particular node. This allows for the
+computation of the gradient of the cost function <span 
+class="cmmi-10">J</span>, which is then allows the optimisation method
+(such as gradient descent, which will be discussed later on) to update the weight <span 
+class="cmmi-10">w </span>for that output arc
+<span class="cite">[<a 
+href="#XNNDL">1</a>]</span>.
+<!--l. 51--><p class="noindent" >Note that in order to work out <img 
+src="learning1x.png" alt="&part;J-
+&part;w"  class="frac" align="middle">, <span 
+class="cmmi-10">J </span>must be differentiable, hence the activation function must also be
+differentiable <span class="cite">[<a 
+href="#XRojasNN">2</a>]</span>.
+<!--l. 1--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-20001"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNNDL"></a>Nielson     M.     How     the     backpropagation     algorithm     works;.            Available     from:
+   <a 
+href="http://neuralnetworksanddeeplearning.com/chap2.html" class="url" ><span 
+class="cmtt-10">http://neuralnetworksanddeeplearning.com/chap2.html</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XRojasNN"></a>Rojas        R.        The        Backpropagation        Algorithm;.                     Available        from:
+   <a 
+href="https://page.mi.fu-berlin.de/rojas/neural/chapter/K7.pdf" class="url" ><span 
+class="cmtt-10">https://page.mi.fu-_berlin.de/rojas/neural/chapter/K7.pdf</span></a>.
+                                                                                         
+                                                                                         
+</p>
+   </div>
+ 
+</body></html> 
+
+                                                                                         
+
+
