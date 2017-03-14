@@ -296,8 +296,8 @@ key "Socher2016"
 
 \end_inset
 
- All of the following examples can make use of autoencoders, as can be seen
- on their individual pages in more detail:
+ And indeed, autoencoders have been used in attempts to solve all of the
+ following problems:
 \end_layout
 
 \begin_layout Subsection
@@ -437,10 +437,6 @@ Document Clustering
 \end_layout
 
 \begin_layout Quote
-See [Document Clustering]
-\end_layout
-
-\begin_layout Quote
 // Document Clustering
 \end_layout
 
@@ -471,8 +467,21 @@ key "Andrews2007"
 \end_layout
 
 \begin_layout Standard
-We will study how autoencoders allow for a better representation than what
- is achievable using methods such as PCA.
+In 2006, Hinton used an autoencoder to reduce the dimensionality of 804
+ 414 vectors, each of 2000 dimensions, representing specific word probabilities
+ in newswire stories.
+ As can be seen by the results shown above, autoencoders significantly outperfor
+med the standard method of latent semantic analysis, which is based on PCA,
+ as well as a nonlinear dimensionality reduction algorithm proposed by Roweis
+ in 2000.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2006"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
