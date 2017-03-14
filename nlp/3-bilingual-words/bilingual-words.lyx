@@ -1,0 +1,519 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\begin_preamble
+\usepackage{hyperref}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Bilingual Representations
+\end_layout
+
+\begin_layout Author
+Jordan Spooner
+\end_layout
+
+\begin_layout Standard
+We will discuss another method for learning representations of phrases (namely
+ the bag-of-words approach), and see how this can be applied to bilingual
+ data where sentences are aligned.
+\end_layout
+
+\begin_layout Section
+Bag-of-Words
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:bow"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Quote
+// Bag-of-Words Diagram
+\end_layout
+
+\begin_layout Standard
+We assume a method for representing words in a vector in 
+\begin_inset Formula $\mathbb{R}^{D}$
+\end_inset
+
+ exists.
+ Methods for achieving this are discussed on other pages.
+ We also assume a vocabulary of words, size 
+\begin_inset Formula $V$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Given a sentence or phrase, we produce a representation by a simple additive
+ method, which is as follows:
+\end_layout
+
+\begin_layout Enumerate
+For each word in our vocabulary, we calculate its vector representation
+ in 
+\begin_inset Formula $\mathbb{R}^{D}$
+\end_inset
+
+.
+ We then define a matrix, say 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ of dimensions 
+\begin_inset Formula $D\times V$
+\end_inset
+
+.
+ The matrix 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ simply has the vector representation for each of the 
+\begin_inset Formula $V$
+\end_inset
+
+ vocabulary words as its columns.
+\end_layout
+
+\begin_layout Enumerate
+We start with a bag-of-words representation 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, such that each element in 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ is an index referencing a word in the vocabulary of 
+\begin_inset Formula $V$
+\end_inset
+
+ words.
+ Note that in a bag-of-words representation, the order of words in the sentence
+ is completely ignored.
+\end_layout
+
+\begin_layout Enumerate
+The encoder function sums over each colum of 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+ referring to a word in the given sentence or phrase, giving a result, which
+ we will call 
+\begin_inset Formula $\phi\left(\mathbf{x}\right)$
+\end_inset
+
+.
+ The decoder function is trained using a loss function that measures how
+ well we are able to reconstruct 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Fergus"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Concrete Implementation
+\end_layout
+
+\begin_layout Standard
+In practice, there are many ways to implement a bag-of-words approach to
+ learning phrase representations using autoencoders.
+ We will now discuss a concrete example:
+\end_layout
+
+\begin_layout Enumerate
+Using the bag-of-words representation 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+, we define 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ in 
+\begin_inset Formula $\mathbb{R}^{V}$
+\end_inset
+
+, whereby 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ is simply a binary vector, such that each 
+\begin_inset Formula $v_{i}$
+\end_inset
+
+ is 1 if the phrase contains the 
+\begin_inset Formula $i$
+\end_inset
+
+th word of the vocabulary, or 0 otherwise.
+\end_layout
+
+\begin_layout Enumerate
+It is now simple to find the encoder representation, 
+\begin_inset Formula $\phi\left(\mathbf{x}\right)$
+\end_inset
+
+ by multiplication of 
+\series bold
+
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+
+\series default
+ with 
+\begin_inset Formula $\mathbf{W}$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\phi\left(\mathbf{x}\right)=f\left(\mathbf{Wv}+\mathbf{b}\right)
+\]
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+ is a bias vector and 
+\begin_inset Formula $f$
+\end_inset
+
+ is a sigmoidal function, applied element wise to 
+\begin_inset Formula $\mathbf{Wx}+\mathbf{b}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+The decoder attempts to reconstruct 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ from 
+\begin_inset Formula $\phi\left(\mathbf{x}\right)$
+\end_inset
+
+:
+\begin_inset Formula 
+\[
+\mathbf{\hat{v}}=g\left(\mathbf{W}'\mathbf{x}+\mathbf{b}'\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Training attempts to minimise the difference between 
+\begin_inset Formula $\mathbf{v}$
+\end_inset
+
+ and its reconstruction.
+ This is done by using a cross-entropy loss function.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nielsen2017"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Bilingual Autoencoders
+\end_layout
+
+\begin_layout Quote
+// Bilingual Autoencoder Diagram
+\end_layout
+
+\begin_layout Standard
+Suppose we have a set of aligned 
+\begin_inset Formula $\left(\mathbf{x},\mathbf{y}\right)$
+\end_inset
+
+ sentence pairs in two languages, 
+\begin_inset Formula $X$
+\end_inset
+
+ and 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+We also assume vocabularies 
+\begin_inset Formula $V_{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $V_{Y}$
+\end_inset
+
+ for each language, and 
+\begin_inset Formula $\mathbf{W}_{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{W}_{Y}$
+\end_inset
+
+ of sizes 
+\begin_inset Formula $D\times V_{X}$
+\end_inset
+
+ and 
+\begin_inset Formula $D\times V_{Y}$
+\end_inset
+
+ respectively, as the word representation matrices as defined for a single
+ language in section 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sec:bow"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The encoder, similarly to before, produces:
+\begin_inset Formula 
+\begin{eqnarray*}
+\phi\left(\mathbf{x}\right) & = & f\left(\mathbf{W}_{X}\mathbf{v}\left(\mathbf{x}\right)+\mathbf{b}\right)\\
+\phi\left(\mathbf{y}\right) & = & f\left(\mathbf{W}_{Y}\mathbf{v}\left(\mathbf{y}\right)+\mathbf{b}\right)
+\end{eqnarray*}
+
+\end_inset
+
+where 
+\begin_inset Formula $\mathbf{b}$
+\end_inset
+
+ is the same for both languages to keep the representations on roughly the
+ same scale.
+ Note that both have dimension 
+\begin_inset Formula $D$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+The decoders are of the same form as before, but with individual parameters
+ for each language.
+\end_layout
+
+\begin_layout Paragraph
+The Loss Function
+\end_layout
+
+\begin_layout Standard
+This encoder-decoder structure gives us the benefit of being able to calculate
+ five different reconstruction errors:
+\end_layout
+
+\begin_layout Enumerate
+Reconstruction of 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ given input 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Reconstruction of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ given input 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Reconstruction of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ given input 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Reconstruction of 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+ given input 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Reconstruction of 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\series bold
+
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+
+\series default
+ given inputs 
+\begin_inset Formula $\mathbf{x}$
+\end_inset
+
+ and 
+\begin_inset Formula $\mathbf{y}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For training, we can simply optimise a sum of these loss functions.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ruder2012,Lauly,Chandar2014"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implementation
+\end_layout
+
+\begin_layout Quote
+// Python Implementation
+\end_layout
+
+\begin_layout Quote
+// Results
+\end_layout
+
+\begin_layout Quote
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bilingual-words"
+options "vancouver"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

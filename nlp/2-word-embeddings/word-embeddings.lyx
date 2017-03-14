@@ -86,7 +86,7 @@ Jordan Spooner
 
 \begin_layout Standard
 On this page, we will discuss how autoencoders can learn vector representations
- for phrases.
+ for phrases, as proposed by Lebret and Collobert in 2015.
  In order to do so, we will need to discuss first how to find vector representat
 ions for single words.
 \end_layout
@@ -952,8 +952,14 @@ Due to the large size of
 , we might choose to use negative sampling to speed up the training process.
  This reduces the number of words we will need to consider from hundreds
  of thousands to somewhere to the order of ten.
- This method is beyond the scope of what we will discuss here but there
- are [many excellent webpages] that describe the process of negative sampling.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "McCormick2017"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Paragraph
@@ -961,8 +967,8 @@ Joint Learning
 \end_layout
 
 \begin_layout Standard
-The benefit of this method, is that we can learn word representations that
- are optimal for summing, by jointly minimising the objective functions
+The benefit of this method (autoencoders), is that we can learn word representat
+ions that are optimal for summing, by jointly minimising the objective functions
  
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -985,13 +991,14 @@ Improving Phrase Representations
 \end_layout
 
 \begin_layout Quote
-[Sentiment Analysis]
+[Recursive Autoencoders] [Sentiment Analysis] [Paraphrase Detection]
 \end_layout
 
 \begin_layout Standard
 As we discussed earlier, this is a relitavely poor method for representing
  phrases.
- We discuss a much better method on the page for sentiment analysis.
+ We discuss a much better method on the pages for sentiment analysis and
+ paraphrase detection, which uses recursive autoencoders.
 \end_layout
 
 \begin_layout Section

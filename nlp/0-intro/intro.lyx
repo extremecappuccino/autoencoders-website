@@ -296,8 +296,8 @@ key "Socher2016"
 
 \end_inset
 
- All examples below can make use of autoencoders, as can be seen on their
- individual pages in more detail:
+ All of the following examples can make use of autoencoders, as can be seen
+ on their individual pages in more detail:
 \end_layout
 
 \begin_layout Subsection
@@ -429,7 +429,7 @@ key "Socher2016"
 
 \begin_layout Standard
 We will discuss how autoencoders can be used to build bilingual word and
- phrase representations.
+ phrase representations, as proposed by Chandar and Lauly in 2014.
 \end_layout
 
 \begin_layout Subsection
@@ -541,8 +541,8 @@ See [Paraphrase Detection]
 \begin_layout Standard
 Often in English, two phrases that look very different can have exactly
  the same meaning.
- We will continue from the previous page on word and phrase representation,
- and show how deep learning allows for accurate detection of such phrases.
+ We will continue from the previous page on sentiment analysis, and show
+ how deep learning allows for accurate detection of such phrases.
 \end_layout
 
 \begin_layout Standard
