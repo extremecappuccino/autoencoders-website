@@ -265,57 +265,9 @@ f(x)=\begin{cases}
 \begin_layout Standard
 \noindent
 \align center
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-addplot[mark=none,domain=-1:0]{0};
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-addplot[mark=none,domain=0:1]{1};
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-draw[solid] (axis cs:0,0) -- (axis cs:0,1);
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
+\begin_inset Graphics
+	filename res/graph-step.png
+	width 50text%
 
 \end_inset
 
@@ -352,43 +304,9 @@ f(x)=\frac{1}{1+e^{-x}}
 \begin_layout Standard
 \noindent
 \align center
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-addplot[mark=none,domain=-5:5]{1/(1+e^-x)};
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
+\begin_inset Graphics
+	filename res/graph-sigmoid.png
+	width 50text%
 
 \end_inset
 
@@ -439,43 +357,9 @@ f(x)=\tanh(x)
 \begin_layout Standard
 \noindent
 \align center
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-addplot[mark=none,domain=-5:5]{tanh(x)};
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
+\begin_inset Graphics
+	filename res/graph-tanh.png
+	width 50text%
 
 \end_inset
 
@@ -514,43 +398,9 @@ f(x)=\max(0,x)
 \begin_layout Standard
 \noindent
 \align center
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-begin{tikzpicture}
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-begin{axis}[xlabel=$x$, ylabel={$f(x)$}]
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-addplot[mark=none,domain=-5:5]{max(0,x)};
-\end_layout
-
-\begin_layout Plain Layout
-
-	
-\backslash
-end{axis}
-\end_layout
-
-\begin_layout Plain Layout
-
-
-\backslash
-end{tikzpicture}
-\end_layout
+\begin_inset Graphics
+	filename res/graph-relu.png
+	width 50text%
 
 \end_inset
 
