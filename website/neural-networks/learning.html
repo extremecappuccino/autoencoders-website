@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: How the Neural Network Learns</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+<!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="">Introduction to Neural Networks</a></li>
+      <li><a href="">Introduction to Autoencoders</a></li>
+      <li><a href="">Uses of Autoencoders</a></li>
+      <li class="last"><a href="">Use Case: Natural Language Processing</a></li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">How the Neural Network Learns</h2>
+    In order for the neural network to learn, we need a learning algorithm so that the weights and biases can be updated to improve the output. One of the most popular algorithms is Back Propagation.
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Back-Propagation</h3><!--l. 34-->
+    <p class="noindent">Consider a cost function $J(\theta)$ defined to be the error (i.e. the difference between the expected and the actual output), where $\theta$ is the parameters of the neural network (weights, biases etc). <!--l. 39--></p>
+    <p class="noindent">During training, training data is input into the neural network, and then the output is compared with the expected output. We then use $J$ to determine the error of each output neuron in the last layer (output layer) of the neural network. Once this error has been calculated we can also calculate the error of the previous layer as we have the error associated with each node and the weight of each arc to that node. This can be repeated for each layer of neurons in the network and so the error is "back-propagated" through the network. <!--l. 43--></p>
+    <p class="noindent">We then have an error term for each neuron, and a weight for each input into that neuron, so we can then compute the partial derivative $\frac{\partial J}{\partial w}$ where $w$ is the weight of the output arc from that particular node. This allows for the computation of the gradient of the cost function $J$, which is then allows the optimisation method (such as gradient descent, which will be discussed later on) to update the weight $w$ for that output arc <span class="cite">[<a href="#XNNDL">1</a>]</span>. <!--l. 51--></p>
+    <p class="noindent">Note that in order to work out $\frac{\partial J}{\partial w}$, $J$ must be differentiable, hence the activation function must also be differentiable <span class="cite">[<a href="#XRojasNN">2</a>]</span>. <!--l. 1--></p>
+    <p class="noindent"></p>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-20001"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XNNDL"></a>Nielson M. How the backpropagation algorithm works;. Available from: <a class="url" href="http://neuralnetworksanddeeplearning.com/chap2.html"><span class="cmtt-10">http://neuralnetworksanddeeplearning.com/chap2.html</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XRojasNN"></a>Rojas R. The Backpropagation Algorithm;. Available from: <a class="url" href="https://page.mi.fu-berlin.de/rojas/neural/chapter/K7.pdf"><span class="cmtt-10">https://page.mi.fu-_berlin.de/rojas/neural/chapter/K7.pdf</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

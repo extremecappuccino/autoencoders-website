@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Optimisers</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+<!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="">Introduction to Neural Networks</a></li>
+      <li><a href="">Introduction to Autoencoders</a></li>
+      <li><a href="">Uses of Autoencoders</a></li>
+      <li class="last"><a href="">Use Case: Natural Language Processing</a></li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Optimisers</h2>
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Gradient Descent</h3><!--l. 33-->
+    <p class="noindent">Gradient descent is the general purpose way to minimize a cost function $J(\theta)$ with $\theta$ being the parameters of the model (such as weights and biases). The learning rate $\eta$ determines the speed at which it learns, and the step size we take at each update interval, too slow a learning rate and convergence to the minimum takes too long, too high the learning rate and the parameters will not reach the minimum as they will not get fine-tuned. <!--l. 42--></p>
+    <p class="noindent">There are three main ways to do gradient descent, and choosing the correct one depends on the amount of data and the trade-off the user makes between speed and accuracy. <!--l. 47--></p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">1.1</span> <a id="x1-20001.1"></a>Batch gradient descent</h4><!--l. 49-->
+    <p class="noindent">This is the most basic type of gradient descent and works well for small data sets. It computes the gradient of the cost function with respect to the parameters of the model for the entire model. This version of gradient descent is very slow and very expensive as the entire data set needs to be processed for one update. Furthermore, using this version on modern machine learning frameworks doesn&#8217;t support the adding of new examples (on-the-fly learning) as the model is training, the reason for this is because the input is the entire data set the model is designed to take inputs of that size, and any change to the size of the inputs requires reloading of the model. <!--l. 61--></p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">1.2</span> <a id="x1-30001.2"></a>Stochastic gradient descent</h4><!--l. 63-->
+    <p class="noindent">Stochastic gradient descent (SGD) is gradient descent performed for each input, so each update interval occurs after one input has been processed through the network. This is a faster way of training the model than batch gradient descent as batch will perform redundant computations for each update cycle as it computes the whole data set and so the update is not granted to affect the performance of a single input. In addition, SGD allows for on the fly learning as the input size isn&#8217;t changed by adding more examples to the data set. The downside is that while training the model the cost function will fluctuate wildly as each input is different from each other. This is shown in the graph below. <!--l. 75--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-3001r1"></a> <!--l. 76-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/sgdstd.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Wild fluctuation in the SGD cost function while training <span class="cite">[<a href="#XsgdTraining">1</a>]</span></span>
+      </div><!--tex4ht:label?: x1-3001r1 -->
+      <!--l. 81-->
+      <p class="noindent"></p>
+    </div>
+    <h4 class="subsectionHead"><span class="titlemark">1.3</span> <a id="x1-40001.3"></a>Mini-batch gradient descent</h4><!--l. 87-->
+    <p class="noindent">Mini-batch gradient descent is a mixture of the two previous methods. Instead of training the network on the entire data set, the data set is partitioned into batches of fixed size and then fed into the model for training. This enables it the converge fast like SGD but can also be computed faster, most modern day machine learning libraries take advantage of the GPU and its ability to perform large matrix calculations quickly, by fixing the input size bigger than 1 (such as in SGD) this enables the entire input to be generalized and stored in memory as a tensor (higher dimensional matrix) and then computed through the model very quickly by the GPU. This method then utilizes the best of the previous methods and is normally the chosen method for practical machine learning. <!--l. 101--></p>
+    <p class="noindent"></p>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-50002"></a>Optimisers</h3><!--l. 103-->
+    <p class="noindent">For all the previous examples we have used the simplest form of the gradient descent algorithm. Simply calculating the gradient of the cost function, multiplying it by a constant learning rate and then subtracting it from the current the parameters so our parameters take a tiny step in the direction we hope minimises the cost function. This is shown in the update algorithm below. <!--l. 110--></p>
+    <p class="noindent"></p>
+    <div class="center">
+      <!--l. 110-->
+      <p class="noindent"><!--l. 111--></p>
+      <p class="noindent">$\theta=\theta-\eta\nabla J(\theta)$</p>
+    </div><!--l. 115-->
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">2.1</span> <a id="x1-60002.1"></a>Momentum</h4><!--l. 117-->
+    <p class="noindent">The normal gradient descent algorithm has difficulty dealing with ravines, or places with much sharper surface curves in one dimension. This causes our parameters to constantly &#8220;roll&#8221; from one side of the ravine to the other as the gradient in these places is much larger than the gradient leading us to the optimal solution. <!--l. 123--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-6001r2"></a> <!--l. 124-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/without-momentum.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">The update steps without momentum</span>
+      </div><!--tex4ht:label?: x1-6001r2 -->
+      <!--l. 129-->
+      <p class="noindent"></p>
+    </div>
+    <!--l. 132-->
+    <p class="noindent">Momentum is a method that helps deal with this problem by simply adding a momentum to the update step. It achieves this by adding a fraction of the past update vector to the current vector. <!--l. 136--></p>
+    <p class="noindent"></p>
+    <div class="center">
+      <!--l. 136-->
+      <p class="noindent"><!--l. 137--></p>
+      <p class="noindent">$v_{t}=0.9\times v_{t-1}+\eta\nabla J(\theta)$</p>
+    </div><!--l. 140-->
+    <p class="noindent"></p>
+    <div class="center">
+      <!--l. 140-->
+      <p class="noindent"><!--l. 141--></p>
+      <p class="noindent">$\theta=\theta-v_{t}$</p>
+    </div><!--l. 144-->
+    <p class="noindent">Therefore, our updates accumulate momentum in the correct direction and reach the optimal solution much faster, as shown in this diagram. This is similar to how a ball rolls down a hill or ravine, accumulating velocity in the direction towards the lowest point. <!--l. 149--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-6002r3"></a> <!--l. 150-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/with-momentum.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;3:</span> <span class="content">The update step with momentum</span>
+      </div><!--tex4ht:label?: x1-6002r3 -->
+      <!--l. 155-->
+      <p class="noindent"></p>
+    </div>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-70002.1"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XsgdTraining"></a>Wikipedia. Fluctuation in Cost Function for SGD;. Available from: <a class="url" href="https://en.wikipedia.org/wiki/Stochastic_gradient_descent"><span class="cmtt-10">https://en.wikipedia.org/wiki/Stochastic_gradient_descent</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Regularisation</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+<!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="">Introduction to Neural Networks</a></li>
+      <li><a href="">Introduction to Autoencoders</a></li>
+      <li><a href="">Uses of Autoencoders</a></li>
+      <li class="last"><a href="">Use Case: Natural Language Processing</a></li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Regularisation</h2>
+    Over fitting is a problem where the neural network performs very good when training data is used, and performs poorly when unseen data is input into the network (the actual output is hugely different to the expected output) <span class="cite">[<a href="#XNikhilBudumaDL">1</a>]</span> - i.e. the network is trying to match to the training data exactly. An illustration of this is shown in Figure <a href="#x1-2r1">1<!--tex4ht:ref: fig:overfitting --></a>. <!--l. 36-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-2r1"></a> <!--l. 37-->
+      <p class="noindent"><img class="smaller" alt="PIC" src="../img/neural-networks/overfitting.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">An example where over fitting has occurred</span>
+      </div><!--tex4ht:label?: x1-2r1 -->
+      <!--l. 42-->
+      <p class="noindent"></p>
+    </div>
+    <!--l. 45-->
+    <p class="noindent">The complex blue line is over fitted to the training data set, whereas the red line shows what an ideal match <span class="cmti-10">should</span> be. <!--l. 48--></p>
+    <p class="noindent">Regularisation is used to prevent over fitting. There are different regularisation techniques such as L1 and L2, however we will be looking at the Dropout technique in particular.</p>
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Dropout</h3><!--l. 55-->
+    <p class="noindent">Dropout is a technique where certain neurons in a neural network are temporarily disabled during the training phase. This prevents the neural network from being dependent upon certain neurons too much. <!--l. 59--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-1001r2"></a> <!--l. 60-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/dropout.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">A neural network before and after applying dropout <span class="cite">[<a href="#XDropout">2</a>]</span></span>
+      </div><!--tex4ht:label?: x1-1001r2 -->
+      <!--l. 66-->
+      <p class="noindent"></p>
+    </div>
+    <h4 class="subsectionHead"><span class="titlemark">1.1</span> <a id="x1-20001.1"></a>Implementation</h4>
+    <ul class="itemize1">
+      <li class="itemize">During <span class="cmbx-10">training</span> time: each neuron in all hidden layers has a probability $p$ which is determines to be the probability of it being enabled</li>
+      <li class="itemize">During <span class="cmbx-10">use</span>: every neuron (in hidden layers) is always enabled, but all the output arc weights are multiplied with with $p$ (to ensure that the neuron outputs during use are the same as during training) <span class="cite">[<a href="#XDropout">2</a>]</span></li>
+    </ul><!--l. 1-->
+    <p class="noindent"></p>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-30001.1"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XNikhilBudumaDL"></a>Buduma N. Deep Learning in a Nutshell;. Available from: <a class="url" href="http://nikhilbuduma.com/2014/12/29/deep-learning-in-a-nutshell"><span class="cmtt-10">http://nikhilbuduma.com/2014/12/29/deep-_learning-_in-_a-_nutshell</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XDropout"></a>Srivastava N, Hinton G, Krizhevsky A, Sutskever I, Salakhutdinov R. Dropout: A Simple Way to Prevent Neural Networks from Overfitting;. Available from: <a class="url" href="http://www.cs.toronto.edu/~rsalakhu/papers/srivastava14a.pdf"><span class="cmtt-10">http://www.cs.toronto.edu/</span><span class="cmtt-10">~</span><span class="cmtt-10">rsalakhu/papers/srivastava14a.pdf</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

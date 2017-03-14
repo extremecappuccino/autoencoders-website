@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Introduction to Neural Networks</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+<!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="">Introduction to Neural Networks</a></li>
+      <li><a href="">Introduction to Autoencoders</a></li>
+      <li><a href="">Uses of Autoencoders</a></li>
+      <li class="last"><a href="">Use Case: Natural Language Processing</a></li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Introduction to Neural Networks</h2>
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Representation in Computing</h3><!--l. 32-->
+    <p class="noindent">A neural network is a model of computation that is roughly based on the structure of the biological brain <span class="cite">[<a href="#XLeslieSmith2008">1</a>]</span>. The brain consists of billions of neurons, which may have connections in the form of synapses. In computer science, this is modelled as a weighted graph, consisting of nodes (which resemble the neurons) and directed arcs connecting one node to another (this resembles the synapses) <span class="cite">[<a href="#XKevinGurneyIntro">2</a>]</span>. <!--l. 40--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-1001r1"></a> <!--l. 41-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/nn-model.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Example of a Neural Network <span class="cite">[<a href="#XModelNN">3</a>]</span></span>
+      </div><!--tex4ht:label?: x1-1001r1 -->
+      <!--l. 46-->
+      <p class="noindent"></p>
+    </div>
+    <!--l. 49-->
+    <p class="noindent">Figure <a href="#x1-1001r1">1<!--tex4ht:ref: fig:Example-NN --></a> is a simple illustration of a neural network. Groups of neurons with similar functionality are clustered together into layers. These layers are then connected to different layers through the arcs in between their individual neurons. At the most basic, there is the input layer and the output layer.</p>
+    <ul class="itemize1">
+      <li class="itemize">The input layer is where the information will be inserted into the neural network - the individual nodes of the input layer may be used for accepting specific features of the information (for example, if the information consists of Cartesian coordinates, there may be a node which accepts the <span class="cmmi-10">x</span> coordinate, and a different node for accepting the <span class="cmmi-10">y</span> coordinate).</li>
+      <li class="itemize">The output layer receives signals (information) from neurons in the previous layer, and then combines the possibly many signals to produce 1 output and then send this to where it is needed. There may be many different nodes in this layer which yield different attributes of the output information (for example, there may be a node to output the <span class="cmmi-10">x</span> coordinate, and a different node to output the <span class="cmmi-10">y</span> coordinate).</li>
+    </ul><!--l. 68-->
+    <p class="noindent">Between the input and output layers, there may exist a number of hidden layers <span class="cite">[<a href="#XBasicPaperNN">4</a>]</span>, which are used to perform more complicated data manipulation. For example, in a hidden layer, there may be a node which is used to detect a wheel in an image.</p>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Types of Neural Networks</h3><!--l. 76-->
+    <p class="noindent">There are many types of neural networks, however, neural networks follow the same general structure as the one described above. The most basic type of neural network is a feed-forward network. <!--l. 81--></p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">2.1</span> <a id="x1-30002.1"></a>Feed-Forward Neural Network</h4><!--l. 83-->
+    <p class="noindent">In this type of neural network, there are no cycles (i.e. there are no connections between neurons to itself) <span class="cite">[<a href="#XMULFeedForward">5</a>]</span>, so information flows only flows forward - from the input nodes, through any nodes in hidden layers, and finally to the output nodes. <!--l. 88--></p>
+    <p class="noindent">Feed-forward neural networks are generally used for classifying data that is not dependent on time. An example usage is shown below - in this case, it is used to classify which Cartesian coordinates lie within a certain area. <!--l. 93--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-3001r2"></a> <!--l. 94-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/tf-ffnn.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">Example of a Feed-Forward NN in TensorFlow Playground <span class="cite">[<a href="#XTensorFlow">6</a>]</span></span>
+      </div><!--tex4ht:label?: x1-3001r2 -->
+      <!--l. 101-->
+      <p class="noindent"></p>
+    </div>
+    <h4 class="subsectionHead"><span class="titlemark">2.2</span> <a id="x1-40002.2"></a>Recurrent Neural Network</h4><!--l. 107-->
+    <p class="noindent">In some situations, the data being input into the neural network is time-dependent (i.e. the inputs are entered in a certain order which needs to be preserved in order to obtain the correct output). This is where standard feed-forward networks cannot help, as the algorithms used in calculating the output does not take time into account, and does not know what the previous input was. <!--l. 114--></p>
+    <p class="noindent">In a recurrent neural network, information may flow forwards, just like a standard feed-forward network, but the network also maintains an internal state - e.g. the state may know what numbers have been input previously. Information may flow from a neuron at a time step $t_1$ to itself in the time step $t_2$ where $t_1 < t_2$. This way, at time $t$ the neural network can take into account what was input into it at $t-1$, hence these types of networks are good for predicting and learning from sequential information - for example, speech recognition. <!--l. 124--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-4001r3"></a> <!--l. 125-->
+      <p class="noindent"><img alt="PIC" src="../img/neural-networks/rnn-model.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;3:</span> <span class="content">Example of a RNN model <span class="cite">[<a href="#XModelRNN">7</a>]</span></span>
+      </div><!--tex4ht:label?: x1-4001r3 -->
+      <!--l. 132-->
+      <p class="noindent"></p>
+    </div>
+    <!--l. 135-->
+    <p class="noindent">Figure <a href="#x1-4001r3">3<!--tex4ht:ref: fig:RNN-Model --></a> shows a recurrent neural network with 1 hidden layer (A), unfolded to show the network at different time steps.</p>
+    <h5 class="subsubsectionHead"><span class="titlemark">2.2.1</span> <a id="x1-50002.2.1"></a>Time Step</h5><!--l. 142-->
+    <p class="noindent">A time step is simply an enumerated way of distinguishing between the internal states of a neuron in a recurrent neural network. <!--l. 1--></p>
+    <p class="noindent"></p>
+  </div>
+    <!-- END: LyX Generated HTML -->
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-60002.2.1"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XLeslieSmith2008"></a>Smith L. An Introduction To Neural Networks;. Available from: <a class="url" href="http://www.cs.stir.ac.uk/~lss/NNIntro/InvSlides.html"><span class="cmtt-10">http://www.cs.stir.ac.uk/</span><span class="cmtt-10">~</span><span class="cmtt-10">lss/NNIntro/InvSlides.html</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XKevinGurneyIntro"></a>Gurney K. An Introduction to Neural Networks. UCL Press; 1999.</p>
+        <p class="bibitem"><span class="biblabel">[3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XModelNN"></a>Neural Network Model;. Available from: <a class="url" href="https://d3kbpzbmcynnmx.cloudfront.net/wp-content/uploads/2015/09/nn-from-scratch-3-layer-network.png"><span class="cmtt-10">https://d3kbpzbmcynnmx.cloudfront.net/wp-_content/uploads/2015/09/nn-_from-_scratch-_3-_layer-_network.png</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XBasicPaperNN"></a>Maind S, Wankar P. Research Paper on Basic of Artificial Neural Network;. Available from: <a class="url" href="http://www.ijritcc.org/download/Research%20Paper%20on%20Basic%20of%20Artificial%20Neural%20Network.pdf"><span class="cmtt-10">http://www.ijritcc.org/download/Research%20Paper%20on%20Basic%20of%20Artificial%20Neural%20Network.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XMULFeedForward"></a>Belavkin RV. Feed-Forward Neural Networks;. Available from: <a class="url" href="http://www.eis.mdx.ac.uk/staffpages/rvb/teaching/BIS3226/hand11.pdf"><span class="cmtt-10">http://www.eis.mdx.ac.uk/staffpages/rvb/teaching/BIS3226/hand11.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XTensorFlow"></a>A Neural Network Playground;. Available from: <a class="url" href="http://playground.tensorflow.org"><span class="cmtt-10">http://playground.tensorflow.org</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XModelRNN"></a>Recurrent Neural Network Model;. Available from: <a class="url" href="https://colah.github.io/posts/2015-08-Understanding-LSTMs/img/RNN-unrolled.png"><span class="cmtt-10">https://colah.github.io/posts/2015-_08-_Understanding-_LSTMs/img/RNN-_unrolled.png</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+header {
+  padding: 120px 0;
+}
+
+header h1 {
+  font-size: 60px;
+  margin-bottom: 0;
+}
+
+header p {
+  font-size: 25px;
+  line-height: 45px;
+  margin: 15px 0 35px;
+}
+
+header img {
+  width: 21em;
+  height: 21em;
+  display: inline-block;
+  float: left;
+}
+
+.content {
+  float: right;
+  display: inline-block;
+  width: 550px;
+}
+
+.well {
+  margin-top: 0;
+}
+
+.well ul {
+  list-style: none;
+  padding: 0;
+  display: block;
+}
+
+.well ul li a {
+  transition: background-color 0.2s ease-in-out,
+              color 0.2s ease-in-out;
+  border: 1px solid #585858;
+  background-color: white;
+  border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  display: inline-block;
+  text-align: center;
+  line-height: 150px;
+  font-size: 30px;
+  vertical-align: middle;
+}
+
+.well ul li {
+  display: inline-block;
+  vertical-align: baseline;
+  float: left;
+}
+
+.well ul li:after {
+  content: "";
+  width: 130px;
+  display: inline-block;
+  border-top: 1px solid #585858;
+  vertical-align: middle;
+}
+
+.well ul li.last:after {
+  width: 0;
+  display: none;
+}
+
+.well ul li a:hover,
+.well ul li a.selected {
+  background-color: rgba(86, 86, 86, 0.075);
+  border-color: black;
+  color: black;
+}
+
+.description {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 25px;
+}

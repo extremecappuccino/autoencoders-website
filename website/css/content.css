@@ -1,0 +1,75 @@
+.titleHead:before {
+  content: "";
+  display: block;
+  width: 100px;
+  border-top: 1px solid gray;
+  margin: 120px auto 50px;
+}
+
+.titleHead {
+  text-align: center;
+  font-size: 2em;
+}
+
+.sectionHead {
+  margin-top: 60px;
+  font-size: 1.5em;
+}
+
+.subsectionHead {
+  font-size: 1.17em;
+}
+.subsubsectionHead {
+  font-size: 1.12em;
+}
+
+.titlemark {
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 1.1em;
+}
+
+.figure img,
+img.smaller {
+  margin: 30px auto 0;
+  max-width: 800px;
+  display: block;
+}
+
+img.smaller {
+  max-width: 500px;
+}
+
+.caption {
+  text-align: center;
+}
+
+.caption span {
+  float: none;
+  text-align: left;
+}
+
+.likesectionHead:before {
+  content: "";
+  display: block;
+  width: 100px;
+  border-top: 1px solid gray;
+  margin: 0 auto 30px;
+}
+
+.likesectionHead {
+  text-align: center;
+  font-size: 2em;
+}
+
+.biblabel {
+  font-weight: bold;
+}
+
+.cmbx-10 {
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
+}
