@@ -85,6 +85,162 @@ Jordan Spooner
 \end_layout
 
 \begin_layout Standard
+This page continues from the previous page on sentiment analysis.
+\end_layout
+
+\begin_layout Section
+Improving Recursive Autoencoders
+\end_layout
+
+\begin_layout Quote
+// Unfolding recursive autoencoder diagram
+\end_layout
+
+\begin_layout Standard
+We will now propose various improvements to the recursive autoencoders on
+ the previous page:
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Unfolding Recursive Autoencoders:
+\series default
+ We make a change to the standard recursive autoencoder model, by now asking
+ the autoencoder to reconstruct the entire sequence so far, and calculating
+ the error accordingly.
+ This means the RAE can capture the increased importance of a child node
+ when this child represents a larger subtree.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Deep Recursive Autoencoders:
+\series default
+ It is also possible to allow multiple encoding layers at each node, by
+ adding an extra hidden layer.
+\end_layout
+
+\begin_layout Enumerate
+
+\series bold
+Using Parse Tree:
+\series default
+ Instead of choosing any random tree structure, or greedily finding a tree
+ structure to use for our recursive autoencoder, we use the parse tree for
+ the given phrase as the base for our RAE structure.
+\end_layout
+
+\begin_layout Section
+Testing Similarity
+\end_layout
+
+\begin_layout Subsection
+Producing a Similarity Matrix
+\end_layout
+
+\begin_layout Quote
+// Similarity matrix diagram
+\end_layout
+
+\begin_layout Standard
+We use unfolding recursive autoencoders to generate phrase representations
+ for two given phrases.
+ To give the best representation, we use the parse tree of the phrase as
+ the RAE tree.
+\end_layout
+
+\begin_layout Standard
+We then create a variable-sized similarity matrix.
+ The rows are `labelled' with each word vector, followed by each non-terminal
+ RAE tree node vector, for the first phrase, and the columns similarly for
+ the second phrase.
+ It is filled with Euclidean distances between the respective vectors.
+\end_layout
+
+\begin_layout Subsection
+Dynamic Pooling
+\end_layout
+
+\begin_layout Quote
+// Dynamic pooling diagram
+\end_layout
+
+\begin_layout Standard
+Although there are already tell-tale signs for paraphrases at this point
+ (e.g.
+ low distances close to the diagonal, from similar word vectors), is not
+ extremely useful since the dimensions of the matrix are variable, depending
+ on the size of the RAE trees.
+\end_layout
+
+\begin_layout Standard
+We want to convert our similarity matrix 
+\begin_inset Formula $S$
+\end_inset
+
+ into a matrix 
+\begin_inset Formula $S'$
+\end_inset
+
+ with fixed dimensions 
+\begin_inset Formula $n\times n$
+\end_inset
+
+.
+ We do this simply by partitioning the rows and columns of 
+\begin_inset Formula $S$
+\end_inset
+
+ into 
+\begin_inset Formula $n$
+\end_inset
+
+ parts.
+ 
+\begin_inset Formula $S'$
+\end_inset
+
+ is then defined as the matrix of minimum values of each respective region
+ formed by the previous step.
+\end_layout
+
+\begin_layout Standard
+Note that other approaches are possible, such as using an average, but this
+ is more likely to lose important correlations.
+\end_layout
+
+\begin_layout Standard
+We can then determine whether two phrases are paraphrases simply by considering
+ this final matrix 
+\begin_inset Formula $S'$
+\end_inset
+
+.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2014,RSEHJPANCM2011"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Implementation
+\end_layout
+
+\begin_layout Quote
+// Python Implementation
+\end_layout
+
+\begin_layout Quote
+// Results
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "paraphrase-detection"
