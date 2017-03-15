@@ -12,10 +12,10 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default""
+\font_sans "" "default""
+\font_typewriter "" "default""
+\font_math "" "auto""
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
@@ -89,7 +89,7 @@ Autoencoders for Representation and Deep Learning
 \end_layout
 
 \begin_layout Quote
-See [Neural Networks]
+See ***Neural Networks
 \end_layout
 
 \begin_layout Standard
@@ -151,18 +151,54 @@ The
 Autoencoder
 \end_layout
 
-\begin_layout Quote
-See [Autoencoders]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/autoencoder.png
+	scale 25
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+An autoencoder.
+ Source: 
+\family typewriter
+http://ufldl.stanford.edu/tutorial/images/Autoencoder636.png
+\family default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote
-// Autoencoder Diagram
+See ***Autoencoders
 \end_layout
 
 \begin_layout Standard
 On the following pages, we will mainly discuss applications of the 
 \emph on
-autoencoder
+***autoencoder
 \emph default
  (AE) in NLP.
  An autoencoder is a good example of a representation learning algorithm.
@@ -185,18 +221,49 @@ The
 Recursive Autoencoder
 \end_layout
 
-\begin_layout Quote
-See [Recursive Autoencoders]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/rae.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A recursive autoencoder.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote
-// Recursive Autoencoder Diagram
+See ***Recursive Autoencoders
 \end_layout
 
 \begin_layout Standard
 Many of the examples that follow make use of 
 \emph on
-recursive autoencoders
+***recursive autoencoders
 \emph default
  (RAE).
  Say we have a representation for words, and want to deduce from this a
@@ -229,12 +296,50 @@ Deep Learning with
 Stacked Autoencoders
 \end_layout
 
-\begin_layout Quote
-[Stacked Autoencoders] [Pretraining]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/stacked-autoencoder.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A stacked autoencoder.
+ Each layer comes from an individually trained autoencoder.
+ Source: 
+\family typewriter
+http://ufldl.stanford.edu/wiki/images/thumb/5/5c/Stacked_Combined.png/500px-Stacked
+_Combined.png
+\family default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote
-// Stacked Autoencoder Diagram
+See ***Stacked Autoencoders and ***Pretraining
 \end_layout
 
 \begin_layout Standard
@@ -304,12 +409,48 @@ key "Socher2016"
 Word Embeddings
 \end_layout
 
-\begin_layout Quote
-See [Word Embeddings and Phrase Representation]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/word-embedding.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Some example word vectors mapped to two dimensions.
+ Source: 
+\family typewriter
+http://suriyadeepan.github.io/img/seq2seq/we1.png
+\family default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote
-// Word Embedding Diagram
+See ***Word Embeddings and Phrase Representation
 \end_layout
 
 \begin_layout Standard
@@ -380,12 +521,48 @@ We will consider a very simple implementation, proposed by Lebret and Collobert
 Machine Translation
 \end_layout
 
-\begin_layout Quote
-See [Bilingual Word and Phrase Embeddings]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/pyramid.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The Vauquois Pyramid.
+ Source: 
+\family typewriter
+https://noramachinetranslation.files.wordpress.com/2015/02/pyramid.png
+\family default
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote
-// Varquois Pyramid
+See ***Bilingual Phrase Embeddings
 \end_layout
 
 \begin_layout Standard
@@ -414,7 +591,7 @@ Still, errors occur due to homonyms: words can take very different meanings
 \end_layout
 
 \begin_layout Standard
-These different methods are shown by a Varquois pyramid.
+These different methods are shown by a Vauquois pyramid.
  In general, the greater the depth of the intermediary representation, the
  higher the quality of translation.
  
@@ -436,8 +613,47 @@ We will discuss how autoencoders can be used to build bilingual word and
 Document Clustering
 \end_layout
 
-\begin_layout Quote
-// Document Clustering
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/clustering.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Clustering documents using (B) LSA and (C) an autoencoder.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton2006"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -489,7 +705,7 @@ Sentiment Analysis
 \end_layout
 
 \begin_layout Quote
-See [Recursive Autoencoders] [Sentiment Analysis]
+See ***Recursive Autoencoders and ***Sentiment Analysis
 \end_layout
 
 \begin_layout Standard
@@ -544,7 +760,7 @@ Paraphrase Detection
 \end_layout
 
 \begin_layout Quote
-See [Paraphrase Detection]
+See ***Paraphrase Detection
 \end_layout
 
 \begin_layout Standard
