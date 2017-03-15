@@ -73,3 +73,11 @@ img.smaller {
 .center {
   text-align: center;
 }
+
+.next {
+  float: right;
+}
+
+.navigation {
+  margin-top: 50px;
+}

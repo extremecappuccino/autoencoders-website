@@ -11,9 +11,15 @@ $(function() {
     });
   });
 
-  $(".overview li a").mouseover(function(e) {
-    $(".overview li a").removeClass("selected");
-    $(e.target).addClass("selected");
-    $(".description").html($(e.target).attr("description"));
+  $("nav ul li a[content]").click(function(e) {
+    $("nav ul li").removeClass("selected");
+    $("nav ul li a[content]:last").parent().addClass("last");
+    $(e.target).parent().addClass("selected");
+    $("nav ul li[content]").stop().slideUp(200);
+    $("nav ul li[content=" + $(e.target).attr("content") + "]").stop().slideDown(200);
+  });
+
+  $("nav ul li a[content]:last").click(function(e) {
+    $("nav ul li a[content]:last").parent().removeClass("last");
   });
 });

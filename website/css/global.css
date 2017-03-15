@@ -108,19 +108,26 @@ nav a {
   border: none;
 }
 
-nav ul {
+nav > ul {
   list-style: none;
   padding: 0;
   margin: 50px 0 0;
 }
 
-nav ul li {
+nav > ul > li {
   padding: 20px 0;
   border-bottom: 1px solid gray;
-  text-align: center;
 }
 
-nav ul li.last {
+nav > ul > li.selected {
+  font-weight: bold;
+}
+
+nav ul li ul li {
+  font-weight: normal;
+}
+
+li.last {
   border-bottom: none;
 }
 
@@ -146,10 +153,16 @@ nav ul li.last {
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 2px;
+  appearance: none;
+}
+
+.button.dark {
+  background-color: #565656;
+  border-color: #565656;
+  color: white !important;
 }
 
 .button:hover {
   background-color: rgba(86, 86, 86, 0.075);
-  border-color: black;
-  color: black;
+  color: black !important;
 }
