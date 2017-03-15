@@ -2,6 +2,16 @@
 % Encoding: UTF-8
 
 
+@Electronic{http://www.opendeep.org/v0.0.5/docs/tutorial-your-first-model,
+  Title                    = {Tutorial: Your First Model (DAE)},
+  Note                     = {As shown on 07/03/2017},
+  Organization             = {OpenDeep},
+  Url                      = {http://www.opendeep.org/v0.0.5/docs/tutorial-your-first-model},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.03.07}
+}
+
 @Electronic{http://deeplearning.net/tutorial/dA.html,
   Title                    = {Denoising Autoencoders},
   Month                    = {March},

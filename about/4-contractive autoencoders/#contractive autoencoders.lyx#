@@ -106,10 +106,8 @@ key "Agustinus_Kristiadi_Blog"
 \end_layout
 
 \begin_layout Standard
-The formula contains a partial derivative of the activation value of a neuron
- with respect to the input value, and so it is possible to see how a large
- increase in the activation value will correspond to an increase in the
- Jacobian, penalizing the representation.
+The formula contains a partial derivative of the activation value with respect
+ to the input value, an
 \end_layout
 
 \begin_layout Standard
@@ -141,14 +139,6 @@ Contractive autoencoders are also very similar to denoising autoencoders.
  Denoising autoencoders also obtain robustness stochastically, by randomly
  adding noise to the input, while contractive autoencoders obtain robustness
  analytically, by penalizing the magnitude of the first derivative.
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Rifai_et_al_2011"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard

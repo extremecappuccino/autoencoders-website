@@ -163,8 +163,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
 \begin_inset Graphics
 	filename autoencoder.png
 
@@ -177,15 +175,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Layers in a autoencoder.
- Credit: 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "autoencoder_visualization"
-
-\end_inset
-
-
+Layers in a autoencoder
 \end_layout
 
 \end_inset
@@ -200,6 +190,10 @@ key "autoencoder_visualization"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+https://blog.keras.io/building-autoencoders-in-keras.html
 \end_layout
 
 \begin_layout Standard

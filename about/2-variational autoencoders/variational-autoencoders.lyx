@@ -105,7 +105,7 @@ The first layer of the VAE is the encoder which will take the input and
  output, like a standard autoencoder.
  With images for example, we can now represent something like a picture
  of a cat as the vector [1.9, 8.2, 2.1].The vector is called latent because
- given just an output from the model, we don't necessairly know which settings
+ given just an output from the model, we don't necessarily know which settings
  of the variables in the latent vector generated this output, without inferring
  it using something like computer vision
 \end_layout
@@ -113,12 +113,12 @@ The first layer of the VAE is the encoder which will take the input and
 \begin_layout Standard
 However to make the VAE a generative model, we must add a constraint on
  the encoding network that forces it to generate latent vectors that roughly
- follow a gaussian distribution.
+ follow a Gaussian distribution.
  This is the key feature of variational autoencoders, and allows the user
  to generate an output similar to the database the VAE was trained on by
  inputting a latent vector straight to the decoder.
  The problem now, is to make the network's latent variables match the unit
- gaussian distribution as closely as possible while also accurately providing
+ Gaussian distribution as closely as possible while also accurately providing
  an output similar to the input.
  
 \end_layout
@@ -129,7 +129,7 @@ For a mathematically simplified explanation, this is done by changing our
  The mean squared error as usual, allows us to measure how accurately the
  network reconstructs images.
  The latent loss however, is the Kullback-Liebler divergence (KL divergence),
- which can measure how closely the variables match a unit gaussian distribution.
+ which can measure how closely the variables match a unit Gaussian distribution.
  The encoder can now be changed to generate a vector of means and a vector
  of standard deviations, rather than a vector of real variables.
  From this the KL divergence can be calculated.

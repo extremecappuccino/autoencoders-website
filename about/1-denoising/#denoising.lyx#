@@ -148,17 +148,14 @@ key "http://www.opendeep.org/v0.0.5/docs/tutorial-your-first-model"
 \end_layout
 
 \begin_layout Standard
-Stacked denoising autoencoders are also useful for deep learning.
- A stacked denoising autoencoder is a denoising autoencoder with multiple
- hidden layers, and is trained layer by layer, by trying to minimize the
- error in the layer's reconstruction compared to it's input (the previous
- layer's output).
- By using a stacked autoencoder in an unsupervised manner, we can learn
- starting weights prior to the main supervised training procedure with deep
- learning.
+Denoising autoencoders are also useful for deep learning.
+ By using a stacked autoencoder [LINK TO STACKED AUTOENCODERS] in an unsupervise
+d manner, we can learn starting weights prior to the main supervised training
+ procedure with deep learning.
  A regularization effect is then created as a result of the pretraining
  procedure creating an initialization point, to which the parameters are
- restricted to a near optimal local minimum.
+ restricted to a small volume of parameter space that is delineated by the
+ boundary of the local basin of attraction.
  
 \begin_inset CommandInset citation
 LatexCommand cite
