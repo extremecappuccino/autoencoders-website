@@ -414,6 +414,11 @@ key "Li2013"
 \end_layout
 
 \begin_layout Standard
+The following page discusses how recursive autoencoders can be applied to
+ the problem of sentiment analysis.
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "rae"

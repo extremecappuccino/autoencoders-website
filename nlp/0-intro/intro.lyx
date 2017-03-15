@@ -230,7 +230,7 @@ Stacked Autoencoders
 \end_layout
 
 \begin_layout Quote
-[Stacked Autoencoders] [Digit Classification Example]
+[Stacked Autoencoders] [Pretraining]
 \end_layout
 
 \begin_layout Quote
@@ -489,7 +489,7 @@ Sentiment Analysis
 \end_layout
 
 \begin_layout Quote
-See [Sentiment Analysis]
+See [Recursive Autoencoders] [Sentiment Analysis]
 \end_layout
 
 \begin_layout Standard
@@ -550,8 +550,8 @@ See [Paraphrase Detection]
 \begin_layout Standard
 Often in English, two phrases that look very different can have exactly
  the same meaning.
- We will continue from the previous page on sentiment analysis, and show
- how deep learning allows for accurate detection of such phrases.
+ We will continue from the previous section, showing how deep learning allows
+ for accurate detection of such phrases.
 \end_layout
 
 \begin_layout Standard
