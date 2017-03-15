@@ -78,7 +78,7 @@
 \begin_layout Standard
 
 \series bold
-1 - Introduction
+1  Introduction
 \end_layout
 
 \begin_layout Standard
@@ -91,13 +91,13 @@
 An autoencoder is a neural network that is trained to copy its input to
  its output, with the typical purpose of dimenson reduction - the process
  of reducing the number of random variables under consideration.
- It features an encoder function to create a smaller hidden layer (or multiple
- layers) which contains a code to describe the input.
+ It features an encoder function to create a hidden layer (or multiple layers)
+ which contains a code to describe the input.
  There is then a decoder which creates a reconstruciton of the input from
  the hidden layer.
- An autoencoder can then become useful by only approximately copying the
- input to the output, when restricted to only learn useful properties of
- the data.
+ An autoencoder can then become useful by having a hidden layer smaller
+ than the input layer, forcing it to create a compressed representataion
+ of the data in the hidden layer by learning correlations in the data.
  This facilitates the classsification, visulization, communication and storage
  of data.
 \begin_inset CommandInset citation
@@ -108,23 +108,50 @@ key "G.E.Hinton2006"
 
 .
  Autoencoders are a form of unsupervised learning, meaning that an autoencoder
- only needs unlabeled data - just a set of input data rather than input-output
+ only needs unlabeled data - a set of input data rather than input-output
  pairs.
 \end_layout
 
 \begin_layout Standard
-Through an unsupervised learning algorithm, the autoencoder will try to
- learn a fuction
+Through an unsupervised learning algorithm, for linear reconstructions the
+ autoencoder will try to learn a fuction
 \begin_inset Formula $h_{W,b}(x)\approx x$
 \end_inset
 
-, so as to minimise the mean square difference 
-\begin_inset Formula $\sum(x-h_{W,b}(x))^{2}$
+, so as to minimise the mean square difference: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L(x,y)=\sum(x-h_{W,b}(x))^{2}
+\]
+
 \end_inset
 
-.
- We can obtain optimum weights for this by starting wtih random weights
- and calculating a gradient.
+
+\end_layout
+
+\begin_layout Standard
+where x is the input data and y is the reconstruction.
+ However, when the decoder's activation function is the sigmoid function,
+ the cross-entropy loss function is typically used:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L(x,y)=-\sum_{i=1}^{d_{x}}x_{i}log(y_{i})+(1-x_{i})log(1-y_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+We can obtain optimum weights for this by starting with random weights and
+ calculating a gradient.
  This is done by using the chain rule to backpropogate [LINK TO QIANG] error
  derivatives through the decoder network and then the encoder network.
 \end_layout

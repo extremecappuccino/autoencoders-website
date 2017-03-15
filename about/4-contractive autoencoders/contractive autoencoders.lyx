@@ -72,6 +72,44 @@
 
 \begin_layout Standard
 
+\series bold
+4 Contractive Autoencoders
+\end_layout
+
+\begin_layout Standard
+The aim of a contractive autoencoder is to make the learned representation
+ be robust towards small changes around its training examples.
+ As with most other autoencoder variations, this is done by adding a penalty
+ term to the cost function that we are trying to minimise.
+ The first part of the cost function is the mean squared error, for linear
+ reconstructions, as usual but the Frobenius norm of the jacobian matrix
+ is also added.
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Agustinus_Kristiadi_Blog"
+
+\end_inset
+
+ We can calculate it from the formula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+||J_{h}(x)||_{F}^{2}=\sum_{ij}\left(\frac{\delta h_{j}(x)}{\delta x_{i}}\right)
+\]
+
+\end_inset
+
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "contractive autoencoders"
+options "plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

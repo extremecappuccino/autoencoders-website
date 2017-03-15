@@ -238,14 +238,57 @@ options "plain"
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Standard
 
 \series bold
-History
+1.2 History
 \end_layout
 
 \begin_layout Standard
-LeCun 1987, Boulard and Kamp 1987, Zemel and Hinton 1994
+The idea of autoencoders was first mentioned in 1986, in an article extensively
+ analysing backpropogation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rumelhrt1986"
+
+\end_inset
+
+.
+ In following years, the idea resurfaced in more research papers.
+ A 1988 paper by Boulard and Kamp on auto-association showed that 
+\begin_inset Quotes eld
+\end_inset
+
+for auto-association with linear output units, the optimal weight values
+ can be derived by standard linear algebra ...
+ making thus the nonlinear functions at the hidden layer completely unnecessary
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bourlard1988"
+
+\end_inset
+
+.
+ Another notable paper is by Hinton and Zemel from 1994 which describes
+ a new objective function for training autoencoders that allows them to
+ discover non-linear, factorial representations
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hinton1994"
+
+\end_inset
+
+.
+ However, it is hard to attribute the ideas about autoencoders because the
+ literature is diverse and terminology has evolved over time.
+ A currently emerging learning algorithm is the extreme learning machine,
+ where the hidden node parameters are randomly generated and the output
+ weights are computed thus learning a linear model, in a way faster than
+ with backpropogation.
 \end_layout
 
 \begin_layout Section

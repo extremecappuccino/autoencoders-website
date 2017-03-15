@@ -1,0 +1,15 @@
+% This file was created with JabRef 2.10.
+% Encoding: UTF-8
+
+
+@Electronic{http://deeplearning.net/tutorial/dA.html,
+  Title                    = {Denoising Autoencoders},
+  Month                    = {March},
+  Organization             = {deeplearning.net},
+  Url                      = {http://deeplearning.net/tutorial/dA.html},
+  Year                     = {2017},
+
+  Owner                    = {ns4516},
+  Timestamp                = {2017.03.07}
+}
+
