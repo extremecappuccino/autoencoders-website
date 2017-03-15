@@ -113,7 +113,7 @@ p_{j}=\frac{1}{m}\sum_{i=1}^{m}\left[a_{j}x\right]
 \end_layout
 
 \begin_layout Standard
-The aim of the sparsity constrapint is to minimise 
+The aim of the sparsity constraint is to minimize 
 \begin_inset Formula $p_{j}$
 \end_inset
 
@@ -128,7 +128,7 @@ The aim of the sparsity constrapint is to minimise
  is a small number close to 0 (for the sigmoid activation function), such
  as 0.05.
  We can do so by adding a penalty term to mean squared error cost function
- that we normally try to minimise for classical autoencoders.
+ that we normally try to minimize for classical autoencoders.
  The penalty term, as with variational autoencoders, is the KL divergence
  between the Bernoulli random variables 
 \begin_inset Formula $p_{j}$
@@ -205,9 +205,9 @@ key "CS294A_Lecture_notes"
 \begin_layout Standard
 An advancement to sparse autoencoders is the k-sparse autoencoder.
  This is where we choose k neurons with the highest activation functions
- and ignore the others, by either sorting the activites or using ReLU activation
- functions and adaptively adjusting the thresholds until the k largest neurons
- are identified.
+ and ignore the others, by either sorting the activities or using ReLU activatio
+n functions and adaptively adjusting the thresholds until the k largest
+ neurons are identified.
  This lets us tune the value of k to obtain a sparsity level most suitable
  for our dataset.
  A large sparsity level would learn very local features which may not be
