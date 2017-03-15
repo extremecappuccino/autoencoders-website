@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -27,9 +30,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,10 +57,14 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip medskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
@@ -70,32 +78,33 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+Variational Autoencoders
+\end_layout
 
-\series bold
-2 Variational Autoencoders
+\begin_layout Author
+Nikolai Smirnov
 \end_layout
 
 \begin_layout Standard
 A variational autoencoder (VAE) resembles a classical autoencoder and is
  a neural network consisting of an encoder, a decoder and a loss function.
- They let us design generative models of data and fit them to large datasets,
+ They let us design generative models of data and fit them to large data-sets,
  and can also be used for image generation and reinforcement learning.
  For example, a practical application may be to generate trees for a forest
  in a video game, which are all similar but not the same.
  They are a recent advancement in machine learning, having only been defined
  in 2013.
  However, they solve a long standing problem in machine-learning and do
- so with weak assumptions and fast training via backpropogation, which explains
- their fast rise in popularity.
- 
+ so with weak assumptions and fast training via back-propagation, which
+ explains their fast rise in popularity 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Doersch2016"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
@@ -104,10 +113,11 @@ The first layer of the VAE is the encoder which will take the input and
  This could be done by reducing the mean squared error of the input and
  output, like a standard autoencoder.
  With images for example, we can now represent something like a picture
- of a cat as the vector [1.9, 8.2, 2.1].The vector is called latent because
- given just an output from the model, we don't necessarily know which settings
- of the variables in the latent vector generated this output, without inferring
- it using something like computer vision
+ of a cat as the vector [1.9, 8.2, 2.1].
+ The vector is called latent because given just an output from the model,
+ we don't necessarily know which settings of the variables in the latent
+ vector generated this output, without inferring it using something like
+ computer vision.
 \end_layout
 
 \begin_layout Standard
@@ -137,6 +147,7 @@ For a mathematically simplified explanation, this is done by changing our
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -144,9 +155,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename VaeDiagam.jpg
+	filename res/vae-diagram.jpg
 	lyxscale 70
-	scale 70
+	width 80text%
 
 \end_inset
 
@@ -160,28 +171,28 @@ status open
 Simplification of layers in a variational autoencoder 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "http://kvfrans.com/variational-autoencoders-explained/"
+key "kvfrans"
+
+\end_inset
+
+.
+\end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 bibfiles "vae"
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
+options "vancouver"
 
 \end_inset
 

@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -27,9 +30,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,10 +57,14 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip medskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
@@ -70,10 +78,12 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+Contractive Autoencoders
+\end_layout
 
-\series bold
-4 Contractive Autoencoders
+\begin_layout Author
+Nikolai Smirnov
 \end_layout
 
 \begin_layout Standard
@@ -84,13 +94,14 @@ The aim of a contractive autoencoder is to make the learned representation
  the representation's sensitivity to the training input.
  The first part of the cost function is the mean squared error, for linear
  reconstructions, as usual but the Frobenius norm of the Jacobian matrix
- is also added.
+ is also added 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Agustinus_Kristiadi_Blog"
 
 \end_inset
 
+.
  We can calculate it from the formula:
 \end_layout
 
@@ -117,7 +128,7 @@ From this formula we can see that sparse autoencoders are likely to correspond
  to a contractive mapping while not explicitly learning it through their
  learning criterion.
  This is due to the low activation values of the neurons in sparse autoencoders
- being likely to occur in the left part of the sigmoid activation function,
+ being likely to occur in the left part of the Sigmoid activation function,
  which is almost flat.
  The neurons will therefore have a small first derivative which corresponds
  to a small entry in the Jacobian.
@@ -140,22 +151,21 @@ Contractive autoencoders are also very similar to denoising autoencoders.
  uses the encoder.
  Denoising autoencoders also obtain robustness stochastically, by randomly
  adding noise to the input, while contractive autoencoders obtain robustness
- analytically, by penalizing the magnitude of the first derivative.
- 
+ analytically, by penalizing the magnitude of the first derivative 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Rifai_et_al_2011"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "contractive autoencoders"
-options "plain"
+bibfiles "contractive-autoencoders"
+options "vancouver"
 
 \end_inset
 

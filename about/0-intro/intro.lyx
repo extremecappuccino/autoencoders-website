@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -75,16 +78,16 @@
 
 \begin_body
 
-\begin_layout Standard
-
-\series bold
-1 Introduction
+\begin_layout Title
+Introduction to Autoencoders
 \end_layout
 
-\begin_layout Standard
+\begin_layout Author
+Nikolai Smirnov
+\end_layout
 
-\series bold
-1.0 Intro
+\begin_layout Section
+Introduction
 \end_layout
 
 \begin_layout Standard
@@ -99,7 +102,7 @@ An autoencoder is a neural network that is trained to copy its input to
  than the input layer, forcing it to create a compressed representation
  of the data in the hidden layer by learning correlations in the data.
  This facilitates the classification, visualization, communication and storage
- of data.
+ of data 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "G.E.Hinton2006"
@@ -114,7 +117,7 @@ key "G.E.Hinton2006"
 
 \begin_layout Standard
 Through an unsupervised learning algorithm, for linear reconstructions the
- autoencoder will try to learn a function
+ autoencoder will try to learn a function 
 \begin_inset Formula $h_{W,b}(x)\approx x$
 \end_inset
 
@@ -134,7 +137,7 @@ L(x,y)=\sum(x-h_{W,b}(x))^{2}
 
 \begin_layout Standard
 where x is the input data and y is the reconstruction.
- However, when the decoder's activation function is the sigmoid function,
+ However, when the decoder's activation function is the Sigmoid function,
  the cross-entropy loss function is typically used:
 \end_layout
 
@@ -152,12 +155,13 @@ L(x,y)=-\sum_{i=1}^{d_{x}}x_{i}log(y_{i})+(1-x_{i})log(1-y_{i})
 \begin_layout Standard
 We can obtain optimum weights for this by starting with random weights and
  calculating a gradient.
- This is done by using the chain rule to backpropogate [LINK TO QIANG] error
- derivatives through the decoder network and then the encoder network.
+ This is done by using the chain rule to ***back-propagate*** error derivatives
+ through the decoder network and then the encoder network.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -166,7 +170,8 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename autoencoder.png
+	filename res/autoencoder.png
+	width 50text%
 
 \end_inset
 
@@ -177,14 +182,18 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Layers in a autoencoder.
- Credit: 
+Layers in a autoencoder 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "autoencoder_visualization"
 
 \end_inset
 
+.
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -193,61 +202,35 @@ key "autoencoder_visualization"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+\begin_layout Section
+Uses
 \end_layout
 
 \begin_layout Standard
-
-\series bold
-1.1 Uses
+The most intuitive application of autoencoders is ***data compression***.
+ Given an 256 x 256px image for example, a representation of a 28 x 28px
+ may be learned, which is easier to handle.
 \end_layout
 
 \begin_layout Standard
-The most intuitive application of autoencoders is data compression [LINK
- TO DATA COMPRESSION].
- Given an 256x256px image for example, a representation of a 28x28px may
- be learnt, which is easier to handle.
+We can also use denoising ***autoencoders*** to reconstruct corrupted data,
+ often in the form of images.
 \end_layout
 
 \begin_layout Standard
-We can also use denoising autoencoders [LINK TO DENOISING] to reconstruct
- corrupted data, often in the form of images.
- 
-\end_layout
-
-\begin_layout Standard
-Another use is to pre-train deep networks [LINK TO DEEP NETWORKS] [LINK
- TO PRE-TRAINING] with stacked denoising autoencoders.
+Another use is to ***pre-train*** ***deep networks*** with stacked denoising
+ autoencoders.
  This is allows us to optimize deep learning solutions and avoid being stuck
  in local minima as we might be with random initialization of weights.
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "intro"
-options "plain"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-1.2 History
+\begin_layout Section
+History
 \end_layout
 
 \begin_layout Standard
 The idea of autoencoders was first mentioned in 1986, in an article extensively
- analyzing backpropogation 
+ analyzing back-propagation 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Rumelhrt1986"
@@ -276,7 +259,7 @@ key "Baldi1989"
 .
  Another notable paper is by Hinton and Zemel from 1994 which describes
  a new objective function for training autoencoders that allows them to
- discover non-linear, factorial representations
+ discover non-linear, factorial representations 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hinton1994"
@@ -289,25 +272,25 @@ key "Hinton1994"
  A currently emerging learning algorithm is the extreme learning machine,
  where the hidden node parameters are randomly generated and the output
  weights are computed thus learning a linear model, in a way faster than
- with backpropogation.
+ with back-propagation.
  It is worth noting how all currently used variants of autoencoders have
  been defined in only the last 10 years:
 \end_layout
 
 \begin_layout Itemize
-Vincent et al 2008 - Denoising autoencoders [link]
+Vincent et al 2008 - ***Denoising autoencoders***
 \end_layout
 
 \begin_layout Itemize
-Goodfellow et al 2009 - Sparse autoencoders [link]
+Goodfellow et al 2009 - ***Sparse autoencoders***
 \end_layout
 
 \begin_layout Itemize
-Rifai et al 2011 - Contractive autoencoders [link]
+Rifai et al 2011 - ***Contractive autoencoders***
 \end_layout
 
 \begin_layout Itemize
-Kingma et al 2013 - Variational autoencoders [link]
+Kingma et al 2013 - ***Variational autoencoders***
 \end_layout
 
 \begin_layout Standard

@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -27,9 +30,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,10 +57,14 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip medskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
@@ -70,10 +78,8 @@
 
 \begin_body
 
-\begin_layout Standard
-
-\series bold
-3 Sparse Autoencoders
+\begin_layout Title
+Sparse Autoencoders
 \end_layout
 
 \begin_layout Standard
@@ -84,9 +90,9 @@ While autoencoders normally discover useful structures by having a small
  This is possible by introducing a sparsity constraint.
  The aim of this, is to cause the large number of neurons to all have a
  low average output so that the neurons are inactive most of the time.
- If we are using a sigmoid activation function we would want their output
+ If we are using a Sigmoid activation function we would want their output
  to be as close to 0 as possible, and as close to -1 as possible if using
- a tanh activation function.
+ a Tanh activation function.
 \end_layout
 
 \begin_layout Standard
@@ -98,7 +104,7 @@ If we have the activation function of a neuron,
 \begin_inset Formula $p_{j},$
 \end_inset
 
- with the formula
+ with the formula:
 \end_layout
 
 \begin_layout Standard
@@ -125,7 +131,7 @@ The aim of the sparsity constraint is to minimize
 \begin_inset Formula $p_{c}$
 \end_inset
 
- is a small number close to 0 (for the sigmoid activation function), such
+ is a small number close to 0 (for the Sigmoid activation function), such
  as 0.05.
  We can do so by adding a penalty term to mean squared error cost function
  that we normally try to minimize for classical autoencoders.
@@ -138,7 +144,7 @@ and
 \begin_inset Formula $p_{c}$
 \end_inset
 
-, and can be calculated with the formula
+, and can be calculated with the formula:
 \end_layout
 
 \begin_layout Standard
@@ -154,17 +160,17 @@ KL(p_{j}||p_{c})=plog\frac{p_{c}}{p_{j}}+(1-p)log\frac{1-p_{c}}{1-p_{j}}
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
 \align center
-e
 \begin_inset Graphics
-	filename KL_divergence.png
+	filename res/kl-divergence.png
 	lyxscale 70
-	scale 70
+	width 60text%
 	scaleBeforeRotation
 
 \end_inset
@@ -181,15 +187,14 @@ KL divergence penalty term for
 \begin_inset Formula $p_{c}$
 \end_inset
 
-= 0.2.
- Credit: 
+= 0.2 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "CS294A_Lecture_notes"
 
 \end_inset
 
-
+.
 \end_layout
 
 \end_inset
@@ -211,20 +216,20 @@ n functions and adaptively adjusting the thresholds until the k largest
  This lets us tune the value of k to obtain a sparsity level most suitable
  for our dataset.
  A large sparsity level would learn very local features which may not be
- useful for identifying handwritten digits but useful for pre-training neural
- nets.
- 
+ useful for identifying handwritten digits but useful for pretraining neural
+ nets 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AlirezaMakhzani2013"
 
 \end_inset
 
-
+.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -232,9 +237,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename k-sparse_autoencoder.png
+	filename res/k-sparse-autoencoder.png
 	lyxscale 80
-	scale 80
+	width 60text%
 
 \end_inset
 
@@ -242,23 +247,18 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Different sparsity levels k, learnt from MNIST with 1000 hidden units.
- Credit: 
+Different sparsity levels k, learned from MNIST with 1000 hidden units 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AlirezaMakhzani2013"
 
 \end_inset
 
- 
+.
 \end_layout
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -270,8 +270,8 @@ key "AlirezaMakhzani2013"
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
-bibfiles "sparse_autoencoders"
-options "plain"
+bibfiles "sparse-autoencoders"
+options "vancouver"
 
 \end_inset
 
