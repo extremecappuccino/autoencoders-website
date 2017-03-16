@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Sentiment Analysis</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="sentiment-analysis.tex"> 
+<meta name="date" content="2017-03-16 01:51:00"> 
+<link rel="stylesheet" type="text/css" href="sentiment-analysis.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Sentiment Analysis</h2>
+<div class="author" ><span 
+class="cmr-12">Jordan Spooner</span></div><br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+   </div>This page continues from the previous page on ***recursive autoencoders.
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Phrase Representations using Recursive Autoencoders</h3>
+<!--l. 35--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-1001r1"></a>
+                                                                                         
+                                                                                         
+<!--l. 37--><p class="noindent" ><img 
+src="16_home_jordanspooner_Documents_163_Computing_T___rs-website_nlp_4-sentiment-analysis_img_rae.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">The structure of a simple recursive autoencoder.</span></div><!--tex4ht:label?: x1-1001r1 -->
+                                                                                         
+                                                                                         
+<!--l. 41--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 44--><p class="indent" >   We start with a phrase, and use a recursive autoencoder to produce a vector representation. This method follows
+naturally from the previous page, with the followin ammendments: our sequence of elements is now an ordered
+sequence of words. Concretely, we have the sequence <img 
+src="sentiment-analysis0x.png" alt="(x1,...,xm)"  class="left" align="middle"> where each <span 
+class="cmbx-10">x</span><sub><span 
+class="cmmi-7">i</span></sub> is the vector representation of the
+<span 
+class="cmmi-10">i</span>th word of a phrase made up of <span 
+class="cmmi-10">m </span>words. <span class="cite">[<a 
+href="#XTan2014">1</a>]</span>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>Semi-Supervised Recursive Autoencoders</h3>
+<!--l. 54--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-2001r2"></a>
+                                                                                         
+                                                                                         
+<!--l. 56--><p class="noindent" ><img 
+src="17_home_jordanspooner_Documents_163_Computing_T___-sentiment-analysis_img_semi-supervised-rae.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">A semi-supervised recursive autoencoder.</span></div><!--tex4ht:label?: x1-2001r2 -->
+                                                                                         
+                                                                                         
+<!--l. 60--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 63--><p class="indent" >   We now use our recursive autoencoder to attempt to predict a sentiment label. It is fairly easy to predict a
+probability distribution over the possible labels, by applying a simple softmax layer:
+   <center class="math-display" >
+<img 
+src="sentiment-analysis1x.png" alt="d(p) = softmax(Wlabelp )
+" class="math-display" ></center>
+<!--l. 69--><p class="nopar" > where <span 
+class="cmbx-10">p </span>is a given parent vector. The softmax layer applies a statistic method (specifically a generalization of
+logistic regression to handle more than two classes), to return the required probability distribution estimate, <span 
+class="cmbx-10">d</span>.
+Concretely, given <span 
+class="cmmi-10">K </span>labels, <span 
+class="cmbx-10">d </span><span 
+class="cmsy-10">&isin; </span><span 
+class="msbm-10">&#x211D;</span><sup><span 
+class="cmmi-7">K</span></sup> and <span 
+class="cmex-10">&sum;</span>
+  <sub><span 
+class="cmmi-7">k</span><span 
+class="cmr-7">=1</span></sub><sup><span 
+class="cmmi-7">K</span></sup><span 
+class="cmbx-10">d</span><sub><span 
+class="cmmi-7">k</span></sub> = 1. <span class="cite">[<a 
+href="#XNg">2</a>]</span>
+<!--l. 76--><p class="indent" >   We also have a target distribution <span 
+class="cmbx-10">t</span>. This is the &#8216;correct&#8217; probability distribution, that we are aiming to learn.
+This means we are able to calculate a cross-entropy error, that will decrease as the predicted distribution <span 
+class="cmbx-10">d </span>and the
+target distribution <span 
+class="cmbx-10">t </span>become more similar. <span class="cite">[<a 
+href="#XNielsen2017">3</a>]</span>
+<!--l. 82--><p class="indent" >   Note that we could have a simple case where <span 
+class="cmmi-10">K </span>= 2 and the set of labels includes only &#8216;good&#8217; and &#8216;bad&#8217;. This
+type of labelling is very common, making implementation easier. We could also have a significantly more
+complicated set of labels, depending on what training data sets are available.
+<!--l. 89--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-30002"></a><span 
+class="cmbx-10">Training</span></span>
+   We start with a corpus of aligned (sentence, label) pairs <img 
+src="sentiment-analysis2x.png" alt="(x,t)"  class="left" align="middle">. During training, we minimise a cost function
+which is constructed as follows:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3002x1">We take into account an error for each entry in the training set, which is calculated from the sum over
+     the errors at the non-terminal nodes of the tree constructed by the RAE:
+     <center class="math-display" >
+     <img 
+src="sentiment-analysis3x.png" alt=" &sum;        &sum;
+                  &alpha;Erec ([c1;c2]s)+ (1&minus; &alpha;)ECE  (ps,t)
+(x,t)s&isin;nodes(RAE (x))
+     " class="math-display" ></center>
+     <!--l. 100--><p class="nopar" > These errors in turn are calculated by adding the reconstruction error <span 
+class="cmmi-10">E</span><sub>rec</sub> (given on the previous
+     page) to the cross entropy error <span 
+class="cmmi-10">E</span><sub>CE</sub> from the softmax regression layer. These two errors are weighted
+     according to the value of the paramater <span 
+class="cmmi-10">&alpha;</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-3004x2">We add to this the final reconstruction error for the full tree.</li></ol>
+<!--l. 107--><p class="noindent" >Learning can then be achieved by ***backpropogation using this cost function. <span class="cite">[<a 
+href="#XSocher2011">4</a>]</span>
+<!--l. 111--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-40002"></a><span 
+class="cmbx-10">Improvements</span></span>
+   There are still better methods for sentiment analysis, which usually take into account the syntax tree of a given
+phrase or sentence. These methods, however, do not usually involve autoencoders! <span class="cite">[<a 
+href="#XSocher2013">5</a>]</span>
+<!--l. 118--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-50003"></a>Implementation</h3>
+<!--l. 120--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-5001r3"></a>
+                                                                                         
+                                                                                         
+<!--l. 122--><p class="noindent" ><img 
+src="18_home_jordanspooner_Documents_163_Computing_T____nlp_4-sentiment-analysis_img_sent-analysis.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">The results achieved by Socher et al using this implementation. The red bars show the actual
+distribution from an online experiment, the light blue bars show the predicted probabilities. The five choices
+were (Sorry, hugs), (You rock), (Teehee), (I understand) and (Wow, just wow), in that order. Source: <span class="cite">[<a 
+href="#XSocher2011">4</a>]</span>.</span></div><!--tex4ht:label?: x1-5001r3 -->
+                                                                                         
+                                                                                         
+<!--l. 130--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 133--><p class="indent" >   A Java implementation of this method can be found at <a 
+href="https://github.com/sancha/jrae" >https://github.com/sancha/jrae</a>.
+<!--l. 135--><p class="indent" >   The following page discusses an extension of this model, allowing us to apply it to the problem of ***paraphrase
+detection.
+   <h3 class="likesectionHead"><a 
+ id="x1-60003"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XTan2014"></a>Tan     S.     Recursive     Auto-encoders:     An     Introduction;     2014.            Available     from:
+   <a 
+href="https://blog.wtf.sg/2014/05/10/recursive-auto-encoders-an-introduction/" class="url" ><span 
+class="cmtt-10">https://blog.wtf.sg/2014/05/10/recursive-_auto-_encoders-_an-_introduction/</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNg"></a>Ng A. Unsupervised Feature Learning and Deep Learning: Softmax Regression;.  Available from:
+   <a 
+href="http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/" class="url" ><span 
+class="cmtt-10">http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNielsen2017"></a>Nielsen      M.      The      cross-entropy      cost      function;      2017.               Available      from:
+   <a 
+href="http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function" class="url" ><span 
+class="cmtt-10">http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-_entropy_cost_function</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XSocher2011"></a>Socher  R,  Pennington  J,  Huang  EH,  Ng  AY,  Manning  CD.     Semi-Supervised  Recursive
+   Autoencoders  for  Predicting  Sentiment  Distributions.     In:  Proceedings  of  the  2011  Conference
+   on   Empirical   Methods   in   Natural   Language   Processing   (EMNLP);   2011.   Available   from:
+   <a 
+href="http://www.socher.org/uploads/Main/SocherPenningtonHuangNgManning_EMNLP2011.pdf" class="url" ><span 
+class="cmtt-10">http://www.socher.org/uploads/Main/SocherPenningtonHuangNgManning_EMNLP2011.pdf</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XSocher2013"></a>Socher R, Perelygin A, Wu J, Chuang J, Manning CD, Ng AY, et&#x00A0;al.  Recursive Deep Models for
+   Semantic Compositionality Over a Sentiment Treebank.   In: Proceedings of the 2013 Conference on
+   Empirical Methods in Natural Language Processing. Stroudsburg, PA: Association for Computational
+   Linguistics; 2013. p. 1631&#8211;1642.
+</p>
+   </div>
+    
+</body></html> 
+
+                                                                                         
+
+

@@ -1,0 +1,402 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Word and Phrase Representations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="word-embeddings.tex"> 
+<meta name="date" content="2017-03-16 01:49:00"> 
+<link rel="stylesheet" type="text/css" href="word-embeddings.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Word and Phrase Representations</h2>
+<div class="author" ><span 
+class="cmr-12">Jordan Spooner</span></div><br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+   </div>On this page, we will discuss how autoencoders can learn vector representations for phrases, as proposed by
+Lebret and Collobert in 2015. In order to do so, we will need to discuss first how to find vector representations for
+single words.
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Word Embeddings</h3>
+<!--l. 43--><p class="noindent" >A common approach to learning word representations is to consider a word&#8217;s most common neighbours.
+<!--l. 47--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Word Co-occurrence Probabilities</h4>
+<!--l. 49--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-2001r1"></a>
+                                                                                         
+                                                                                         
+<!--l. 51--><p class="noindent" ><img 
+src="9_home_jordanspooner_Documents_163_Computing_To___rs-website_nlp_1-word-embeddings_img_corpus.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">An example corpus and demonstration of selection of context words.</span></div><!--tex4ht:label?: x1-2001r1 -->
+                                                                                         
+                                                                                         
+<!--l. 55--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 58--><p class="indent" >   We start with a corpus <span 
+class="cmmi-10">W </span>(a large and structured set of texts). We then define a context <span 
+class="cmmi-10">D</span>, which determines
+exactly what requirements need to be met in order for a word to be considered a &#8216;neighbour&#8217; <span 
+class="cmmi-10">c </span>to any selected word
+<span 
+class="cmmi-10">w </span>. We will here define a context as the six words surrounding (three preceeding and three following) the currently
+selected word (although it could be defined differently to this). We can the calculate the co-occurrence probabilites
+as follows:
+   <center class="math-display" >
+<img 
+src="word-embeddings0x.png" alt="p (c|w) = p(c,w-)= &sum;---n(c,w)---
+         p (w)      cj&isin;D n(cj,w )
+" class="math-display" ></center>
+<!--l. 67--><p class="nopar" > Here, <span 
+class="cmmi-10">n</span><img 
+src="word-embeddings1x.png" alt="(c,w)"  class="left" align="middle"> gives the number of times that <span 
+class="cmmi-10">c </span>occurs in the context of <span 
+class="cmmi-10">w</span>.
+<!--l. 71--><p class="indent" >   For each word <span 
+class="cmmi-10">w </span>in the corpus <span 
+class="cmmi-10">W</span>, we then end up with a probability distribution, <span 
+class="cmmi-10">P</span><sub><span 
+class="cmmi-7">w</span></sub> = <img 
+src="word-embeddings2x.png" alt="(            (     ))
+ p (c1|w ),...,p c|D||w"  class="left" align="middle">
+that gives the probability of the co-occurence each context word <span 
+class="cmmi-10">c </span>in the set of context words <span 
+class="cmmi-10">D</span>. <span class="cite">[<a 
+href="#XKhaz2016">1</a>,&#x00A0;<a 
+href="#XWeb1">2</a>]</span>
+<!--l. 76--><p class="indent" >   For example, consider a very simple corpus that consists of the following four texts:
+        <div class="quotation">
+     <!--l. 79--><p class="indent" >    &#8220;Projects  which  are  open-source,  and  developed  collaboratively  by  diverse  communities,
+     generate an increasingly more diverse scope of design perspective than any one company is capable
+     of developing.&#8221;
+     <!--l. 83--><p class="indent" >    &#8220;If a program is open-source, its source code is freely available to its users.&#8221;
+     <!--l. 86--><p class="indent" >    &#8220;When an author contributes code to open-source projects, they do so under an explicit license
+     or an implicit license.&#8221;
+     <!--l. 89--><p class="indent" >    &#8220;Contributing to open-source software is an excellent way to improve your programming
+     skills.&#8221;</div>
+<!--l. 92--><p class="noindent" >Let us select the word <span 
+class="cmti-10">open-source </span>as <span 
+class="cmmi-10">w</span>. We then get the following counts <span 
+class="cmmi-10">n</span><img 
+src="word-embeddings3x.png" alt="(c,w)"  class="left" align="middle">: <div class="table">
+<!--l. 94--><p class="indent" >   <hr class="float"><div class="float" 
+>
+                                                                                         
+                                                                                         
+<div class="tabular">
+ <table id="TBL-2" class="tabular" 
+cellspacing="0" cellpadding="0"  
+><colgroup id="TBL-2-1g"><col 
+id="TBL-2-1"><col 
+id="TBL-2-2"></colgroup><tr  
+ style="vertical-align:baseline;" id="TBL-2-1-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-1"  
+class="td11">Context word <span 
+class="cmmi-10">c</span></td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-1-2"  
+class="td11">Count <span 
+class="cmmi-10">n</span><img 
+src="word-embeddings4x.png" alt="(c,w )"  class="left" align="middle"></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-2-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-1"  
+class="td11">   projects     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-2-2"  
+class="td11">     2         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-3-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-1"  
+class="td11">    which       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-3-2"  
+class="td11">     1         </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-4-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-1"  
+class="td11"> are </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-4-2"  
+class="td11"> 1</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-5-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-1"  
+class="td11">     and        </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-5-2"  
+class="td11">     1         </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-6-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-1"  
+class="td11"> developed </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-6-2"  
+class="td11"> 1</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-7-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-1"  
+class="td11"> collaboratively </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-7-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-8-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-1"  
+class="td11">      a          </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-8-2"  
+class="td11">     1         </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-9-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-1"  
+class="td11"> program </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-9-2"  
+class="td11"> 1</td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-10-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-1"  
+class="td11">      is          </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-10-2"  
+class="td11">     2         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-11-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-1"  
+class="td11">      its         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-11-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-12-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-1"  
+class="td11">    source       </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-12-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-13-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-13-1"  
+class="td11">     code        </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-13-2"  
+class="td11">     2         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-14-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-14-1"  
+class="td11">  contributes   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-14-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-15-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-15-1"  
+class="td11">      to         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-15-2"  
+class="td11">     2         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-16-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-16-1"  
+class="td11">     they        </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-16-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-17-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-17-1"  
+class="td11">      do         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-17-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-18-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-18-1"  
+class="td11">  contributing   </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-18-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-19-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-19-1"  
+class="td11">   software     </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-19-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-20-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-20-1"  
+class="td11">      an         </td><td  style="white-space:nowrap; text-align:center;" id="TBL-2-20-2"  
+class="td11">     1         </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-2-21-"><td  style="white-space:nowrap; text-align:center;" id="TBL-2-21-1"  
+class="td11">             </td></tr></table></div>
+                                                                                         
+                                                                                         
+   </div><hr class="endfloat" />
+   </div>
+<!--l. 144--><p class="indent" >   You can see how, as we increased the size of the corpus by finding more and longer relevant texts, we would
+begin to associate the word <span 
+class="cmti-10">open-source </span>strongly with words such as <span 
+class="cmti-10">project</span>, <span 
+class="cmti-10">developed</span>, <span 
+class="cmti-10">program</span>, <span 
+class="cmti-10">code</span>,
+<span 
+class="cmti-10">contributes</span>, <span 
+class="cmti-10">software </span>and so on. We would see similar counts for similar words. For example, a vector
+generated from the co-occurence probabilities of the word <span 
+class="cmti-10">charitable </span>might be close because of surrounding
+context words such as <span 
+class="cmti-10">free </span>and <span 
+class="cmti-10">contributing</span>. A word such as <span 
+class="cmti-10">programming </span>would be considered close
+due to words such as <span 
+class="cmti-10">code </span>and <span 
+class="cmti-10">project</span>. We can determine this &#8216;closeness&#8217; of words using the Hellinger
+distance.
+   <h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x1-30001.2"></a>Hellinger Distance</h4>
+<!--l. 158--><p class="noindent" >The Hellinger distance is a measure of the similarity of two probability distributions. Given the two
+discrete probability distributions <span 
+class="cmbx-10">p</span> = <img 
+src="word-embeddings5x.png" alt="(p1,...,pk)"  class="left" align="middle"> and <span 
+class="cmbx-10">q </span>= <img 
+src="word-embeddings6x.png" alt="(q1,...,qk)"  class="left" align="middle">, the Hellinger distance is defined
+as:
+   <center class="math-display" >
+<img 
+src="word-embeddings7x.png" alt="             &#x250C; --------------
+             &#x2502;&#x2502; &sum;k   --    --
+H (p,q) = &radic;1-&#x2218;    (&radic; pi &minus; &radic; qi)2
+           2   i=1
+" class="math-display" ></center>
+<!--l. 164--><p class="nopar" > Note that the Hellinger distance will always take a value between 0 and 1, due the the constant factor of 1<span 
+class="cmmi-10">&#x2215;</span><img 
+src="word-embeddings8x.png" alt="&radic; -
+  2"  class="sqrt" >.
+This is one property of the Hellinger distance which makes it preferable to the standard Euclidean distance for this
+purpose. <span class="cite">[<a 
+href="#XWeb1">2</a>]</span>
+<!--l. 171--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x1-40001.3"></a>Generating Word Vectors</h4>
+<!--l. 173--><p class="noindent" >The model we have so far is fine, except for the fact that each probabibility distribution <span 
+class="cmbx-10">p</span><sub><span 
+class="cmmi-7">w</span></sub> will generate a vector
+containing hundreds of thousands of entries (potentially as large as the number of words in <span 
+class="cmmi-10">W</span>). A common
+approach to reducing the dimensionality of this vector (generally to 50 or 100 dimensions) is to consider a
+co-occurence matrix that only includes the most relevant context words, and use principal component analysis
+(PCA) to reduce dimensionality without losing too much meaning. <span class="cite">[<a 
+href="#XWeb1">2</a>]</span> The use of autoencoders is an alternative
+method.
+<!--l. 184--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-50001.3"></a><span 
+class="cmbx-10">An Approach using Autoencoders</span></span>
+   As the input, we provide an ***autoencoder with a probability distribution <img 
+src="word-embeddings9x.png" alt="&radic;pw-"  class="sqrt" >. We use a standard squared
+difference cost function:
+   <table 
+class="equation"><tr><td>
+   <center class="math-display" >
+<img 
+src="word-embeddings10x.png" alt="&#x2225;g(f (&radic;pw-))&minus; &radic;pw-&#x2225;2
+" class="math-display" ><a 
+ id="x1-5001r1"></a></center></td><td class="equation-label">(1)</td></tr></table>
+                                                                                         
+                                                                                         
+<!--l. 191--><p class="nopar" >
+The autoencoder will learn a more compact (reduced dimensionality) representation for this distribution, which can
+then be compared with other distributions using the Hellinger distance. <span class="cite">[<a 
+href="#XLebret2015">3</a>]</span>
+<!--l. 197--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-60002"></a>Simple Phrase Representations</h3>
+<!--l. 199--><p class="noindent" >We will now discuss a very simple method for finding vector representations for phrases. There are many methods
+for doing so, most of which perform better than the method we discuss here.
+<!--l. 203--><p class="indent" >   To determine representations for phrases, we simply add word representations. This will work for simple phrases
+such as &#8220;the red cat&#8221;, where the meaning is simply a sum of its parts. It does not work for more complex phrases
+(such as those involving negation).
+<!--l. 208--><p class="indent" >   We start with a phrase <span 
+class="cmmi-10">p </span>= <img 
+src="word-embeddings11x.png" alt="(w1,w2, ...,wT)"  class="left" align="middle"> of <span 
+class="cmmi-10">T </span>words. We simple feed <img 
+src="word-embeddings12x.png" alt="&radic; ---
+  pw"  class="sqrt" > into the autoencoder for each
+word <span 
+class="cmmi-10">w </span>in the phrase <span 
+class="cmmi-10">p</span>, which returns for each word, the vector representation <span 
+class="cmbx-10">x</span><sub><span 
+class="cmmi-7">w</span></sub> = <span 
+class="cmmi-10">f</span><img 
+src="word-embeddings13x.png" alt="(&radic;---)
+  pw"  class="left" align="middle">. The very simple
+process of element-wise addition gives us the representation of the phrase <span 
+class="cmmi-10">p </span>as:
+   <center class="math-display" >
+<img 
+src="word-embeddings14x.png" alt="       &sum;T
+xp = 1-   xwi
+     T i=1
+" class="math-display" ></center>
+<!--l. 216--><p class="nopar" >
+<!--l. 220--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-70002"></a><span 
+class="cmbx-10">Training</span></span>
+   We can improve our representation by a method of training which involves predicting whether words are in a
+given phrase or not. We use a ranking-type cost on each phrase:
+   <table 
+class="equation"><tr><td>
+   <center class="math-display" >
+<img 
+src="word-embeddings15x.png" alt="&sum;   &sum;
+        max (0,1&minus; xs &sdot;xwt +xs &sdot;xwi)
+wt&isin;pwi&isin;W
+" class="math-display" ><a 
+ id="x1-7001r2"></a></center></td><td class="equation-label">(2)</td></tr></table>
+<!--l. 227--><p class="nopar" >
+<!--l. 230--><p class="indent" >   Due to the large size of <span 
+class="cmmi-10">W</span>, we might choose to use negative sampling to speed up the training process. This
+reduces the number of words we will need to consider from hundreds of thousands to somewhere to the order of ten.
+<span class="cite">[<a 
+href="#XMcCormick2017">4</a>]</span>
+<!--l. 236--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-80002"></a><span 
+class="cmbx-10">Joint Learning</span></span>
+   The benefit of this method (autoencoders), is that we can learn word representations that are optimal for
+summing, by jointly minimising the objective functions <a 
+href="#x1-5001r1">1<!--tex4ht:ref: Cost1 --></a> and <a 
+href="#x1-7001r2">2<!--tex4ht:ref: Cost2 --></a> over the training data.
+                                                                                         
+                                                                                         
+<!--l. 244--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-90002"></a><span 
+class="cmbx-10">Improving Phrase Representations</span></span>
+     <div class="quote">
+     <!--l. 246--><p class="noindent" >See ***Recursive Autoencoders, ***Sentiment Analysis and ***Paraphrase Detection</div>
+As we discussed earlier, this is a relitavely poor method for representing phrases. We discuss a much
+better method on the pages for sentiment analysis and paraphrase detection, which uses recursive
+autoencoders.
+<!--l. 254--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-100003"></a>Implementation</h3>
+<!--l. 256--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-10001r2"></a>
+                                                                                         
+                                                                                         
+<!--l. 258--><p class="noindent" ><img 
+src="10_home_jordanspooner_Documents_163_Computing_T___s-website_nlp_1-word-embeddings_img_results.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">The results of Lebret and Collobert in their 2015 paper. This table gives five example phrases, and
+five of the ten closest phrases according to an implementation of the model described on this page. The first
+column gives the results when using a symmetric window of ten context words around the query phrase. The
+second column gives the results when using an average of the individual word vectors. All representations
+were of 100 dimensions. Source: <span class="cite">[<a 
+href="#XLebret2015">3</a>]</span>.</span></div><!--tex4ht:label?: x1-10001r2 -->
+                                                                                         
+                                                                                         
+<!--l. 268--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 271--><p class="indent" >   An example implementation in Python, using TensorFlow can be found at
+<a 
+href="https://github.com/ParallelDots/WordEmbeddingAutoencoder" >https://github.com/ParallelDots/WordEmbeddingAutoencoder</a>.
+   <h3 class="likesectionHead"><a 
+ id="x1-110003"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XKhaz2016"></a>Khazan     L.     Autoencoders     and     Word     Embeddings;     2016.             Available     from:
+   <a 
+href="https://ayearofai.com/lenny-2-autoencoders-and-word-embeddings-oh-my-576403b0113a#.m99qy1yii" class="url" ><span 
+class="cmtt-10">https://ayearofai.com/lenny-_2-_autoencoders-_and-_word-_embeddings-_oh-_my-_576403b0113a#.m99qy1yii</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XWeb1"></a>How  to  Use  Words  Co-Occurrence  Statistics  to  Map  Words  to  Vectors;.     Available  from:
+   <a 
+href="https://iksinc.wordpress.com/tag/hellinger-distance/" class="url" ><span 
+class="cmtt-10">https://iksinc.wordpress.com/tag/hellinger-_distance/</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XLebret2015"></a>Lebret R, Collobert R. &#8221;The Sum of Its Parts&#8221;: Joint Learning of Word and Phrase Representations
+   with Autoencoders. CoRR. 2015;abs/1506.05703. Available from: <a 
+href="http://arxiv.org/abs/1506.05703" class="url" ><span 
+class="cmtt-10">http://arxiv.org/abs/1506.05703</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XMcCormick2017"></a>McCormick   C.   Word2Vec   Tutorial   Part   2   -   Negative   Sampling;   2017.      Available   from:
+   <a 
+href="http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/" class="url" ><span 
+class="cmtt-10">http://mccormickml.com/2017/01/11/word2vec-_tutorial-_part-_2-_negative-_sampling/</span></a>.
+</p>
+   </div>
+    
+</body></html> 
+
+                                                                                         
+
+

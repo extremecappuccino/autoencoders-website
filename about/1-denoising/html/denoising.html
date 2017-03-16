@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Denoising Autoencoders</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="denoising.tex"> 
+<meta name="date" content="2017-03-16 01:39:00"> 
+<link rel="stylesheet" type="text/css" href="denoising.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Denoising Autoencoders</h2>
+<div class="author" ></div>
+<br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+</div>The principle behind denoising autoencoders is to be able to reconstruct data from an input of corrupted data. After
+giving the autoencoder the corrupted data, we force the hidden layer to learn only the more robust
+features, rather than just the identity. The output will then be a more refined version of the input data
+<span class="cite">[<a 
+href="#Xdeeplearning">1</a>]</span>.
+<!--l. 32--><p class="noindent" >We can train a denoising autoencoder by stochastically corrupting data sets and inputting them into a neural
+network. The autoencoder can then be trained against the original data. One way to corrupt the data would be
+simply to randomly remove some parts of the data, so that the autoencoder is trying to predict the missing
+input.
+<!--l. 38--><p class="noindent" >An example of this is shown below, with the image an autoencoder is trained on being on the left, and a
+reconstruction of the middle image on the right.
+<!--l. 42--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-2r1"></a>
+                                                                                         
+                                                                                         
+
+<!--l. 44--><p class="noindent" ><img 
+src="0_home_jordanspooner_Documents_163_Computing_To___ite_about_1-denoising_res_denoising-example.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Denoising autoencoder example on handwritten digits <span class="cite">[<a 
+href="#Xopendeep">2</a>]</span>.</span></div><!--tex4ht:label?: x1-2r1 -->
+                                                                                         
+                                                                                         
+<!--l. 48--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 51--><p class="noindent" >Stacked denoising autoencoders are also useful for deep learning. A stacked denoising autoencoder is a denoising
+autoencoder with multiple hidden layers, and is trained layer by layer, by trying to minimize the error in the layer&#8217;s
+reconstruction compared to it&#8217;s input (the previous layer&#8217;s output). By using a stacked autoencoder in an
+unsupervised manner, we can learn starting weights prior to the main supervised training procedure
+with deep learning. A regularization effect is then created as a result of the pretraining procedure
+creating an initialization point, to which the parameters are restricted to a near optimal local minimum
+<span class="cite">[<a 
+href="#XERHAN2010">3</a>]</span>.
+<!--l. 62--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-3r2"></a>
+                                                                                         
+                                                                                         
+<!--l. 63--><p class="noindent" > <img 
+src="1_home_jordanspooner_Documents_163_Computing_To___t_1-denoising_res_pretraining-deep-networks.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Pretraining example visualization <span class="cite">[<a 
+href="#XERHAN2010">3</a>]</span>.</span></div><!--tex4ht:label?: x1-3r2 -->
+                                                                                         
+                                                                                         
+<!--l. 68--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 71--><p class="noindent" >The above image, is a 2D visualization generated with ISOMAP of the functions represented by 50 networks with
+and 50 networks without pretraining, for supervised training over MNIST (handwritten digits database) with 2
+hidden layers. The colours from deep blue to cyan represent the progression in iterations. As the image shows, the
+pretraining models all start in a small region of space and decrease in variance, towards a basin of attraction. The
+training was also quicker by pretraining the functions.
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xdeeplearning"></a>DeepLearning.          Denoising          Autoencoders;.                              Available          from:
+   <a 
+href="http://deeplearning.net/tutorial/dA.html" class="url" ><span 
+class="cmtt-10">http://deeplearning.net/tutorial/dA.html</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="Xopendeep"></a>OpenDeep.      Tutorial:      Your      First      Model      (DAE);.                 Available      from:
+   <a 
+href="http://www.opendeep.org/v0.0.5/docs/tutorial-your-first-model" class="url" ><span 
+class="cmtt-10">http://www.opendeep.org/v0.0.5/docs/tutorial-_your-_first-_model</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XERHAN2010"></a>et&#x00A0;al   E.   Why   does   Unsupervised   Pre-training   Help   Deep   Learning?;.      Available   from:
+   <a 
+href="http://www.jmlr.org/papers/volume11/erhan10a/erhan10a.pdf" class="url" ><span 
+class="cmtt-10">http://www.jmlr.org/papers/volume11/erhan10a/erhan10a.pdf</span></a>.
+</p>
+   </div>
+ 
+</body></html> 
+
+                                                                                         
+
+

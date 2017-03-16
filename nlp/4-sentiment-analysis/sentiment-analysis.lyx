@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 474
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{hyperref}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default"
+\font_sans "" "default"
+\font_typewriter "" "default"
+\font_math "" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -85,19 +87,46 @@ Jordan Spooner
 \end_layout
 
 \begin_layout Standard
-This page continues from the previous page on recursive autoencoders.
+This page continues from the previous page on ***recursive autoencoders.
 \end_layout
 
 \begin_layout Section
 Phrase Representations using Recursive Autoencoders
 \end_layout
 
-\begin_layout Quotation
-[Recursive Autoencoders]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/rae.png
+	scale 40
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Quote
-// Recursive Autoencoder Diagram
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The structure of a simple recursive autoencoder.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -136,8 +165,39 @@ key "Tan2014"
 Semi-Supervised Recursive Autoencoders
 \end_layout
 
-\begin_layout Quote
-// Semi-Supervised Autoencoder Diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/semi-supervised-rae.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+A semi-supervised recursive autoencoder.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -272,12 +332,8 @@ These errors in turn are calculated by adding the reconstruction error
 We add to this the final reconstruction error for the full tree.
 \end_layout
 
-\begin_layout Quote
-[Backpropogation]
-\end_layout
-
 \begin_layout Standard
-Learning can then be achieved by backpropogation using this cost function.
+Learning can then be achieved by ***backpropogation using this cost function.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -309,17 +365,67 @@ key "Socher2013"
 Implementation
 \end_layout
 
-\begin_layout Quote
-// Python Implementation
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/sent-analysis.png
+	scale 40
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Quote
-// Example Results
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The results achieved by Socher et al using this implementation.
+ The red bars show the actual distribution from an online experiment, the
+ light blue bars show the predicted probabilities.
+ The five choices were (Sorry, hugs), (You rock), (Teehee), (I understand)
+ and (Wow, just wow), in that order.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2011"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A Java implementation of this method can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/sancha/jrae"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 The following page discusses an extension of this model, allowing us to
- apply it to the problem of paraphrase detection.
+ apply it to the problem of ***paraphrase detection.
 \end_layout
 
 \begin_layout Standard

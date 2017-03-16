@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 474
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{hyperref}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default"
+\font_sans "" "default"
+\font_typewriter "" "default"
+\font_math "" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -101,8 +103,40 @@ name "sec:bow"
 
 \end_layout
 
-\begin_layout Quote
-// Bag-of-Words Diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/bow.png
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Demonstration of the bag-of-words approach and how a bag-of-words can be
+ used to generate a vector representation for a phrase.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -286,7 +320,7 @@ The decoder attempts to reconstruct
 :
 \begin_inset Formula 
 \[
-\mathbf{\hat{v}}=g\left(\mathbf{W}'\mathbf{x}+\mathbf{b}'\right)
+\mathbf{\hat{v}}=g\left(\mathbf{W}'\phi\left(\mathbf{x}\right)+\mathbf{b}'\right)
 \]
 
 \end_inset
@@ -315,8 +349,40 @@ key "Nielsen2017"
 Bilingual Autoencoders
 \end_layout
 
-\begin_layout Quote
-// Bilingual Autoencoder Diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/bae.png
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Part of a bilingual autoencoder (BAE) that shows the process for calculating
+ the second part of the loss function as described below.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -496,12 +562,50 @@ key "Ruder2012,Lauly,Chandar2014"
 Implementation
 \end_layout
 
-\begin_layout Quote
-// Python Implementation
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/bae-results.png
+	scale 45
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Quote
-// Results
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Results achieved by Chandar Lauly et al using the methodology described
+ above.
+ The table shows six example words in English, along with the 10 closest
+ words (by Euclidean distance) to each example, in both English and German.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Chandar2014"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote

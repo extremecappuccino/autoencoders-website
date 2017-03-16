@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Bilingual Representations</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="bilingual-words.tex"> 
+<meta name="date" content="2017-03-16 01:49:00"> 
+<link rel="stylesheet" type="text/css" href="bilingual-words.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Bilingual Representations</h2>
+<div class="author" ><span 
+class="cmr-12">Jordan Spooner</span></div><br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+   </div>We will discuss another method for learning representations of phrases (namely the bag-of-words approach), and
+see how this can be applied to bilingual data where sentences are aligned.
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Bag-of-Words</h3>
+<!--l. 35--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-1001r1"></a>
+                                                                                         
+                                                                                         
+<!--l. 37--><p class="noindent" ><img 
+src="11_home_jordanspooner_Documents_163_Computing_T___oders-website_nlp_2-bilingual-words_img_bow.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Demonstration of the bag-of-words approach and how a bag-of-words can be used to generate a
+vector representation for a phrase.</span></div><!--tex4ht:label?: x1-1001r1 -->
+                                                                                         
+                                                                                         
+<!--l. 42--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 45--><p class="indent" >   We assume a method for representing words in a vector in <span 
+class="msbm-10">&#x211D;</span><sup><span 
+class="cmmi-7">D</span></sup> exists. Methods for achieving this are discussed on
+other pages. We also assume a vocabulary of words, size <span 
+class="cmmi-10">V </span>.
+<!--l. 49--><p class="indent" >   Given a sentence or phrase, we produce a representation by a simple additive method, which is as
+follows:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-1003x1">For each word in our vocabulary, we calculate its vector representation in <span 
+class="msbm-10">&#x211D;</span><sup><span 
+class="cmmi-7">D</span></sup>. We then define a matrix,
+     say <span 
+class="cmbx-10">W</span> of dimensions <span 
+class="cmmi-10">D </span><span 
+class="cmsy-10">&#x00D7; </span><span 
+class="cmmi-10">V </span>. The matrix <span 
+class="cmbx-10">W </span>simply has the vector representation for each of the <span 
+class="cmmi-10">V</span>
+     vocabulary words as its columns.
+     </li>
+     <li 
+  class="enumerate" id="x1-1005x2">We start with a bag-of-words representation <span 
+class="cmbx-10">x</span>, such that each element in <span 
+class="cmbx-10">x </span>is an index referencing a
+     word in the vocabulary of <span 
+class="cmmi-10">V </span>words. Note that in a bag-of-words representation, the order of words in
+     the sentence is completely ignored.
+     </li>
+     <li 
+  class="enumerate" id="x1-1007x3">The encoder function sums over each colum of <span 
+class="cmbx-10">W </span>referring to a word in the given sentence or phrase,
+     giving a result, which we will call <span 
+class="cmmi-10">&#x03D5;</span><img 
+src="bilingual-words0x.png" alt="(x)"  class="left" align="middle">. The decoder function is trained using a loss function that
+     measures how well we are able to reconstruct <span 
+class="cmbx-10">x</span>. <span class="cite">[<a 
+href="#XFergus">1</a>]</span></li></ol>
+<!--l. 67--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-20001"></a><span 
+class="cmbx-10">Concrete Implementation</span></span>
+   In practice, there are many ways to implement a bag-of-words approach to learning phrase representations using
+autoencoders. We will now discuss a concrete example:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-2002x1">Using the bag-of-words representation <span 
+class="cmbx-10">x</span>, we define <span 
+class="cmbx-10">v </span>in <span 
+class="msbm-10">&#x211D;</span><sup><span 
+class="cmmi-7">V</span> </sup>, whereby <span 
+class="cmbx-10">v </span>is simply a binary vector, such
+     that each <span 
+class="cmmi-10">v</span><sub><span 
+class="cmmi-7">i</span></sub> is 1 if the phrase contains the <span 
+class="cmmi-10">i</span>th word of the vocabulary, or 0 otherwise.
+     </li>
+     <li 
+  class="enumerate" id="x1-2004x2">It is now simple to find the encoder representation, <span 
+class="cmmi-10">&#x03D5;</span><img 
+src="bilingual-words1x.png" alt="(x)"  class="left" align="middle"> by multiplication of <span 
+class="cmbx-10">v </span>with <span 
+class="cmbx-10">W</span>:
+     <center class="math-display" >
+     <img 
+src="bilingual-words2x.png" alt="&#x03D5;(x) = f (Wv + b)
+     " class="math-display" ></center>
+     <!--l. 81--><p class="nopar" > where <span 
+class="cmbx-10">b </span>is a bias vector and <span 
+class="cmmi-10">f </span>is a sigmoidal function, applied element wise to <span 
+class="cmbx-10">Wx</span> + <span 
+class="cmbx-10">b</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-2006x3">The decoder attempts to reconstruct <span 
+class="cmbx-10">v </span>from <span 
+class="cmmi-10">&#x03D5;</span><img 
+src="bilingual-words3x.png" alt="(x)"  class="left" align="middle">:
+     <center class="math-display" >
+     <img 
+src="bilingual-words4x.png" alt="&#x02C6;v = g (W &prime;&#x03D5; (x) + b&prime;)
+     " class="math-display" ></center>
+     <!--l. 87--><p class="nopar" >
+     </li>
+     <li 
+  class="enumerate" id="x1-2008x4">Training attempts to minimise the difference between <span 
+class="cmbx-10">v </span>and its reconstruction. This is done by using
+     a cross-entropy loss function. <span class="cite">[<a 
+href="#XNielsen2017">2</a>]</span></li></ol>
+<!--l. 94--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-30002"></a>Bilingual Autoencoders</h3>
+<!--l. 96--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-3001r2"></a>
+                                                                                         
+                                                                                         
+<!--l. 98--><p class="noindent" ><img 
+src="12_home_jordanspooner_Documents_163_Computing_T___oders-website_nlp_2-bilingual-words_img_bae.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Part of a bilingual autoencoder (BAE) that shows the process for calculating the second part of
+the loss function as described below.</span></div><!--tex4ht:label?: x1-3001r2 -->
+                                                                                         
+                                                                                         
+<!--l. 103--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 106--><p class="indent" >   Suppose we have a set of aligned <img 
+src="bilingual-words5x.png" alt="(x,y)"  class="left" align="middle"> sentence pairs in two languages, <span 
+class="cmmi-10">X </span>and <span 
+class="cmmi-10">Y </span>.
+<!--l. 109--><p class="indent" >   We also assume vocabularies <span 
+class="cmmi-10">V</span> <sub><span 
+class="cmmi-7">X</span></sub> and <span 
+class="cmmi-10">V</span> <sub><span 
+class="cmmi-7">Y</span> </sub> for each language, and <span 
+class="cmbx-10">W</span><sub><span 
+class="cmmi-7">X</span></sub> and <span 
+class="cmbx-10">W</span><sub><span 
+class="cmmi-7">Y</span> </sub> of sizes <span 
+class="cmmi-10">D </span><span 
+class="cmsy-10">&#x00D7; </span><span 
+class="cmmi-10">V</span> <sub><span 
+class="cmmi-7">X</span></sub> and
+<span 
+class="cmmi-10">D </span><span 
+class="cmsy-10">&#x00D7; </span><span 
+class="cmmi-10">V</span> <sub><span 
+class="cmmi-7">Y</span> </sub> respectively, as the word representation matrices as defined for a single language in section
+<a 
+href="#x1-10001">1<!--tex4ht:ref: sec:bow --></a>.
+<!--l. 114--><p class="indent" >   The encoder, similarly to before, produces: <div class="eqnarray">
+   <center class="math-display" >
+<img 
+src="bilingual-words6x.png" alt=" &#x03D5;(x)  =  f (WXv (x)+ b)
+&#x03D5; (y)  =  f (WY v(y)+ b)
+" class="math-display" ></center>
+</div>where <span 
+class="cmbx-10">b </span>is the same for both languages to keep the representations on roughly the same scale. Note that both have
+dimension <span 
+class="cmmi-10">D</span>.
+<!--l. 122--><p class="indent" >   The decoders are of the same form as before, but with individual parameters for each language.
+<!--l. 126--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-40002"></a><span 
+class="cmbx-10">The Loss Function</span></span>
+   This encoder-decoder structure gives us the benefit of being able to calculate five different reconstruction
+errors:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-4002x1">Reconstruction of <span 
+class="cmbx-10">y </span>given input <span 
+class="cmbx-10">x</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-4004x2">Reconstruction of <span 
+class="cmbx-10">x </span>given input <span 
+class="cmbx-10">y</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-4006x3">Reconstruction of <span 
+class="cmbx-10">x </span>given input <span 
+class="cmbx-10">x</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-4008x4">Reconstruction of <span 
+class="cmbx-10">y </span>given input <span 
+class="cmbx-10">y</span>.
+     </li>
+     <li 
+  class="enumerate" id="x1-4010x5">Reconstruction of <span 
+class="cmbx-10">x </span>and <span 
+class="cmbx-10">y </span>given inputs <span 
+class="cmbx-10">x </span>and <span 
+class="cmbx-10">y</span>.</li></ol>
+<!--l. 138--><p class="noindent" >For training, we can simply optimise a sum of these loss functions. <span class="cite">[<a 
+href="#XRuder2012">3</a>,&#x00A0;<a 
+href="#XLauly">4</a>,&#x00A0;<a 
+href="#XChandar2014">5</a>]</span>
+<!--l. 142--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-50003"></a>Implementation</h3>
+<!--l. 144--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-5001r3"></a>
+                                                                                         
+                                                                                         
+<!--l. 146--><p class="noindent" ><img 
+src="13_home_jordanspooner_Documents_163_Computing_T___bsite_nlp_2-bilingual-words_img_bae-results.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">Results achieved by Chandar Lauly et al using the methodology described above. The table shows
+six example words in English, along with the 10 closest words (by Euclidean distance) to each example, in
+both English and German. Source: <span class="cite">[<a 
+href="#XChandar2014">5</a>]</span>.</span></div><!--tex4ht:label?: x1-5001r3 -->
+                                                                                         
+                                                                                         
+<!--l. 153--><p class="noindent" ></div><hr class="endfigure">
+     <div class="quote">
+     <h3 class="likesectionHead"><a 
+ id="x1-60003"></a>References</h3>
+     <!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XFergus"></a>Fergus        R.        Bag-of-Words        models;.                       Available        from:
+   <a 
+href="http://cs.nyu.edu/~fergus/teaching/vision_2012/9_BoW.pdf" class="url" ><span 
+class="cmtt-10">http://cs.nyu.edu/</span><span 
+class="cmtt-10">~</span><span 
+class="cmtt-10">fergus/teaching/vision_2012/9_BoW.pdf</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNielsen2017"></a>Nielsen    M.    The    cross-entropy    cost    function;    2017.          Available    from:
+   <a 
+href="http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function" class="url" ><span 
+class="cmtt-10">http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-_entropy_cost_function</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XRuder2012"></a>Ruder  S.  A  survey  of  cross-lingual  embedding  models;  2012.     Available  from:
+   <a 
+href="http://sebastianruder.com/cross-lingual-embeddings/" class="url" ><span 
+class="cmtt-10">http://sebastianruder.com/cross-_lingual-_embeddings/</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XLauly"></a>Lauly    S.    CIFAR    NCAP    Summer    School    Presentation:    An    Autoencoder
+   Approach    to    Learning    Bilingual    Word    Representations;.          Available    from:
+   <a 
+href="http://www.iro.umontreal.ca/~bengioy/cifar/NCAP2014-summerschool/slides/StanislasLauly_presSummerSchoolCIFAR.pdf" class="url" ><span 
+class="cmtt-10">http://www.iro.umontreal.ca/</span><span 
+class="cmtt-10">~</span><span 
+class="cmtt-10">bengioy/cifar/NCAP2014-_summerschool/slides/StanislasLauly_presSummerSchoolCIFAR.pdf</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XChandar2014"></a>Chandar  APS,  Lauly  S,  Larochelle  H,  Khapra  MM,  Ravindran  B,  Raykar  VC,
+   et&#x00A0;al.   An  Autoencoder  Approach  to  Learning  Bilingual  Word  Representations.   CoRR.
+   2014;abs/1402.1454. Available from: <a 
+href="http://arxiv.org/abs/1402.1454" class="url" ><span 
+class="cmtt-10">http://arxiv.org/abs/1402.1454</span></a>.
+</p>
+   </div>
+     </div>
+    
+</body></html> 
+
+                                                                                         
+
+

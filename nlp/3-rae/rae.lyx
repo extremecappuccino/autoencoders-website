@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 474
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{hyperref}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default"
+\font_sans "" "default"
+\font_typewriter "" "default"
+\font_math "" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -162,12 +164,51 @@ key "Pollack"
 Unsupervised Recursive Autoencoders
 \end_layout
 
-\begin_layout Quote
-[Autoencoders]
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/rae.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The structure of a simple recursive autoencoder.
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:rae"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Quote
-// ?? Binary tree structure
+See ***autoencoders.
 \end_layout
 
 \begin_layout Standard
@@ -194,7 +235,14 @@ We will now introduce a binary tree structure that allows for recursion,
 \end_inset
 
  in our sequence to be processed.
- Such a tree structure is shown in figure ??.
+ Such a tree structure is shown in figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:rae"
+
+\end_inset
+
+.
  It should be noted that every hidden representation will have the same
  dimensionality as the elements of the sequence, here called 
 \begin_inset Formula $n$
@@ -209,10 +257,6 @@ key "Tan"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Quote
-// Single autoencoder
 \end_layout
 
 \begin_layout Standard
@@ -269,10 +313,6 @@ We then attempt to reconstruct the children from the parent vector in a
 
 \end_layout
 
-\begin_layout Quote
-[Backpropogation]
-\end_layout
-
 \begin_layout Standard
 We can then calculate the reconstruction error by simply calculating the
  Euclidean distance between the children and their reconstruction:
@@ -283,7 +323,7 @@ E=0.5\left\Vert \left[\mathbf{c}_{1};\mathbf{c}_{2}\right]-\left[\mathbf{c}_{1}'
 
 \end_inset
 
-We then backpropogate the error as usual, finding a representation that
+We then ***backpropogate the error as usual, finding a representation that
  encodes the children as well as possible.
 \end_layout
 

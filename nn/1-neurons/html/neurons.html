@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Artificial Neurons</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="neurons.tex"> 
+<meta name="date" content="2017-03-16 01:43:00"> 
+<link rel="stylesheet" type="text/css" href="neurons.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Artificial Neurons</h2>
+<div class="author" ><span 
+class="cmr-12">Qiang Feng</span></div>
+<br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+</div>
+<h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Structure</h3>
+<!--l. 34--><p class="noindent" >An artificial neuron in a neural network is essentially a mathematical function. It receives inputs from neurons in a
+previous layer (or, in the case of the input layer, directly from a file or outside signal). It then performs the
+summation:
+<center class="math-display" >
+<img 
+src="neurons0x.png" alt="    &sum;
+v =    wixi
+" class="math-display" ></center>
+<!--l. 40--><p class="nopar" > where <span 
+class="cmmi-10">w</span><sub><span 
+class="cmmi-7">i</span></sub> is the weight assigned to the arc the information is travelling through and <span 
+class="cmmi-10">x</span><sub><span 
+class="cmmi-7">i</span></sub> is the information passed
+through the arc <span 
+class="cmmi-10">i</span>. A bias <span 
+class="cmmi-10">b </span>is added on to this sum:
+<center class="par-math-display" >
+<img 
+src="neurons1x.png" alt="   &sum;
+v =   wixi +b
+" class="par-math-display" ></center>
+<!--l. 47--><p class="nopar" >
+<!--l. 50--><p class="noindent" >After the bias is added, it is then passed through an activation function <span 
+class="cmmi-10">f</span>:
+<center class="par-math-display" >
+<img 
+src="neurons2x.png" alt="v = f(&sum;  wixi + b)
+" class="par-math-display" ></center>
+<!--l. 55--><p class="nopar" >
+<!--l. 58--><p class="noindent" >The result <span 
+class="cmmi-10">v </span>is then output from this neuron.
+                                                                                         
+                                                                                         
+<!--l. 61--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-20001.1"></a>Information</h4>
+<!--l. 63--><p class="noindent" >All data passed into the neural network need to be in the form of vectors, all of the same dimension <span class="cite">[<a 
+href="#XDataForDeepLearningDL4J">1</a>]</span>. This is so
+that mathematical operations such as the one above can be performed on the data.
+<!--l. 69--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">1.2   </span> <a 
+ id="x1-30001.2"></a>Weights</h4>
+<!--l. 71--><p class="noindent" >A weight is a number associated with an arc which carries information from one neuron to another. It is used to
+represent the fact that certain pairs of neurons have a stronger connection (which is represented using a weight of
+higher absolute value), and others have very weak to no connection at all (represented using a weight
+<img 
+src="neurons3x.png" alt="|w |"  class="left" align="middle"> <span 
+class="cmsy-10">&rarr; </span>0).
+<!--l. 78--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">1.3   </span> <a 
+ id="x1-40001.3"></a>Biases</h4>
+<!--l. 80--><p class="noindent" >A bias a constant (for a particular neuron) that is added onto the summation, before it is passed to the activation
+function. Essentially, it is a measure of how easy it is for the neuron to activate - the larger the bias, the easier it is
+to fire the neuron at a high rate) <span class="cite">[<a 
+href="#XNNDLC1">2</a>]</span>.
+<!--l. 87--><p class="noindent" >
+<h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-50002"></a>Activation Function</h3>
+<!--l. 89--><p class="noindent" >The purpose of the activation function is to decide whether or not the inputs are significant enough to activate
+the neuron (i.e. whether or not to activate the neuron, and also how active this neuron should be)
+<span class="cite">[<a 
+href="#XCS231nCNN">3</a>]</span>.
+<!--l. 95--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-60002.1"></a>Unit Step</h4>
+<!--l. 97--><p class="noindent" >The simplest activation function is the step function. When the sum of the inputs with weights is greater than or
+equal 0, it returns 1 (equivalent of the neuron firing). Otherwise it returns 0 (the neuron remains
+inactive.
+<center class="par-math-display" >
+<img 
+src="neurons4x.png" alt="      {
+        1  x &ge; 0
+f(x) =  0  x &#x003C; 0
+" class="par-math-display" ></center>
+<!--l. 107--><p class="nopar" >
+<!--l. 110--><p class="noindent" >
+                                                                                         
+                                                                                         
+<div class="center" 
+>
+<!--l. 110--><p class="noindent" >
+
+<!--l. 111--><p class="noindent" ><img 
+src="4_home_jordanspooner_Documents_163_Computing_To___ncoders-website_nn_1-neurons_res_graph-step.png" alt="PIC"  
+>
+</div>
+<!--l. 115--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-70002.2"></a>Sigmoid</h4>
+<!--l. 117--><p class="noindent" >The Sigmoid activation function has a smooth transition from the 0 to 1, so small changes in weights and biases
+result in small changes in the output value. This particular property of this function makes it useful for training the
+neural network. Using a learning algorithm such as Back Propagation, we can make small changes in the weights of
+the arcs connecting to this neuron to get small changes in the output, in order to reduce the error (the difference
+between the expected and actual output).
+<center class="par-math-display" >
+<img 
+src="neurons5x.png" alt="         1
+f(x) = 1-+-e&minus;x
+" class="par-math-display" ></center>
+<!--l. 128--><p class="nopar" >
+<!--l. 131--><p class="noindent" >
+<div class="center" 
+>
+<!--l. 131--><p class="noindent" >
+
+<!--l. 132--><p class="noindent" ><img 
+src="5_home_jordanspooner_Documents_163_Computing_To___ders-website_nn_1-neurons_res_graph-sigmoid.png" alt="PIC"  
+>
+</div>
+<!--l. 135--><p class="noindent" >If the step function was used, the small changes in biases and weights would not guarantee the change in output to
+be small, so it could affect the entire network drastically <span class="cite">[<a 
+href="#XNNDLC1">2</a>]</span>.
+<!--l. 140--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">2.3   </span> <a 
+ id="x1-80002.3"></a>Tanh</h4>
+<!--l. 142--><p class="noindent" >This function is very similar to the Sigmoid activation function. However, it the range of this function is [<span 
+class="cmsy-10">&minus;</span>1<span 
+class="cmmi-10">,</span>1]
+whereas the range of the Sigmoid function is [0<span 
+class="cmmi-10">,</span>1].
+<center class="par-math-display" >
+<img 
+src="neurons6x.png" alt="f(x) = tanh(x)
+" class="par-math-display" ></center>
+<!--l. 148--><p class="nopar" >
+<!--l. 151--><p class="noindent" >
+                                                                                         
+                                                                                         
+<div class="center" 
+>
+<!--l. 151--><p class="noindent" >
+
+<!--l. 152--><p class="noindent" ><img 
+src="6_home_jordanspooner_Documents_163_Computing_To___ncoders-website_nn_1-neurons_res_graph-tanh.png" alt="PIC"  
+>
+</div>
+<!--l. 156--><p class="noindent" >
+<h4 class="subsectionHead"><span class="titlemark">2.4   </span> <a 
+ id="x1-90002.4"></a>ReLU (Rectified Linear Unit)</h4>
+<!--l. 158--><p class="noindent" >This was the most popular non linear activation function in 2015 <span class="cite">[<a 
+href="#XNatureDL">4</a>]</span>. This is due to multi-layer neural networks (i.e.
+multiple hidden layers) learning much faster than when using smooth activation functions such as Tanh and
+Sigmoid.
+<center class="par-math-display" >
+<img 
+src="neurons7x.png" alt="f (x) = max(0,x)
+" class="par-math-display" ></center>
+<!--l. 165--><p class="nopar" >
+<!--l. 168--><p class="noindent" >
+<div class="center" 
+>
+<!--l. 168--><p class="noindent" >
+
+<!--l. 169--><p class="noindent" ><img 
+src="7_home_jordanspooner_Documents_163_Computing_To___ncoders-website_nn_1-neurons_res_graph-relu.png" alt="PIC"  
+>
+</div>
+<!--l. 1--><p class="noindent" >
+<h3 class="likesectionHead"><a 
+ id="x1-100002.4"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XDataForDeepLearningDL4J"></a>Skymind.   The   Data   You   Need   For   Deep   Learning   -   Deeplearning4j;.      Available   from:
+   <a 
+href="https://deeplearning4j.org/data-for-deep-learning.html" class="url" ><span 
+class="cmtt-10">https://deeplearning4j.org/data-_for-_deep-_learning.html</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNNDLC1"></a>Nielsen   M.   Using   neural   nets   to   recognize   handwritten   digits;.        Available   from:
+   <a 
+href="http://neuralnetworksanddeeplearning.com/chap1.html" class="url" ><span 
+class="cmtt-10">http://neuralnetworksanddeeplearning.com/chap1.html</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XCS231nCNN"></a>karpathy@cs[dot]stanford[dot]edu. CS231n Convolutional Neural Networks for Visual Recognition;.
+   Available from: <a 
+href="https://cs231n.github.io/neural-networks-1" class="url" ><span 
+class="cmtt-10">https://cs231n.github.io/neural-_networks-_1</span></a>.
+                                                                                         
+                                                                                         
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XNatureDL"></a>LeCun     Y,     Bengio     Y,     Hinton     G.     Deep     Learning;.              Available     from:
+   <a 
+href="http://www.nature.com/nature/journal/v521/n7553/pdf/nature14539.pdf" class="url" ><span 
+class="cmtt-10">http://www.nature.com/nature/journal/v521/n7553/pdf/nature14539.pdf</span></a>.
+</p>
+   </div>
+ 
+</body></html> 
+
+                                                                                         
+                                                                                         
+                                                                                         
+
+

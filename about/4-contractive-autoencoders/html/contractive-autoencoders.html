@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Contractive Autoencoders</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="contractive-autoencoders.tex"> 
+<meta name="date" content="2017-03-16 01:42:00"> 
+<link rel="stylesheet" type="text/css" href="contractive-autoencoders.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Contractive Autoencoders</h2>
+<div class="author" ><span 
+class="cmr-12">Nikolai Smirnov</span></div>
+<br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+</div>The aim of a contractive autoencoder is to make the learned representation be robust towards small changes around
+its training examples. As with most other autoencoder variations, this is done by adding a penalty term to the
+cost function that we are trying to minimize, which penalizes the representation&#8217;s sensitivity to the
+training input. The first part of the cost function is the mean squared error, for linear reconstructions, as
+usual but the Frobenius norm of the Jacobian matrix is also added <span class="cite">[<a 
+href="#XAgustinus_Kristiadi_Blog">1</a>]</span>. We can calculate it from the
+formula:
+<center class="par-math-display" >
+<img 
+src="contractive-autoencoders0x.png" alt="       2   &sum;  ( &delta;hj(x))
+||Jh(x)||F =      -&delta;xi--
+            ij
+" class="par-math-display" ></center>
+<!--l. 38--><p class="nopar" >
+<!--l. 41--><p class="noindent" >The formula contains a partial derivative of the activation value of a neuron with respect to the input value, and so
+it is possible to see how a large increase in the activation value will correspond to an increase in the Jacobian,
+penalizing the representation.
+<!--l. 46--><p class="noindent" >From this formula we can see that sparse autoencoders are likely to correspond to a contractive mapping while not
+explicitly learning it through their learning criterion. This is due to the low activation values of the neurons in
+sparse autoencoders being likely to occur in the left part of the Sigmoid activation function, which is almost
+flat. The neurons will therefore have a small first derivative which corresponds to a small entry in the
+Jacobian.
+<!--l. 54--><p class="noindent" >Contractive autoencoders are also very similar to denoising autoencoders. Both encourage robustness but while
+denoising autoencoders encourage it with the reconstruction (<span 
+class="cmmi-10">f </span><span 
+class="cmsy-10">&#x2218; </span><span 
+class="cmmi-10">g</span>)(<span 
+class="cmmi-10">x</span>), contractive autoencoders do
+so with the encoder function <span 
+class="cmmi-10">f</span>(<span 
+class="cmmi-10">x</span>). This is important when relying on the robustness of the encoder
+function rather than the reconstruction, for example for classification which only uses the encoder.
+Denoising autoencoders also obtain robustness stochastically, by randomly adding noise to the input, while
+contractive autoencoders obtain robustness analytically, by penalizing the magnitude of the first derivative
+<span class="cite">[<a 
+href="#XRifai_et_al_2011">2</a>]</span>.
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+                                                                                         
+                                                                                         
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XAgustinus_Kristiadi_Blog"></a>Kristiadi  A.  Deriving  Contractive  Autoencoder  and  Implementing  it  in  Keras;.   Available  from:
+   <a 
+href="http://wiseodd.github.io/techblog/2016/12/05/contractive-autoencoder/" class="url" ><span 
+class="cmtt-10">http://wiseodd.github.io/techblog/2016/12/05/contractive-_autoencoder/</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XRifai_et_al_2011"></a>et&#x00A0;al   R.       Contractive   Auto-Encoders:   Explicit   Invariance   During   Feature   Extraction.
+   Proceedings  of  the  28th  International  Conference  on  Machine  Learning.  2011;Available  from:
+   <a 
+href="http://machinelearning.wustl.edu/mlpapers/paper_files/ICML2011Rifai_455.pdf" class="url" ><span 
+class="cmtt-10">http://machinelearning.wustl.edu/mlpapers/paper_files/ICML2011Rifai_455.pdf</span></a>.
+</p>
+   </div>
+ 
+</body></html> 
+
+                                                                                         
+
+

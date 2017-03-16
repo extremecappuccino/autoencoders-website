@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Sparse Autoencoders</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="sparse-autoencoders.tex"> 
+<meta name="date" content="2017-03-16 01:41:00"> 
+<link rel="stylesheet" type="text/css" href="sparse-autoencoders.css"> 
+</head><body 
+>
+<div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Sparse Autoencoders</h2>
+<div class="author" ></div>
+<br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+</div>While autoencoders normally discover useful structures by having a small number of hidden units, they can also be
+useful with a large number of hidden units. By doing so, the autoencoder enlarges the given input&#8217;s representation.
+This is possible by introducing a sparsity constraint. The aim of this, is to cause the large number of neurons to all
+have a low average output so that the neurons are inactive most of the time. If we are using a Sigmoid activation
+function we would want their output to be as close to 0 as possible, and as close to -1 as possible if using a Tanh
+activation function.
+<!--l. 36--><p class="noindent" >If we have the activation function of a neuron, <span 
+class="cmmi-10">a</span><sub><span 
+class="cmmi-7">j</span></sub>, we can calculate the average activation function of all the
+neurons, <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">j</span></sub><span 
+class="cmmi-10">, </span>with the formula:
+<center class="par-math-display" >
+<img 
+src="sparse-autoencoders0x.png" alt="       m
+p = -1&sum;  [a x]
+ j  m  i=1  j
+" class="par-math-display" ></center>
+<!--l. 42--><p class="nopar" >
+<!--l. 45--><p class="noindent" >The aim of the sparsity constraint is to minimize <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">j</span></sub>, so that <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">j</span></sub> = <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">c</span></sub> where <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">c</span></sub> is a small number close to 0 (for the
+Sigmoid activation function), such as 0.05. We can do so by adding a penalty term to mean squared error cost
+function that we normally try to minimize for classical autoencoders. The penalty term, as with variational
+autoencoders, is the KL divergence between the Bernoulli random variables <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">j</span></sub>and <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">c</span></sub>, and can be calculated with
+the formula:
+<center class="par-math-display" >
+<img 
+src="sparse-autoencoders1x.png" alt="               pc           1&minus; pc
+KL (pj||pc) = plogpj +(1 &minus; p)log1&minus;-pj
+" class="par-math-display" ></center>
+<!--l. 56--><p class="nopar" >
+<!--l. 59--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-2r1"></a>
+                                                                                         
+                                                                                         
+
+<!--l. 61--><p class="noindent" ><img 
+src="0_home_jordanspooner_Documents_163_Computing_To___out_3-sparse-autoencoders_res_kl-divergence.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">KL divergence penalty term for <span 
+class="cmmi-10">p</span><sub><span 
+class="cmmi-7">c</span></sub>= 0.2 <span class="cite">[<a 
+href="#XCS294A_Lecture_notes">1</a>]</span>.</span></div><!--tex4ht:label?: x1-2r1 -->
+                                                                                         
+                                                                                         
+<!--l. 65--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 68--><p class="noindent" >An advancement to sparse autoencoders is the k-sparse autoencoder. This is where we choose k neurons with the
+highest activation functions and ignore the others, by either sorting the activities or using ReLU activation functions
+and adaptively adjusting the thresholds until the k largest neurons are identified. This lets us tune the value of k
+to obtain a sparsity level most suitable for our dataset. A large sparsity level would learn very local
+features which may not be useful for identifying handwritten digits but useful for pretraining neural nets
+<span class="cite">[<a 
+href="#XAlirezaMakhzani2013">2</a>]</span>.
+<!--l. 78--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-3r2"></a>
+                                                                                         
+                                                                                         
+
+<!--l. 79--><p class="noindent" ><img 
+src="1_home_jordanspooner_Documents_163_Computing_To___parse-autoencoders_res_k-sparse-autoencoder.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Different sparsity levels k, learned from MNIST with 1000 hidden units <span class="cite">[<a 
+href="#XAlirezaMakhzani2013">2</a>]</span>.</span></div><!--tex4ht:label?: x1-3r2 -->
+                                                                                         
+                                                                                         
+<!--l. 81--><p class="noindent" ></div><hr class="endfigure">
+<h3 class="likesectionHead"><a 
+ id="x1-1000"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XCS294A_Lecture_notes"></a>NG A. Sparse autoencoder. CS294A Lecture notes;.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XAlirezaMakhzani2013"></a>Alireza&#x00A0;Makhzani BF. k-Sparse Autoencoders. arXiv. 2013;.
+</p>
+   </div>
+ 
+</body></html> 
+
+                                                                                         
+
+

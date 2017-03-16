@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Paraphrase Detection</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="paraphrase-detection.tex"> 
+<meta name="date" content="2017-03-16 01:51:00"> 
+<link rel="stylesheet" type="text/css" href="paraphrase-detection.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Paraphrase Detection</h2>
+<div class="author" ><span 
+class="cmr-12">Jordan Spooner</span></div><br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+   </div>This page continues from the previous page on ***sentiment analysis.
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-10001"></a>Improving Recursive Autoencoders</h3>
+<!--l. 34--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-1001r1"></a>
+                                                                                         
+                                                                                         
+<!--l. 36--><p class="noindent" ><img 
+src="20_home_jordanspooner_Documents_163_Computing_T___lp_5-paraphrase-detection_img_unfolding-rae.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">Unfolding recursive autoencoder.</span></div><!--tex4ht:label?: x1-1001r1 -->
+                                                                                         
+                                                                                         
+<!--l. 40--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 43--><p class="indent" >   We will now propose various improvements to the recursive autoencoders on the previous page:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-1003x1"><span 
+class="cmbx-10">Unfolding Recursive Autoencoders: </span>We make a change to the standard recursive autoencoder
+     model, by now asking the autoencoder to reconstruct the entire sequence so far, and calculating the
+     error accordingly. This means the RAE can capture the increased importance of a child node when
+     this child represents a larger subtree.
+     </li>
+     <li 
+  class="enumerate" id="x1-1005x2"><span 
+class="cmbx-10">Deep Recursive Autoencoders: </span>It is also possible to allow multiple encoding layers at each node,
+     by adding an extra hidden layer.
+     </li>
+     <li 
+  class="enumerate" id="x1-1007x3"><span 
+class="cmbx-10">Using Parse Tree: </span>Instead of choosing any random tree structure, or greedily finding a tree structure
+     to use for our recursive autoencoder, we use the parse tree for the given phrase as the base for our
+     RAE structure.</li></ol>
+   <h3 class="sectionHead"><span class="titlemark">2   </span> <a 
+ id="x1-20002"></a>Testing Similarity</h3>
+<!--l. 62--><p class="noindent" >
+   <h4 class="subsectionHead"><span class="titlemark">2.1   </span> <a 
+ id="x1-30002.1"></a>Producing a Similarity Matrix</h4>
+<!--l. 64--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-3001r2"></a>
+                                                                                         
+                                                                                         
+<!--l. 66--><p class="noindent" ><img 
+src="21_home_jordanspooner_Documents_163_Computing_T___e_nlp_5-paraphrase-detection_img_sim-matrix.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;2: </span><span  
+class="content">Similarity matrix.</span></div><!--tex4ht:label?: x1-3001r2 -->
+                                                                                         
+                                                                                         
+<!--l. 70--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 73--><p class="indent" >   We use unfolding recursive autoencoders to generate phrase representations for two given phrases. To give the
+best representation, we use the parse tree of the phrase as the RAE tree.
+<!--l. 77--><p class="indent" >   We then create a variable-sized similarity matrix. The rows are &#8216;labelled&#8217; with each word vector, followed by each
+non-terminal RAE tree node vector, for the first phrase, and the columns similarly for the second phrase. It is filled
+with Euclidean distances between the respective vectors.
+   <h4 class="subsectionHead"><span class="titlemark">2.2   </span> <a 
+ id="x1-40002.2"></a>Dynamic Pooling</h4>
+<!--l. 86--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-4001r3"></a>
+                                                                                         
+                                                                                         
+<!--l. 88--><p class="noindent" ><img 
+src="22_home_jordanspooner_Documents_163_Computing_T____5-paraphrase-detection_img_dynamic-pooling.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;3: </span><span  
+class="content">Example of the dynamic min-pooling layer. Source: <span class="cite">[<a 
+href="#XSocher2014">1</a>]</span>.</span></div><!--tex4ht:label?: x1-4001r3 -->
+                                                                                         
+                                                                                         
+<!--l. 92--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 95--><p class="indent" >   Although there are already tell-tale signs for paraphrases at this point (e.g. low distances close to the diagonal,
+from similar word vectors), is not extremely useful since the dimensions of the matrix are variable, depending on the
+size of the RAE trees.
+<!--l. 100--><p class="indent" >   We want to convert our similarity matrix <span 
+class="cmmi-10">S </span>into a matrix <span 
+class="cmmi-10">S</span><span 
+class="cmsy-10">&prime; </span>with fixed dimensions <span 
+class="cmmi-10">n</span><span 
+class="cmsy-10">&#x00D7;</span><span 
+class="cmmi-10">n</span>. We do this simply by
+partitioning the rows and columns of <span 
+class="cmmi-10">S </span>into <span 
+class="cmmi-10">n </span>parts. <span 
+class="cmmi-10">S</span><span 
+class="cmsy-10">&prime; </span>is then defined as the matrix of minimum values of each
+respective region formed by the previous step.
+<!--l. 106--><p class="indent" >   Note that other approaches are possible, such as using an average, but this is more likely to lose important
+correlations.
+<!--l. 109--><p class="indent" >   We can then determine whether two phrases are paraphrases simply by considering this final matrix <span 
+class="cmmi-10">S</span><span 
+class="cmsy-10">&prime;</span>.
+<span class="cite">[<a 
+href="#XSocher2014">1</a>,&#x00A0;<a 
+href="#XRSEHJPANCM2011">2</a>]</span>
+   <h3 class="sectionHead"><span class="titlemark">3   </span> <a 
+ id="x1-50003"></a>Implementation</h3>
+<!--l. 115--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-5001r4"></a>
+                                                                                         
+                                                                                         
+<!--l. 117--><p class="noindent" ><img 
+src="23_home_jordanspooner_Documents_163_Computing_T___raphrase-detection_img_paraphrase-detection.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;4: </span><span  
+class="content">The results achieved by Socher et al using this implementation. Table shows nearest neighbours
+of randomly chosen phrases. Source: <span class="cite">[<a 
+href="#XSocher2014">1</a>]</span>.</span></div><!--tex4ht:label?: x1-5001r4 -->
+                                                                                         
+                                                                                         
+<!--l. 122--><p class="noindent" ></div><hr class="endfigure">
+<!--l. 125--><p class="indent" >   Code that implements this method can be found at
+<a 
+href="http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection" >http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection</a>.
+   <h3 class="likesectionHead"><a 
+ id="x1-60003"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XSocher2014"></a>Socher R, Manning C, Bengio Y. Machine Learning Summer School Lisbon; 2014.  Available from:
+   <a 
+href="http://lxmls.it.pt/2014/socher-lxmls.pdf" class="url" ><span 
+class="cmtt-10">http://lxmls.it.pt/2014/socher-_lxmls.pdf</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XRSEHJPANCM2011"></a>Richard   Socher   and   Eric   H   Huang   and   Jeffrey   Pennington   and   Andrew   Y   Ng   and
+   Christopher  D  Manning.   Dynamic  Pooling  and  Unfolding  Recursive  Autoencoders  for  Paraphrase
+   Detection.     In:  Advances  in  Neural  Information  Processing  Systems  24;  2011.  Available  from:
+   <a 
+href="http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection" class="url" ><span 
+class="cmtt-10">http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection</span></a>.
+</p>
+   </div>
+    
+</body></html> 
+
+                                                                                         
+
+

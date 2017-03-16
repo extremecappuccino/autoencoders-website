@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"  
+  "http://www.w3.org/TR/html4/loose.dtd">  
+<html > 
+<head><title>Recursive Autoencoders</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)"> 
+<!-- html --> 
+<meta name="src" content="rae.tex"> 
+<meta name="date" content="2017-03-16 01:50:00"> 
+<link rel="stylesheet" type="text/css" href="rae.css"> 
+</head><body 
+>
+   <div class="maketitle">
+                                                                                         
+                                                                                         
+                                                                                         
+                                                                                         
+
+<h2 class="titleHead">Recursive Autoencoders</h2>
+<div class="author" ><span 
+class="cmr-12">Jordan Spooner</span></div><br />
+<div class="date" ><span 
+class="cmr-12">March 16, 2017</span></div>
+   </div>As we know, autoencoders learn a (usually reduced dimensional) representation of their inputs. On this page, we
+will discuss how recursive autoencoders can take a sequence of representation vectors, and return a useful (reduced
+dimensional) representation for that sequence.
+<!--l. 34--><p class="noindent" ><span class="paragraphHead"><a 
+ id="x1-1000"></a><span 
+class="cmbx-10">Vector Representations for Sequences</span></span>
+   Suppose we have a matrix <span 
+class="cmbx-10">L</span> of representation vectors and an ordered sequence of <span 
+class="cmmi-10">m </span>elements, each
+with an index <span 
+class="cmmi-10">k </span>which is used to get the element&#8217;s vector representation in <span 
+class="cmbx-10">L</span>. Our look-up operation
+is then a simple projection, using a binary vector <span 
+class="cmbx-10">b</span>, with zero in every position except for the <span 
+class="cmmi-10">k</span>th
+index:
+   <center class="math-display" >
+<img 
+src="rae0x.png" alt="xi = Lbk
+" class="math-display" ></center>
+<!--l. 44--><p class="nopar" >
+<!--l. 47--><p class="indent" >   We can now express our ordered sequence of <span 
+class="cmmi-10">m </span>elements as a sequence of <span 
+class="cmmi-10">m </span>vector representations, namely
+<img 
+src="rae1x.png" alt="(x1,...,xm)"  class="left" align="middle">. <span class="cite">[<a 
+href="#XPollack">1</a>]</span>
+<!--l. 52--><p class="noindent" >
+   <h3 class="sectionHead"><span class="titlemark">1   </span> <a 
+ id="x1-20001"></a>Unsupervised Recursive Autoencoders</h3>
+<!--l. 54--><p class="noindent" ><hr class="figure"><div class="figure" 
+>
+                                                                                         
+                                                                                         
+<a 
+ id="x1-2001r1"></a>
+                                                                                         
+                                                                                         
+<!--l. 56--><p class="noindent" ><img 
+src="14_home_jordanspooner_Documents_163_Computing_Topics_autoencoders-website_nlp_3-rae_img_rae.png" alt="PIC"  
+>
+<br /> <div class="caption" 
+><span class="id">Figure&#x00A0;1: </span><span  
+class="content">The structure of a simple recursive autoencoder. </span></div><!--tex4ht:label?: x1-2001r1 -->
+                                                                                         
+                                                                                         
+<!--l. 60--><p class="noindent" ></div><hr class="endfigure">
+     <div class="quote">
+     <!--l. 63--><p class="noindent" >See ***autoencoders.</div>
+<!--l. 65--><p class="noindent" >We will now introduce a binary tree structure that allows for recursion, by introducing a number of hidden
+respresentations. Each parent node has two children. In the base case, both children are vector representations for
+two sequence elements, here we will use <span 
+class="cmbx-10">x</span><sub><span 
+class="cmr-7">1</span></sub> and <span 
+class="cmbx-10">x</span><sub><span 
+class="cmr-7">2</span></sub>. In every further case, we have one child as a hidden
+representation of the sequence so far, say <span 
+class="cmbx-10">y</span><sub><span 
+class="cmmi-7">j</span></sub>, and the next <span 
+class="cmbx-10">x</span><sub><span 
+class="cmmi-7">i</span></sub> in our sequence to be processed. Such a tree structure
+is shown in figure <a 
+href="#x1-2001r1">1<!--tex4ht:ref: fig:rae --></a>. It should be noted that every hidden representation will have the same dimensionality as the
+elements of the sequence, here called <span 
+class="cmmi-10">n</span>. <span class="cite">[<a 
+href="#XTan">2</a>]</span>
+<!--l. 76--><p class="indent" >   In order to compute a parent representation <span 
+class="cmbx-10">p</span>, we consider its two children <span 
+class="cmbx-10">c</span><sub><span 
+class="cmr-7">1</span></sub> and <span 
+class="cmbx-10">c</span><sub><span 
+class="cmr-7">2</span></sub>:
+   <center class="math-display" >
+<img 
+src="rae2x.png" alt="p = f (W  [c1;c2]+ b)
+" class="math-display" ></center>
+<!--l. 80--><p class="nopar" > Here we multiply a matrix of parameters <span 
+class="cmbx-10">W </span><span 
+class="cmsy-10">&isin; </span><span 
+class="msbm-10">&#x211D;</span><sup><span 
+class="cmmi-7">n</span><span 
+class="cmsy-7">&#x00D7;</span><span 
+class="cmr-7">2</span><span 
+class="cmmi-7">n</span></sup> by the concatenation of the two children and add a bias
+term <span 
+class="cmmi-10">b</span>. We finally apply an element-wise activation function <span 
+class="cmmi-10">f</span>, usually a sigmoidal function such as
+tanh.
+<!--l. 86--><p class="indent" >   We then attempt to reconstruct the children from the parent vector in a reconstruction layer:
+   <center class="math-display" >
+<img 
+src="rae3x.png" alt="  &prime;  &prime;     &prime;    &prime;
+[c1;c2] = W p + b
+" class="math-display" ></center>
+<!--l. 90--><p class="nopar" >
+<!--l. 93--><p class="indent" >   We can then calculate the reconstruction error by simply calculating the Euclidean distance between the children
+and their reconstruction:
+   <center class="math-display" >
+<img 
+src="rae4x.png" alt="E = 0.5&#x2225;[c ;c ]&minus; [c&prime;;c&prime;]&#x2225;2
+         1  2    1  2
+" class="math-display" ></center>
+<!--l. 97--><p class="nopar" > We then ***backpropogate the error as usual, finding a representation that encodes the children as well as
+possible.
+<!--l. 101--><p class="indent" >   After computing the reconstruction <img 
+src="rae5x.png" alt="[c&prime;1;c&prime;2]"  class="left" align="middle">, if one of the children (say <span 
+class="cmbx-10">c</span><sub><span 
+class="cmr-7">2</span></sub><span 
+class="cmsy-10">&prime;</span>) is a non-terminal node (some <span 
+class="cmbx-10">y</span><sub><span 
+class="cmmi-7">i</span></sub>), we
+can again compute the reconstruction error of that <span 
+class="cmbx-10">y</span><sub><span 
+class="cmmi-7">i</span></sub> using the reconstruction <span 
+class="cmbx-10">c</span><sub><span 
+class="cmr-7">2</span></sub><span 
+class="cmsy-10">&prime;</span>.
+<!--l. 106--><p class="indent" >   This process is repeated for each parent node until we have constructed the full tree, and calculated the
+reconstuction error for each element in the original sequence. <span class="cite">[<a 
+href="#XSocher2011">3</a>]</span>
+   <h4 class="subsectionHead"><span class="titlemark">1.1   </span> <a 
+ id="x1-30001.1"></a>Optimisations</h4>
+<!--l. 113--><p class="noindent" >There are several adjustments we can make to optimise recursive autoencoders:
+     <ol  class="enumerate1" >
+     <li 
+  class="enumerate" id="x1-3002x1"><span 
+class="cmti-10">Choosing a good tree structure</span>: Note that there are many ways of building the binary tree structure.
+     One method of determining a good tree structure is to try a greedy algorithm that tests each possibility
+     at each step, and chooses the children nodes that give the lowest reconstruction error.
+     </li>
+     <li 
+  class="enumerate" id="x1-3004x2"><span 
+class="cmti-10">Choosing a good reconstruction error</span>: We want our reconstruction error to penalise any representation
+     that looses the meaning of the sequence. As such, it may be a good idea to penalise more heavily
+     a reconstruction error on a node that encodes lots of children (i.e. many elements of the sequence),
+                                                                                         
+                                                                                         
+     than a reconstruction error on a node that represents fewer children. We can implement this easily, by
+     altering <span 
+class="cmmi-10">E </span>to take into account the number of elements <span 
+class="cmmi-10">n</span><sub><span 
+class="cmr-7">1</span></sub> and <span 
+class="cmmi-10">n</span><sub><span 
+class="cmr-7">2</span></sub> underneath the child nodes <span 
+class="cmbx-10">c</span><sub><span 
+class="cmr-7">1</span></sub> and
+     <span 
+class="cmbx-10">c</span><sub><span 
+class="cmr-7">2</span></sub> respectively:
+     <center class="math-display" >
+     <img 
+src="rae6x.png" alt="E =  --n1--&#x2225;c1 &minus; c&prime;1&#x2225;2 + --n2---&#x2225;c2 &minus; c&prime;2&#x2225;2
+     n1 + n2           n1 + n2
+     " class="math-display" ></center>
+     <!--l. 131--><p class="nopar" >
+     </li>
+     <li 
+  class="enumerate" id="x1-3006x3"><span 
+class="cmti-10">Length normalisation</span>: Recursive autoencoders compute the hidden representations that they then
+     reconstruct.  In  order  to  minimise  the  reconstruction  error,  the  RAE  may  compute  a  hidden
+     representation which is very small in magnitude, which will decrease the reconstruction error, but is
+     clearly undesirable as we will lose the meaning of the sequence. We can alleviate this effect by forcing
+     the length of each node to have length 1, through setting <span 
+class="cmbx-10">p </span>= <span 
+class="cmbx-10">p</span><span 
+class="cmmi-10">&#x2215;</span><img 
+src="rae7x.png" alt="&#x2225;p &#x2225;"  class="left" align="middle">. <span class="cite">[<a 
+href="#XLi2013">4</a>]</span></li></ol>
+<!--l. 142--><p class="noindent" >The following page discusses how recursive autoencoders can be applied to the problem of sentiment analysis.
+<!--l. 1--><p class="noindent" >
+   <h3 class="likesectionHead"><a 
+ id="x1-40001.1"></a>References</h3>
+<!--l. 1--><p class="noindent" >
+   <div class="thebibliography">
+   <p class="bibitem" ><span class="biblabel">
+ [1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XPollack"></a>Pollack      JB.      Recursive      Distributed      Representations;.                 Available      from:
+   <a 
+href="www.demo.cs.brandeis.edu/papers/raam.pdf" class="url" ><span 
+class="cmtt-10">www.demo.cs.brandeis.edu/papers/raam.pdf</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XTan"></a>Tan      S.      Recursive      Auto-encoders:      An      Introduction;.                Available      from:
+   <a 
+href="https://blog.wtf.sg/2014/05/10/recursive-auto-encoders-an-introduction/" class="url" ><span 
+class="cmtt-10">https://blog.wtf.sg/2014/05/10/recursive-_auto-_encoders-_an-_introduction/</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XSocher2011"></a>Socher  R,  Pennington  J,  Huang  EH,  Ng  AY,  Manning  CD.     Semi-Supervised  Recursive
+   Autoencoders  for  Predicting  Sentiment  Distributions.     In:  Proceedings  of  the  2011  Conference
+   on   Empirical   Methods   in   Natural   Language   Processing   (EMNLP);   2011.   Available   from:
+   <a 
+href="http://www.socher.org/uploads/Main/SocherPenningtonHuangNgManning_EMNLP2011.pdf" class="url" ><span 
+class="cmtt-10">http://www.socher.org/uploads/Main/SocherPenningtonHuangNgManning_EMNLP2011.pdf</span></a>.
+   </p>
+   <p class="bibitem" ><span class="biblabel">
+ [4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a 
+ id="XLi2013"></a>Li  P,  Liu  Y,  Sun  M.    Recursive  Autoencoders  for  ITG-Based  Translation.    In:  Proceedings
+   of   the   2013   Conference   on   Empirical   Methods   in   Natural   Language   Processing.   Seattle,
+   Washington,  USA:  Association  for  Computational  Linguistics;  2013.  p.  567&#8211;577.    Available  from:
+   <a 
+href="https://pdfs.semanticscholar.org/153a/a8b982f0d6db42502a307276fe6323304140.pdf" class="url" ><span 
+class="cmtt-10">https://pdfs.semanticscholar.org/153a/a8b982f0d6db42502a307276fe6323304140.pdf</span></a>.
+</p>
+   </div>
+    
+</body></html> 
+
+                                                                                         
+
+

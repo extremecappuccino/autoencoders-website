@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 474
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{hyperref}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default""
+\font_sans "" "default""
+\font_typewriter "" "default""
+\font_math "" "auto""
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -104,8 +106,39 @@ A common approach to learning word representations is to consider a word's
 Word Co-occurrence Probabilities
 \end_layout
 
-\begin_layout Quote
-// Corpus, context, word diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/corpus.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+An example corpus and demonstration of selection of context words.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -266,7 +299,7 @@ status open
 \align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="20" columns="2">
-<features rotate="0" booktabs="true" tabularvalignment="middle">
+<features booktabs="true" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top" width="0pt">
 <row>
@@ -826,12 +859,8 @@ key "Web1"
 An Approach using Autoencoders
 \end_layout
 
-\begin_layout Quote
-[Autoencoders]
-\end_layout
-
 \begin_layout Standard
-As the input, we provide an autoencoder with a probability distribution
+As the input, we provide an ***autoencoder with a probability distribution
  
 \begin_inset Formula $\sqrt{\mathbf{p}_{w}}$
 \end_inset
@@ -991,7 +1020,7 @@ Improving Phrase Representations
 \end_layout
 
 \begin_layout Quote
-[Recursive Autoencoders] [Sentiment Analysis] [Paraphrase Detection]
+See ***Recursive Autoencoders, ***Sentiment Analysis and ***Paraphrase Detection
 \end_layout
 
 \begin_layout Standard
@@ -1005,12 +1034,65 @@ As we discussed earlier, this is a relitavely poor method for representing
 Implementation
 \end_layout
 
-\begin_layout Quote
-// Python Implementation of Word Embeddings
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/results.png
+	scale 40
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Quote
-// Diagrams of similar words
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The results of Lebret and Collobert in their 2015 paper.
+ This table gives five example phrases, and five of the ten closest phrases
+ according to an implementation of the model described on this page.
+ The first column gives the results when using a symmetric window of ten
+ context words around the query phrase.
+ The second column gives the results when using an average of the individual
+ word vectors.
+ All representations were of 100 dimensions.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lebret2015"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+An example implementation in Python, using TensorFlow can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+target "https://github.com/ParallelDots/WordEmbeddingAutoencoder"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
 \lyxformat 474
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 \usepackage{hyperref}
@@ -12,16 +14,16 @@
 \language_package default
 \inputencoding auto
 \fontencoding global
-\font_roman "default" "default"
-\font_sans "default" "default"
-\font_typewriter "default" "default"
-\font_math "auto" "auto"
+\font_roman "" "default""
+\font_sans "" "default""
+\font_typewriter "" "default""
+\font_math "" "auto""
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -85,15 +87,46 @@ Jordan Spooner
 \end_layout
 
 \begin_layout Standard
-This page continues from the previous page on sentiment analysis.
+This page continues from the previous page on ***sentiment analysis.
 \end_layout
 
 \begin_layout Section
 Improving Recursive Autoencoders
 \end_layout
 
-\begin_layout Quote
-// Unfolding recursive autoencoder diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/unfolding-rae.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Unfolding recursive autoencoder.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -140,8 +173,39 @@ Testing Similarity
 Producing a Similarity Matrix
 \end_layout
 
-\begin_layout Quote
-// Similarity matrix diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/sim-matrix.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Similarity matrix.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -163,8 +227,47 @@ We then create a variable-sized similarity matrix.
 Dynamic Pooling
 \end_layout
 
-\begin_layout Quote
-// Dynamic pooling diagram
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/dynamic-pooling.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Example of the dynamic min-pooling layer.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2014"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -232,12 +335,59 @@ key "Socher2014,RSEHJPANCM2011"
 Implementation
 \end_layout
 
-\begin_layout Quote
-// Python Implementation
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename img/paraphrase-detection.png
+	scale 40
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Quote
-// Results
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+The results achieved by Socher et al using this implementation.
+ Table shows nearest neighbours of randomly chosen phrases.
+ Source: 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Socher2014"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Code that implements this method can be found at 
+\begin_inset CommandInset href
+LatexCommand href
+target "http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
