@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: </title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+  <!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="#" content="neural-networks">Neural Networks</a></li>
+      <li class="hidden" content="neural-networks">
+        <ul>
+          <li><a href="/neural-networks">Introduction</a></li>
+          <li><a href="/neural-networks/neurons.html">Artificial Neurons</a></li>
+          <li><a href="/neural-networks/learning.html">Learning</a></li>
+          <li><a href="/neural-networks/regularisation.html">Regularisation</a></li>
+          <li><a href="/neural-networks/optimisers.html">Optimisers</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="autoencoders">Autoencoders</a></li>
+      <li class="hidden" content="autoencoders">
+        <ul>
+          <li><a href="/autoencoders">Introduction</a></li>
+          <li><a href="/autoencoders/denoising.html">Autoencoders for Denoising</a></li>
+          <li><a href="/autoencoders/variational.html">Variational Autoencoders</a></li>
+          <li><a href="/autoencoders/sparse.html">Sparse Autoencoders</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="uses-autoencoders">Uses of Autoencoders</a></li>
+      <li class="hidden" content="uses-autoencoders">
+        <ul>
+          <li><a href="/autoencoders/ip.html">Image Processing</a></li>
+          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+        </ul>
+      </li>
+      <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
+      <li class="hidden last" content="nlp">
+        <ul>
+          <li><a href="/nlp">Introduction</a></li>
+          <li><a href="/nlp/word-phrase.html">Word and Phrase Representations</a></li>
+          <li><a href="/nlp/bilingual.html">Bilingual Phrase Representations</a></li>
+          <li><a href="/nlp/recursive.html">Recursive Autoencoders</a></li>
+          <li><a href="/nlp/sentiment.html">Sentiment Analysis</a></li>
+          <li><a href="/nlp/paraphrase.html">Paraphrase Detection</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Sentiment Analysis</h2>
+    This page continues from the previous page on <a href="/nlp/recursive.html">recursive autoencoders</a>.
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Phrase Representations using Recursive Autoencoders</h3><!--l. 35-->
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-1001r1"></a> <!--l. 37-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/rae.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">The structure of a simple recursive autoencoder.</span>
+      </div><!--tex4ht:label?: x1-1001r1 -->
+      <!--l. 41-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 44-->
+    <p class="indent">We start with a phrase, and use a recursive autoencoder to produce a vector representation. This method follows naturally from the previous page, with the followin ammendments: our sequence of elements is now an ordered sequence of words. Concretely, we have the sequence $\left(\mathbf{x}_{1},\dots,\mathbf{x}_{m}\right)$ where each $\mathbf{x}_{i}$ is the vector representation of the $i$th word of a phrase made up of $m$ words. <span class="cite">[<a href="#XTan2014">1</a>]</span></p>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Semi-Supervised Recursive Autoencoders</h3><!--l. 54-->
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-2001r2"></a> <!--l. 56-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/semi-supervised-rae.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">A semi-supervised recursive autoencoder.</span>
+      </div><!--tex4ht:label?: x1-2001r2 -->
+      <!--l. 60-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 63-->
+    <p class="indent">We now use our recursive autoencoder to attempt to predict a sentiment label. It is fairly easy to predict a probability distribution over the possible labels, by applying a simple softmax layer:</p>
+    <center class="math-display">
+      $\mathbf{d}\left(\mathbf{p}\right)=\mbox{softmax}\left(\mathbf{W}_{\mbox{label}}\mathbf{p}\right)$
+    </center><!--l. 69-->
+    <p class="nopar">where $\mathbf{p}$ is a given parent vector. The softmax layer applies a statistic method (specifically a generalization of logistic regression to handle more than two classes), to return the required probability distribution estimate, $\mathbf{d}$. Concretely, given $K$ labels, $\mathbf{d}\in\mathbb{R}^{K}$ and $\sum_{k=1}^{K}\mathbf{d}_{k}=1$. <span class="cite">[<a href="#XNg">2</a>]</span> <!--l. 76--></p>
+    <p class="indent">We also have a target distribution $\mathbf{t}$. This is the &#8216;correct&#8217; probability distribution, that we are aiming to learn. This means we are able to calculate a cross-entropy error, that will decrease as the predicted distribution $\mathbf{d}$ and the target distribution $\mathbf{t}$ become more similar. <span class="cite">[<a href="#XNielsen2017">3</a>]</span> <!--l. 82--></p>
+    <p class="indent">Note that we could have a simple case where $K=2$ and the set of labels includes only &#8216;good&#8217; and &#8216;bad&#8217;. This type of labelling is very common, making implementation easier. We could also have a significantly more complicated set of labels, depending on what training data sets are available. <!--l. 89--></p>
+    <p class="noindent"><span class="paragraphHead"><a id="x1-30002"></a><span class="cmbx-10">Training</span></span> We start with a corpus of aligned (sentence, label) pairs $(\mathbf{x},\mathbf{t})$. During training, we minimise a cost function which is constructed as follows:</p>
+    <ol class="enumerate1">
+      <li class="enumerate" id="x1-3002x1">We take into account an error for each entry in the training set, which is calculated from the sum over the errors at the non-terminal nodes of the tree constructed by the RAE:
+        <center class="math-display">
+          $\sum_{(\mathbf{x},\mathbf{t})}\sum_{s\in\mbox{nodes}(\mbox{RAE}(x))}\alpha E_{\mbox{rec}}([\mathbf{c}_{1};\mathbf{c}_{2}]_{s})+(1-\alpha)E_{\mbox{CE}}(\mathbf{p}_{s},\mathbf{t})$
+        </center><!--l. 100-->
+        <p class="nopar">These errors in turn are calculated by adding the reconstruction error $E_{\mbox{rec}}$ (given on the previous page) to the cross entropy error $E_{\mbox{CE}}$ from the softmax regression layer. These two errors are weighted according to the value of the paramater <span class="cmmi-10">&alpha;</span>.</p>
+      </li>
+      <li class="enumerate" id="x1-3004x2">We add to this the final reconstruction error for the full tree.</li>
+    </ol><!--l. 107-->
+    <p class="noindent">Learning can then be achieved by <a href="/neural-networks/learning.html">backpropogation</a> using this cost function. <span class="cite">[<a href="#XSocher2011">4</a>]</span> <!--l. 111--></p>
+    <p class="noindent"><span class="paragraphHead"><a id="x1-40002"></a><span class="cmbx-10">Improvements</span></span> There are still better methods for sentiment analysis, which usually take into account the syntax tree of a given phrase or sentence. These methods, however, do not usually involve autoencoders! <span class="cite">[<a href="#XSocher2013">5</a>]</span> <!--l. 118--></p>
+    <p class="noindent"></p>
+    <h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-50003"></a>Implementation</h3><!--l. 120-->
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-5001r3"></a> <!--l. 122-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/sent-analysis.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;3:</span> <span class="content">The results achieved by Socher et al using this implementation. The red bars show the actual distribution from an online experiment, the light blue bars show the predicted probabilities. The five choices were (Sorry, hugs), (You rock), (Teehee), (I understand) and (Wow, just wow), in that order. Source: <span class="cite">[<a href="#XSocher2011">4</a>]</span>.</span>
+      </div><!--tex4ht:label?: x1-5001r3 -->
+      <!--l. 130-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 133-->
+    <p class="indent">A Java implementation of this method can be found at <a href="https://github.com/sancha/jrae">https://github.com/sancha/jrae</a>. <!--l. 135--></p>
+    <p class="indent">The following page discusses an extension of this model, allowing us to apply it to the problem of <a href="/nlp/paraphrase.html">paraphrase detection.</a></p>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-60003"></a>References</h3><!--l. 1-->
+        <p class="noindent"></p>
+        <div class="thebibliography">
+          <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XTan2014"></a>Tan S. Recursive Auto-encoders: An Introduction; 2014. Available from: <a class="url" href="https://blog.wtf.sg/2014/05/10/recursive-auto-encoders-an-introduction/"><span class="cmtt-10">https://blog.wtf.sg/2014/05/10/recursive-_auto-_encoders-_an-_introduction/</span></a>.</p>
+          <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XNg"></a>Ng A. Unsupervised Feature Learning and Deep Learning: Softmax Regression;. Available from: <a class="url" href="http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/"><span class="cmtt-10">http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/</span></a>.</p>
+          <p class="bibitem"><span class="biblabel">[3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XNielsen2017"></a>Nielsen M. The cross-entropy cost function; 2017. Available from: <a class="url" href="http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-entropy_cost_function"><span class="cmtt-10">http://neuralnetworksanddeeplearning.com/chap3.html#the_cross-_entropy_cost_function</span></a>.</p>
+          <p class="bibitem"><span class="biblabel">[4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XSocher2011"></a>Socher R, Pennington J, Huang EH, Ng AY, Manning CD. Semi-Supervised Recursive Autoencoders for Predicting Sentiment Distributions. In: Proceedings of the 2011 Conference on Empirical Methods in Natural Language Processing (EMNLP); 2011. Available from: <a class="url" href="http://www.socher.org/uploads/Main/SocherPenningtonHuangNgManning_EMNLP2011.pdf"><span class="cmtt-10">http://www.socher.org/uploads/Main/SocherPenningtonHuangNgManning_EMNLP2011.pdf</span></a>.</p>
+          <p class="bibitem"><span class="biblabel">[5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XSocher2013"></a>Socher R, Perelygin A, Wu J, Chuang J, Manning CD, Ng AY, et&#x00A0;al. Recursive Deep Models for Semantic Compositionality Over a Sentiment Treebank. In: Proceedings of the 2013 Conference on Empirical Methods in Natural Language Processing. Stroudsburg, PA: Association for Computational Linguistics; 2013. p. 1631&#8211;1642.</p>
+        </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>
