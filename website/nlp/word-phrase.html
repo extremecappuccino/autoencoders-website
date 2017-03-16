@@ -73,12 +73,12 @@
     </div>
     <hr class="endfigure">
     <!--l. 58-->
-    <p class="indent">We start with a corpus $W$ (a large and structured set of texts). We then define a context $D$, which determines exactly what requirements need to be met in order for a word to be considered a &#8216;neighbour&#8217; $c$ to any selected word $w$. We will here define a context as the six words surrounding (three preceeding and three following) the currently selected word (although it could be defined differently to this). We can the calculate the co-occurrence probabilites as follows:</p>
+    <p class="indent">We start with a corpus $W$ (a large and structured set of texts). We then define a context $D$, which determines exactly what requirements need to be met in order for a word to be considered a &#8216;neighbour&#8217; $c$ to any selected word $w$. We will here define a context as the six words surrounding (three preceding and three following) the currently selected word (although it could be defined differently to this). We can the calculate the co-occurrence probabilities as follows:</p>
     <center class="math-display">
       $p\left(c|w\right)=\frac{p\left(c,w\right)}{p\left(w\right)}=\frac{n\left(c,w\right)}{\sum_{c_{j}\in D}n\left(c_{j},w\right)}$
     </center><!--l. 67-->
     <p class="nopar">Here, $n\left(c,w\right)$ gives the number of times that $c$ occurs in the context of $w$. <!--l. 71--></p>
-    <p class="indent">For each word $w$ in the corpus $W$, we then end up with a probability distribution, $P_{w}=\left(p\left(c_{1}|w\right),\dots,p\left(c_{\left|D\right|}|w\right)\right)$ that gives the probability of the co-occurence each context word $c$ in the set of context words $D$. <span class="cite">[<a href="#XKhaz2016">1</a>,&#x00A0;<a href="#XWeb1">2</a>]</span> <!--l. 76--></p>
+    <p class="indent">For each word $w$ in the corpus $W$, we then end up with a probability distribution, $P_{w}=\left(p\left(c_{1}|w\right),\dots,p\left(c_{\left|D\right|}|w\right)\right)$ that gives the probability of the co-occurrence each context word $c$ in the set of context words $D$. <span class="cite">[<a href="#XKhaz2016">1</a>,&#x00A0;<a href="#XWeb1">2</a>]</span> <!--l. 76--></p>
     <p class="indent">For example, consider a very simple corpus that consists of the following four texts:</p>
     <div class="quotation">
       <!--l. 79-->
@@ -188,7 +188,7 @@
       </div>
       <hr class="endfloat">
     </div><!--l. 144-->
-    <p class="indent">You can see how, as we increased the size of the corpus by finding more and longer relevant texts, we would begin to associate the word <span class="cmti-10">open-source</span> strongly with words such as <span class="cmti-10">project</span>, <span class="cmti-10">developed</span>, <span class="cmti-10">program</span>, <span class="cmti-10">code</span>, <span class="cmti-10">contributes</span>, <span class="cmti-10">software</span> and so on. We would see similar counts for similar words. For example, a vector generated from the co-occurence probabilities of the word <span class="cmti-10">charitable</span> might be close because of surrounding context words such as <span class="cmti-10">free</span> and <span class="cmti-10">contributing</span>. A word such as <span class="cmti-10">programming</span> would be considered close due to words such as <span class="cmti-10">code</span> and <span class="cmti-10">project</span>. We can determine this &#8216;closeness&#8217; of words using the Hellinger distance.</p>
+    <p class="indent">You can see how, as we increased the size of the corpus by finding more and longer relevant texts, we would begin to associate the word <span class="cmti-10">open-source</span> strongly with words such as <span class="cmti-10">project</span>, <span class="cmti-10">developed</span>, <span class="cmti-10">program</span>, <span class="cmti-10">code</span>, <span class="cmti-10">contributes</span>, <span class="cmti-10">software</span> and so on. We would see similar counts for similar words. For example, a vector generated from the co-occurrence probabilities of the word <span class="cmti-10">charitable</span> might be close because of surrounding context words such as <span class="cmti-10">free</span> and <span class="cmti-10">contributing</span>. A word such as <span class="cmti-10">programming</span> would be considered close due to words such as <span class="cmti-10">code</span> and <span class="cmti-10">project</span>. We can determine this &#8216;closeness&#8217; of words using the Hellinger distance.</p>
     <h4 class="subsectionHead"><span class="titlemark">1.2</span> <a id="x1-30001.2"></a>Hellinger Distance</h4><!--l. 158-->
     <p class="noindent">The Hellinger distance is a measure of the similarity of two probability distributions. Given the two discrete probability distributions $\mathbf{p}=\left(p_{1},\dots,p_{k}\right)$ and $\mathbf{q}=\left(q_{1},\dots,q_{k}\right)$, the Hellinger distance is defined as:</p>
     <center class="math-display">
@@ -197,7 +197,7 @@
     <p class="nopar">Note that the Hellinger distance will always take a value between 0 and 1, due the the constant factor of $1/\sqrt{2}$. This is one property of the Hellinger distance which makes it preferable to the standard Euclidean distance for this purpose. <span class="cite">[<a href="#XWeb1">2</a>]</span> <!--l. 171--></p>
     <p class="noindent"></p>
     <h4 class="subsectionHead"><span class="titlemark">1.3</span> <a id="x1-40001.3"></a>Generating Word Vectors</h4><!--l. 173-->
-    <p class="noindent">The model we have so far is fine, except for the fact that each probabibility distribution $\mathbf{p}_{w}$ will generate a vector containing hundreds of thousands of entries (potentially as large as the number of words in $W$). A common approach to reducing the dimensionality of this vector (generally to 50 or 100 dimensions) is to consider a co-occurence matrix that only includes the most relevant context words, and use principal component analysis (PCA) to reduce dimensionality without losing too much meaning. <span class="cite">[<a href="#XWeb1">2</a>]</span> The use of autoencoders is an alternative method. <!--l. 184--></p>
+    <p class="noindent">The model we have so far is fine, except for the fact that each probability distribution $\mathbf{p}_{w}$ will generate a vector containing hundreds of thousands of entries (potentially as large as the number of words in $W$). A common approach to reducing the dimensionality of this vector (generally to 50 or 100 dimensions) is to consider a co-occurrence matrix that only includes the most relevant context words, and use principal component analysis (PCA) to reduce dimensionality without losing too much meaning. <span class="cite">[<a href="#XWeb1">2</a>]</span> The use of autoencoders is an alternative method. <!--l. 184--></p>
     <p class="noindent"><span class="paragraphHead"><a id="x1-50001.3"></a><span class="cmbx-10">An Approach using Autoencoders</span></span> As the input, we provide an <a href="../autoencoders">autoencoder</a> with a probability distribution $\sqrt{\mathbf{p}_{w}}$. We use a standard squared difference cost function:</p>
     <center class="math-display">
       <a id="x1-5001r1"></a>$\Vert g(f(\mathbf{p}_{w}))-\sqrt{\mathbf{p}_{w}}\Vert ^{2}$
@@ -223,7 +223,7 @@
     <div class="quote">
       <!--l. 246-->
       <p class="noindent">See <a href="recursive.html">Recursive Autoencoders</a>, <a href="sentiment.html">Sentiment Analysis</a> and <a href="paraphrase.html">Paraphrase Detection</a></p>
-    </div>As we discussed earlier, this is a relitavely poor method for representing phrases. We discuss a much better method on the pages for sentiment analysis and paraphrase detection, which uses recursive autoencoders. <!--l. 254-->
+    </div>As we discussed earlier, this is a relatively poor method for representing phrases. We discuss a much better method on the pages for sentiment analysis and paraphrase detection, which uses recursive autoencoders. <!--l. 254-->
     <p class="noindent"></p>
     <h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-100003"></a>Implementation</h3><!--l. 256-->
     <p class="noindent"></p>

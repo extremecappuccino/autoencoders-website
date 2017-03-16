@@ -61,7 +61,7 @@
       $p_{j}=\frac{1}{m}\sum_{i=1}^{m}\left[a_{j}x\right]$
     </center><!--l. 42-->
     <p class="nopar"><!--l. 45--></p>
-    <p class="noindent">The aim of the sparsity constraint is to minimize $p_{j}$, so that $p_{j}=p_{c}$ where $p_{c}$ is a small number close to 0 (for the Sigmoid activation function), such as 0.05. We can do so by adding a penalty term to mean squared error cost function that we normally try to minimize for classical autoencoders. The penalty term, as with variational autoencoders, is the KL divergence between the Bernoulli random variables $p_{j}$ and $p_{c}$, and can be calculated with the formula:</p>
+    <p class="noindent">The aim of the sparsity constraint is to minimise $p_{j}$, so that $p_{j}=p_{c}$ where $p_{c}$ is a small number close to 0 (for the Sigmoid activation function), such as 0.05. We can do so by adding a penalty term to mean squared error cost function that we normally try to minimise for classical autoencoders. The penalty term, as with variational autoencoders, is the KL divergence between the Bernoulli random variables $p_{j}$ and $p_{c}$, and can be calculated with the formula:</p>
     <center class="par-math-display">
       $KL(p_{j}||p_{c})=plog\frac{p_{c}}{p_{j}}+(1-p)log\frac{1-p_{c}}{1-p_{j}}$
     </center><!--l. 56-->

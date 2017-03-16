@@ -80,7 +80,7 @@
       <!--l. 63-->
       <p class="noindent">See <a href="../autoencoders">autoencoders</a>.</p>
     </div><!--l. 65-->
-    <p class="noindent">We will now introduce a binary tree structure that allows for recursion, by introducing a number of hidden respresentations. Each parent node has two children. In the base case, both children are vector representations for two sequence elements, here we will use $\mathbf{x}_{1}$ and $\mathbf{x}_{2}$. In every further case, we have one child as a hidden representation of the sequence so far, say $\mathbf{y}_{j}$, and the next $\mathbf{x}_{i}$ in our sequence to be processed. Such a tree structure is shown in figure <a href="#x1-2001r1">1<!--tex4ht:ref: fig:rae --></a>. It should be noted that every hidden representation will have the same dimensionality as the elements of the sequence, here called $n$. <span class="cite">[<a href="#XTan">2</a>]</span> <!--l. 76--></p>
+    <p class="noindent">We will now introduce a binary tree structure that allows for recursion, by introducing a number of hidden representations. Each parent node has two children. In the base case, both children are vector representations for two sequence elements, here we will use $\mathbf{x}_{1}$ and $\mathbf{x}_{2}$. In every further case, we have one child as a hidden representation of the sequence so far, say $\mathbf{y}_{j}$, and the next $\mathbf{x}_{i}$ in our sequence to be processed. Such a tree structure is shown in figure <a href="#x1-2001r1">1<!--tex4ht:ref: fig:rae --></a>. It should be noted that every hidden representation will have the same dimensionality as the elements of the sequence, here called $n$. <span class="cite">[<a href="#XTan">2</a>]</span> <!--l. 76--></p>
     <p class="indent">In order to compute a parent representation $\mathbf{p}$, we consider its two children $\mathbf{c}_{1}$ and $\mathbf{c}_{2}$:</p>
     <center class="math-display">
       $\mathbf{p}=f(\mathbf{W}[\mathbf{c}_{1};\mathbf{c}_{2}]+\mathbf{b})$
@@ -97,7 +97,7 @@
     </center><!--l. 97-->
     <p class="nopar">We then <a href="../neural-networks/learning.html">backpropagate</a> the error as usual, finding a representation that encodes the children as well as possible. <!--l. 101--></p>
     <p class="indent">After computing the reconstruction $\left[\mathbf{c}_{1}';\mathbf{c}_{2}'\right]$, if one of the children (say $\mathbf{c}_{2}'$) is a non-terminal node (some $\mathbf{y}_{i}$), we can again compute the reconstruction error of that $\mathbf{y}_{i}$ using the reconstruction $\mathbf{c}_{2}'$. <!--l. 106--></p>
-    <p class="indent">This process is repeated for each parent node until we have constructed the full tree, and calculated the reconstuction error for each element in the original sequence. <span class="cite">[<a href="#XSocher2011">3</a>]</span></p>
+    <p class="indent">This process is repeated for each parent node until we have constructed the full tree, and calculated the reconstruction error for each element in the original sequence. <span class="cite">[<a href="#XSocher2011">3</a>]</span></p>
     <h4 class="subsectionHead"><span class="titlemark">1.1</span> <a id="x1-30001.1"></a>Optimisations</h4><!--l. 113-->
     <p class="noindent">There are several adjustments we can make to optimise recursive autoencoders:</p>
     <ol class="enumerate1">

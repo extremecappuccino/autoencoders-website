@@ -70,19 +70,19 @@
     </div>
     <!--l. 51-->
     <a id="pre-training"></a>
-    <p class="noindent"><span class="paragraphHead"><a id="x1-20001"></a><span class="cmbx-10">Pretraining</span></span> Stacked denoising autoencoders are also useful for deep learning. A stacked denoising autoencoder is a denoising autoencoder with multiple hidden layers, and is trained layer by layer, by trying to minimize the error in the layer&#8217;s reconstruction compared to it&#8217;s input (the previous layer&#8217;s output). By using a stacked autoencoder in an unsupervised manner, we can learn starting weights prior to the main supervised training procedure with deep learning. A regularization effect is then created as a result of the pretraining procedure creating an initialization point, to which the parameters are restricted to a near optimal local minimum <span class="cite">[<a href="#XERHAN2010">3</a>]</span>. <!--l. 62--></p>
+    <p class="noindent"><span class="paragraphHead"><a id="x1-20001"></a><span class="cmbx-10">Pretraining</span></span> Stacked denoising autoencoders are also useful for deep learning. A stacked denoising autoencoder is a denoising autoencoder with multiple hidden layers, and is trained layer by layer, by trying to minimise the error in the layer&#8217;s reconstruction compared to it&#8217;s input (the previous layer&#8217;s output). By using a stacked autoencoder in an unsupervised manner, we can learn starting weights prior to the main supervised training procedure with deep learning. A regularisation effect is then created as a result of the pretraining procedure creating an initialisation point, to which the parameters are restricted to a near optimal local minimum <span class="cite">[<a href="#XERHAN2010">3</a>]</span>. <!--l. 62--></p>
     <p class="noindent"></p>
     <div class="figure">
       <a id="x1-3r2"></a> <!--l. 63-->
       <p class="noindent"><img alt="PIC" src="../img/autoencoders/pretraining-deep-networks.png"><br></p>
       <div class="caption">
-        <span class="id">Figure&#x00A0;2:</span> <span class="content">Pretraining example visualization <span class="cite">[<a href="#XERHAN2010">3</a>]</span>.</span>
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">Pretraining example visualisation <span class="cite">[<a href="#XERHAN2010">3</a>]</span>.</span>
       </div><!--tex4ht:label?: x1-3r2 -->
       <!--l. 68-->
       <p class="noindent"></p>
     </div>
     <!--l. 71-->
-    <p class="noindent">The above image, is a 2D visualization generated with ISOMAP of the functions represented by 50 networks with and 50 networks without pretraining, for supervised training over MNIST (handwritten digits database) with 2 hidden layers. The colours from deep blue to cyan represent the progression in iterations. As the image shows, the pretraining models all start in a small region of space and decrease in variance, towards a basin of attraction. The training was also quicker by pretraining the functions.</p>
+    <p class="noindent">The above image, is a 2D visualisation generated with ISOMAP of the functions represented by 50 networks with and 50 networks without pretraining, for supervised training over MNIST (handwritten digits database) with 2 hidden layers. The colours from deep blue to cyan represent the progression in iterations. As the image shows, the pretraining models all start in a small region of space and decrease in variance, towards a basin of attraction. The training was also quicker by pretraining the functions.</p>
     <!-- END: LyX Generated HTML -->
     <div class="navigation">
       <a class="button" href="index.html">Previous</a>

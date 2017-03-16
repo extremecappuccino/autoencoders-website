@@ -56,7 +56,7 @@
     <!-- BEGIN: LyX Generated HTML -->
     <h2 class="titleHead">Using Autoencoders in Image Processing</h2>
     <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Visualising Trained Autoencoders</h3><!--l. 31-->
-    <p class="noindent">Consider the case of a trained autoencoder on 20x20 black and white images, so the number of input neurons to the network is 400. The network has been trained to output the same image but has a constraint on the number of hidden neurons in order to force the image to be compressed to a more efficient internal representation. This would be useful for other applications as reducing the input parameters with minimal loss in reconstruction error (information loss) means that other systems have less redundant inputs. To gain a better understanding on the inner workings of the network we can try to visualize the input which maximizes any given hidden layer neuron. This will reveal exactly what kind of input each hidden neuron is responding too, and so how the network has learned to represent the input. We can now derive a formula for generating these images. <!--l. 45--></p>
+    <p class="noindent">Consider the case of a trained autoencoder on 20x20 black and white images, so the number of input neurons to the network is 400. The network has been trained to output the same image but has a constraint on the number of hidden neurons in order to force the image to be compressed to a more efficient internal representation. This would be useful for other applications as reducing the input parameters with minimal loss in reconstruction error (information loss) means that other systems have less redundant inputs. To gain a better understanding on the inner workings of the network we can try to visualise the input which maximises any given hidden layer neuron. This will reveal exactly what kind of input each hidden neuron is responding too, and so how the network has learned to represent the input. We can now derive a formula for generating these images. <!--l. 45--></p>
     <p class="noindent">Let $a_{i}$ be the state of each hidden layer neuron, $x_{j}$ the input neuron, $W_{ij}$ the weight between input $j$ and hidden $i$, $b_{i}$ the bias for hidden $i$ and $f(x)$ the chosen increasing activation function. Each hidden neuron computes its inner state to be:</p>
     <div class="center">
       <!--l. 51-->
@@ -73,13 +73,13 @@
         $x_{j}=\frac{W_{ij}}{\sqrt{\sum_{j=1}^{400}(W_{ij})^{2}}}$
       </p>
     </div><!--l. 62-->
-    <p class="noindent">Will lead to a highly activated function, as $(W_{ij})^{2}$ is guaranteed to be positive and dividing by the squared allows $x_{j}$ to maintain the constraint between -1 and 1 and offers a useful comparison between inputs <span class="cite">[<a href="#XvisualizingStanford">1</a>]</span>. We can then plot $x_{j}$ (the input) for each hidden layer to show what the neuron responds to from the input. In this case on a network trained on images of natural images with 100 hidden neurons can be visualized as this: <!--l. 70--></p>
+    <p class="noindent">Will lead to a highly activated function, as $(W_{ij})^{2}$ is guaranteed to be positive and dividing by the squared allows $x_{j}$ to maintain the constraint between -1 and 1 and offers a useful comparison between inputs <span class="cite">[<a href="#XvisualizingStanford">1</a>]</span>. We can then plot $x_{j}$ (the input) for each hidden layer to show what the neuron responds to from the input. In this case on a network trained on images of natural images with 100 hidden neurons can be visualised as this: <!--l. 70--></p>
     <p class="noindent"></p>
     <div class="figure">
       <a id="x1-1001r1"></a> <!--l. 71-->
       <p class="noindent"><img alt="PIC" src="../img/autoencoders/example-sparse-ae-weights.png"><br></p>
       <div class="caption">
-        <span class="id">Figure&#x00A0;1:</span> <span class="content">Visualization of the hidden layers in an autoencoder</span>
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Visualisation of the hidden layers in an autoencoder</span>
       </div><!--tex4ht:label?: x1-1001r1 -->
       <!--l. 72-->
       <p class="noindent"></p>

@@ -70,7 +70,7 @@
     </div>
     <hr class="endfigure">
     <!--l. 44-->
-    <p class="indent">We start with a phrase, and use a recursive autoencoder to produce a vector representation. This method follows naturally from the previous page, with the followin ammendments: our sequence of elements is now an ordered sequence of words. Concretely, we have the sequence $\left(\mathbf{x}_{1},\dots,\mathbf{x}_{m}\right)$ where each $\mathbf{x}_{i}$ is the vector representation of the $i$th word of a phrase made up of $m$ words. <span class="cite">[<a href="#XTan2014">1</a>]</span></p>
+    <p class="indent">We start with a phrase, and use a recursive autoencoder to produce a vector representation. This method follows naturally from the previous page, with the following amendments: our sequence of elements is now an ordered sequence of words. Concretely, we have the sequence $\left(\mathbf{x}_{1},\dots,\mathbf{x}_{m}\right)$ where each $\mathbf{x}_{i}$ is the vector representation of the $i$th word of a phrase made up of $m$ words. <span class="cite">[<a href="#XTan2014">1</a>]</span></p>
     <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Semi-Supervised Recursive Autoencoders</h3><!--l. 54-->
     <p class="noindent"></p>
     <hr class="figure">
@@ -89,7 +89,7 @@
     <center class="math-display">
       $\mathbf{d}\left(\mathbf{p}\right)=\mbox{softmax}\left(\mathbf{W}_{\mbox{label}}\mathbf{p}\right)$
     </center><!--l. 69-->
-    <p class="nopar">where $\mathbf{p}$ is a given parent vector. The softmax layer applies a statistic method (specifically a generalization of logistic regression to handle more than two classes), to return the required probability distribution estimate, $\mathbf{d}$. Concretely, given $K$ labels, $\mathbf{d}\in\mathbb{R}^{K}$ and $\sum_{k=1}^{K}\mathbf{d}_{k}=1$. <span class="cite">[<a href="#XNg">2</a>]</span> <!--l. 76--></p>
+    <p class="nopar">where $\mathbf{p}$ is a given parent vector. The softmax layer applies a statistic method (specifically a generalisation of logistic regression to handle more than two classes), to return the required probability distribution estimate, $\mathbf{d}$. Concretely, given $K$ labels, $\mathbf{d}\in\mathbb{R}^{K}$ and $\sum_{k=1}^{K}\mathbf{d}_{k}=1$. <span class="cite">[<a href="#XNg">2</a>]</span> <!--l. 76--></p>
     <p class="indent">We also have a target distribution $\mathbf{t}$. This is the &#8216;correct&#8217; probability distribution, that we are aiming to learn. This means we are able to calculate a cross-entropy error, that will decrease as the predicted distribution $\mathbf{d}$ and the target distribution $\mathbf{t}$ become more similar. <span class="cite">[<a href="#XNielsen2017">3</a>]</span> <!--l. 82--></p>
     <p class="indent">Note that we could have a simple case where $K=2$ and the set of labels includes only &#8216;good&#8217; and &#8216;bad&#8217;. This type of labelling is very common, making implementation easier. We could also have a significantly more complicated set of labels, depending on what training data sets are available. <!--l. 89--></p>
     <p class="noindent"><span class="paragraphHead"><a id="x1-30002"></a><span class="cmbx-10">Training</span></span> We start with a corpus of aligned (sentence, label) pairs $(\mathbf{x},\mathbf{t})$. During training, we minimise a cost function which is constructed as follows:</p>
@@ -98,11 +98,11 @@
         <center class="math-display">
           $\sum_{(\mathbf{x},\mathbf{t})}\sum_{s\in\mbox{nodes}(\mbox{RAE}(x))}\alpha E_{\mbox{rec}}([\mathbf{c}_{1};\mathbf{c}_{2}]_{s})+(1-\alpha)E_{\mbox{CE}}(\mathbf{p}_{s},\mathbf{t})$
         </center><!--l. 100-->
-        <p class="nopar">These errors in turn are calculated by adding the reconstruction error $E_{\mbox{rec}}$ (given on the previous page) to the cross entropy error $E_{\mbox{CE}}$ from the softmax regression layer. These two errors are weighted according to the value of the paramater <span class="cmmi-10">&alpha;</span>.</p>
+        <p class="nopar">These errors in turn are calculated by adding the reconstruction error $E_{\mbox{rec}}$ (given on the previous page) to the cross entropy error $E_{\mbox{CE}}$ from the softmax regression layer. These two errors are weighted according to the value of the parameter <span class="cmmi-10">&alpha;</span>.</p>
       </li>
       <li class="enumerate" id="x1-3004x2">We add to this the final reconstruction error for the full tree.</li>
     </ol><!--l. 107-->
-    <p class="noindent">Learning can then be achieved by <a href="../neural-networks/learning.html">backpropogation</a> using this cost function. <span class="cite">[<a href="#XSocher2011">4</a>]</span> <!--l. 111--></p>
+    <p class="noindent">Learning can then be achieved by <a href="../neural-networks/learning.html">backpropagation</a> using this cost function. <span class="cite">[<a href="#XSocher2011">4</a>]</span> <!--l. 111--></p>
     <p class="noindent"><span class="paragraphHead"><a id="x1-40002"></a><span class="cmbx-10">Improvements</span></span> There are still better methods for sentiment analysis, which usually take into account the syntax tree of a given phrase or sentence. These methods, however, do not usually involve autoencoders! <span class="cite">[<a href="#XSocher2013">5</a>]</span> <!--l. 118--></p>
     <p class="noindent"></p>
     <h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-50003"></a>Implementation</h3><!--l. 120-->
