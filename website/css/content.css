@@ -93,6 +93,7 @@ img.smaller {
 .paragraphHead,
 .likeparagraphHead {
   display: block;
+  margin-bottom: 10px;
 }
 
 .math-display {

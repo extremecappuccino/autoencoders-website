@@ -38,7 +38,7 @@
       <li class="hidden" content="uses-autoencoders">
         <ul>
           <li><a href="/autoencoders/ip.html">Image Processing</a></li>
-          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+          <li><a href="/autoencoders/denoising.html#pre-training">Pretraining</a></li>
         </ul>
       </li>
       <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
@@ -56,7 +56,7 @@
     <div class="close"></div>
   </nav>
   <div class="overlay hidden"></div>
-  
+
   <div class="container">
     <!-- BEGIN: LyX Generated HTML -->
     <h2 class="titleHead">Denoising Autoencoders</h2>
@@ -74,7 +74,8 @@
       <p class="noindent"></p>
     </div>
     <!--l. 51-->
-    <p class="noindent">Stacked denoising autoencoders are also useful for deep learning. A stacked denoising autoencoder is a denoising autoencoder with multiple hidden layers, and is trained layer by layer, by trying to minimize the error in the layer&#8217;s reconstruction compared to it&#8217;s input (the previous layer&#8217;s output). By using a stacked autoencoder in an unsupervised manner, we can learn starting weights prior to the main supervised training procedure with deep learning. A regularization effect is then created as a result of the pretraining procedure creating an initialization point, to which the parameters are restricted to a near optimal local minimum <span class="cite">[<a href="#XERHAN2010">3</a>]</span>. <!--l. 62--></p>
+    <a id="pre-training"></a>
+    <p class="noindent"><span class="paragraphHead"><a id="x1-20001"></a><span class="cmbx-10">Pretraining</span></span> Stacked denoising autoencoders are also useful for deep learning. A stacked denoising autoencoder is a denoising autoencoder with multiple hidden layers, and is trained layer by layer, by trying to minimize the error in the layer&#8217;s reconstruction compared to it&#8217;s input (the previous layer&#8217;s output). By using a stacked autoencoder in an unsupervised manner, we can learn starting weights prior to the main supervised training procedure with deep learning. A regularization effect is then created as a result of the pretraining procedure creating an initialization point, to which the parameters are restricted to a near optimal local minimum <span class="cite">[<a href="#XERHAN2010">3</a>]</span>. <!--l. 62--></p>
     <p class="noindent"></p>
     <div class="figure">
       <a id="x1-3r2"></a> <!--l. 63-->
