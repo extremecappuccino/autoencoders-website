@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -27,9 +30,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,10 +57,14 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip medskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
@@ -70,57 +78,76 @@
 
 \begin_body
 
-\begin_layout Standard
+\begin_layout Title
+Variational Autoencoders
+\end_layout
 
-\series bold
-3 Variational Autoencoders
+\begin_layout Author
+Nikolai Smirnov
 \end_layout
 
 \begin_layout Standard
-A variational autoencoder (VAE) is a neural network consisting of an encoder,
- a decoder and a loss function.
- They let us design generative models of data and fit them to large datasets
+A variational autoencoder (VAE) resembles a classical autoencoder and is
+ a neural network consisting of an encoder, a decoder and a loss function.
+ They let us design generative models of data and fit them to large data-sets,
  and can also be used for image generation and reinforcement learning.
+ For example, a practical application may be to generate trees for a forest
+ in a video game, which are all similar but not the same.
  They are a recent advancement in machine learning, having only been defined
  in 2013.
+ However, they solve a long standing problem in machine-learning and do
+ so with weak assumptions and fast training via back-propagation, which
+ explains their fast rise in popularity 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Doersch2016"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 The first layer of the VAE is the encoder which will take the input and
  convert it into a latent vector.
- This can be done by reducing the mean squared error of the input and output,
- like a standard autoencoder.
+ This could be done by reducing the mean squared error of the input and
+ output, like a standard autoencoder.
  With images for example, we can now represent something like a picture
  of a cat as the vector [1.9, 8.2, 2.1].
+ The vector is called latent because given just an output from the model,
+ we don't necessarily know which settings of the variables in the latent
+ vector generated this output, without inferring it using something like
+ computer vision.
 \end_layout
 
 \begin_layout Standard
 However to make the VAE a generative model, we must add a constraint on
  the encoding network that forces it to generate latent vectors that roughly
- follow a gaussian distribution.
- This is the key feature of variational autoencoders.
- We must now make the network's latent variables match the unit gaussian
- distribution as closely as possible.
- This is done by changing our loss term to be the sum of the mean squared
- error and a latent loss.
- The mean squared error as usual, allows us to measure how accurately the
- network reconstructs images.
- The latent loss however, is the Kullback-Liebler divergence (KL divergence),
- which can measure how closely the variables match a unit gaussian distribution.
- The encoder can now be changed to generate a vector of means and a vector
- of standard deviations, rather than a vector of real variables.
- From this the KL divergence can be calculated.
+ follow a Gaussian distribution.
+ This is the key feature of variational autoencoders, and allows the user
+ to generate an output similar to the database the VAE was trained on by
+ inputting a latent vector straight to the decoder.
+ The problem now, is to make the network's latent variables match the unit
+ Gaussian distribution as closely as possible while also accurately providing
+ an output similar to the input.
  
 \end_layout
 
 \begin_layout Standard
-By training the VAE to increase the standard deviation of the encoded data
- allows us to distinguish between data, such as images of faces, where there
- may normally be noise in the data creating uncertainity.
+For a mathematically simplified explanation, this is done by changing our
+ loss term to be the sum of the mean squared error and a latent loss.
+ The mean squared error as usual, allows us to measure how accurately the
+ network reconstructs images.
+ The latent loss however, is the Kullback-Liebler divergence (KL divergence),
+ which can measure how closely the variables match a unit Gaussian distribution.
+ The encoder can now be changed to generate a vector of means and a vector
+ of standard deviations, rather than a vector of real variables.
+ From this the KL divergence can be calculated.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -128,9 +155,9 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename VaeDiagam.jpg
+	filename res/vae-diagram.jpg
 	lyxscale 70
-	scale 70
+	width 80text%
 
 \end_inset
 
@@ -141,7 +168,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Variational Autoencoder Layers 
+Simplification of layers in a variational autoencoder 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "kvfrans"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -149,9 +183,16 @@ Variational Autoencoder Layers
 
 \end_layout
 
-\begin_layout Plain Layout
+\end_inset
+
 
 \end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "vae"
+options "vancouver"
 
 \end_inset
 

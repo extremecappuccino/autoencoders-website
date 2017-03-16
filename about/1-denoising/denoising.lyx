@@ -5,6 +5,9 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -27,9 +30,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -53,10 +57,14 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
 \secnumdepth 3
 \tocdepth 3
-\paragraph_separation indent
-\paragraph_indentation default
+\paragraph_separation skip
+\defskip medskip
 \quotes_language english
 \papercolumns 1
 \papersides 1
@@ -70,16 +78,8 @@
 
 \begin_body
 
-\begin_layout Standard
-
-\series bold
-2 - Denoising Autoencoders
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-2.1 Denoising introduction
+\begin_layout Title
+Denoising Autoencoders
 \end_layout
 
 \begin_layout Standard
@@ -87,15 +87,14 @@ The principle behind denoising autoencoders is to be able to reconstruct
  data from an input of corrupted data.
  After giving the autoencoder the corrupted data, we force the hidden layer
  to learn only the more robust features, rather than just the identity.
- The output will then be a more refined version of the input data.
- 
+ The output will then be a more refined version of the input data 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "http://deeplearning.net/tutorial/dA.html"
+key "deeplearning"
 
 \end_inset
 
- 
+.
 \end_layout
 
 \begin_layout Standard
@@ -104,13 +103,6 @@ We can train a denoising autoencoder by stochastically corrupting data sets
  The autoencoder can then be trained against the original data.
  One way to corrupt the data would be simply to randomly remove some parts
  of the data, so that the autoencoder is trying to predict the missing input.
- 
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-2.2 Denoising for images
 \end_layout
 
 \begin_layout Standard
@@ -119,57 +111,17 @@ An example of this is shown below, with the image an autoencoder is trained
 \end_layout
 
 \begin_layout Standard
-\begin_inset Graphics
-	filename denoising example.png
-
-\end_inset
-
-
-\begin_inset CommandInset citation
-LatexCommand cite
-key "http://www.opendeep.org/v0.0.5/docs/tutorial-your-first-model"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-2.3 Denoising autoencoders for learning Deep Networks
-\end_layout
-
-\begin_layout Standard
-By using a stacked autoencoder [LINK TO STACKED AUTOENCODERS] in an unsupervised
- manner, we can learn starting weights prior to the supervised fine-tuning
- training procedure with deep learning.
- A regularization effect is then created as a result of the pre-training
- procedure creating an initialization point, to which the parameters are
- restricted to a small volume of parameter space that is delineated by the
- boundry of the local basin of attraction [LINK TO SOMETHING THAT LETS THIS
- MAKE SENSE].
- 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "ERHAN2010"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
 
 \begin_layout Plain Layout
-\noindent
 \align center
 \begin_inset Graphics
-	filename ../0-intro/Pretraining Deep Networks.png
+	filename res/denoising-example.png
+	width 60text%
 
 \end_inset
 
@@ -180,7 +132,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Pre-training example visualisation
+Denoising autoencoder example on handwritten digits 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "opendeep"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -194,28 +153,63 @@ Pre-training example visualisation
 \end_layout
 
 \begin_layout Standard
-The above image, created by 
+Stacked denoising autoencoders are also useful for deep learning.
+ A stacked denoising autoencoder is a denoising autoencoder with multiple
+ hidden layers, and is trained layer by layer, by trying to minimize the
+ error in the layer's reconstruction compared to it's input (the previous
+ layer's output).
+ By using a stacked autoencoder in an unsupervised manner, we can learn
+ starting weights prior to the main supervised training procedure with deep
+ learning.
+ A regularization effect is then created as a result of the pretraining
+ procedure creating an initialization point, to which the parameters are
+ restricted to a near optimal local minimum 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "ERHAN2010"
 
 \end_inset
 
- is a 2D visulaization generated with ISOMAP of the functions represented
- by 50 networks with and 50 networks without pre-traning, for supervised
- training over MNIST (handwritten digits database) with 2 hidden layers.
- The colours from deep blue to cyan represent the progression in iterations.
- As the image shows, the pre-training models all start in a small region
- of space and decrease in variance, towards a basin of attraction [SOMEONE
- CONFIRM PLEASE].
- The traning was also quicker by pre-training the functions.
+.
 \end_layout
 
 \begin_layout Standard
-\begin_inset CommandInset bibtex
-LatexCommand bibtex
-bibfiles "denoising"
-options "plain"
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename res/pretraining-deep-networks.png
+	width 60text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Pretraining example visualization 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "ERHAN2010"
+
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
 
 \end_inset
 
@@ -223,11 +217,25 @@ options "plain"
 \end_layout
 
 \begin_layout Standard
-Refs:
+The above image, is a 2D visualization generated with ISOMAP of the functions
+ represented by 50 networks with and 50 networks without pretraining, for
+ supervised training over MNIST (handwritten digits database) with 2 hidden
+ layers.
+ The colours from deep blue to cyan represent the progression in iterations.
+ As the image shows, the pretraining models all start in a small region
+ of space and decrease in variance, towards a basin of attraction.
+ The training was also quicker by pretraining the functions.
 \end_layout
 
 \begin_layout Standard
-http://fastml.com/very-fast-denoising-autoencoder-with-a-robot-arm/
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "denoising"
+options "vancouver"
+
+\end_inset
+
+
 \end_layout
 
 \end_body

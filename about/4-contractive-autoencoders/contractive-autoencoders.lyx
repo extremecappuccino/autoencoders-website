@@ -1,0 +1,176 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage[hidelinks]{hyperref}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Contractive Autoencoders
+\end_layout
+
+\begin_layout Author
+Nikolai Smirnov
+\end_layout
+
+\begin_layout Standard
+The aim of a contractive autoencoder is to make the learned representation
+ be robust towards small changes around its training examples.
+ As with most other autoencoder variations, this is done by adding a penalty
+ term to the cost function that we are trying to minimize, which penalizes
+ the representation's sensitivity to the training input.
+ The first part of the cost function is the mean squared error, for linear
+ reconstructions, as usual but the Frobenius norm of the Jacobian matrix
+ is also added 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Agustinus_Kristiadi_Blog"
+
+\end_inset
+
+.
+ We can calculate it from the formula:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+||J_{h}(x)||_{F}^{2}=\sum_{ij}\left(\frac{\delta h_{j}(x)}{\delta x_{i}}\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The formula contains a partial derivative of the activation value of a neuron
+ with respect to the input value, and so it is possible to see how a large
+ increase in the activation value will correspond to an increase in the
+ Jacobian, penalizing the representation.
+\end_layout
+
+\begin_layout Standard
+From this formula we can see that sparse autoencoders are likely to correspond
+ to a contractive mapping while not explicitly learning it through their
+ learning criterion.
+ This is due to the low activation values of the neurons in sparse autoencoders
+ being likely to occur in the left part of the Sigmoid activation function,
+ which is almost flat.
+ The neurons will therefore have a small first derivative which corresponds
+ to a small entry in the Jacobian.
+\end_layout
+
+\begin_layout Standard
+Contractive autoencoders are also very similar to denoising autoencoders.
+ Both encourage robustness but while denoising autoencoders encourage it
+ with the reconstruction 
+\begin_inset Formula $(f\circ g)(x)$
+\end_inset
+
+, contractive autoencoders do so with the encoder function 
+\begin_inset Formula $f(x)$
+\end_inset
+
+.
+ This is important when relying on the robustness of the encoder function
+ rather than the reconstruction, for example for classification which only
+ uses the encoder.
+ Denoising autoencoders also obtain robustness stochastically, by randomly
+ adding noise to the input, while contractive autoencoders obtain robustness
+ analytically, by penalizing the magnitude of the first derivative 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rifai_et_al_2011"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "contractive-autoencoders"
+options "vancouver"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
