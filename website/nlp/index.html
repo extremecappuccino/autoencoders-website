@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Applications in Natural Language Processing</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+  <!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="#" content="neural-networks">Neural Networks</a></li>
+      <li class="hidden" content="neural-networks">
+        <ul>
+          <li><a href="/neural-networks">Introduction</a></li>
+          <li><a href="/neural-networks/neurons.html">Artificial Neurons</a></li>
+          <li><a href="/neural-networks/learning.html">Learning</a></li>
+          <li><a href="/neural-networks/regularisation.html">Regularisation</a></li>
+          <li><a href="/neural-networks/optimisers.html">Optimisers</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="autoencoders">Autoencoders</a></li>
+      <li class="hidden" content="autoencoders">
+        <ul>
+          <li><a href="/autoencoders">Introduction</a></li>
+          <li><a href="/autoencoders/denoising.html">Autoencoders for Denoising</a></li>
+          <li><a href="/autoencoders/variational.html">Variational Autoencoders</a></li>
+          <li><a href="/autoencoders/sparse.html">Sparse Autoencoders</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="uses-autoencoders">Uses of Autoencoders</a></li>
+      <li class="hidden" content="uses-autoencoders">
+        <ul>
+          <li><a href="/autoencoders/ip.html">Image Processing</a></li>
+          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+        </ul>
+      </li>
+      <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
+      <li class="hidden last" content="nlp">
+        <ul>
+          <li><a href="/nlp">Introduction</a></li>
+          <li><a href="/nlp/word-phrase.html">Word and Phrase Representations</a></li>
+          <li><a href="/nlp/bilingual.html">Bilingual Phrase Representations</a></li>
+          <li><a href="/nlp/recursive.html">Recursive Autoencoders</a></li>
+          <li><a href="/nlp/sentiment.html">Sentiment Analysis</a></li>
+          <li><a href="/nlp/paraphrase.html">Paraphrase Detection</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Applications of Autoencoders in Natural Language Processing</h2>
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Autoencoders for Representation and Deep Learning</h3><!--l. 31-->
+    <p class="noindent"></p>
+    <div class="quote">
+      <!--l. 32-->
+      <p class="noindent">See <a href="/neural-networks">Neural Networks</a></p>
+    </div><!--l. 34-->
+    <p class="noindent"><span class="cmti-10">Deep Learning</span> is a branch of machine learning that studies models which involve a large amount of composition of learned functions or concepts. <span class="cite">[<a href="#XGoodfellow2016">1</a>]</span> <!--l. 38--></p>
+    <p class="indent">Most machine learning algorithms require a large amount of human input in the form of selecting <span class="cmti-10">features</span> that cluster data in the desired way. Often, designing features and representations requires an in-depth knowledge of the data and its subject, and features that may work well for one specific set of data are not guaranteed to work for a different, even similar, set. <span class="cmti-10">Representation learning</span> attempts to learn good features and representations, removing this barrier. <span class="cmti-10">Deep learning</span> algorithms (such as deep neural networks) then learn multiple levels of representation at different levels of abstraction. Each concept is defined in terms of simpler ones, and more abstract representations are computed from less abstract ones. This is what makes deep learning algorithms particularly powerful, especially in difficult tasks such as computer vision and natural language processing (NLP). <span class="cite">[<a href="#XSocher2014">2</a>]</span> <!--l. 54--></p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">1.1</span> <a id="x1-20001.1"></a>The <span class="cmti-10">Autoencoder</span></h4><!--l. 56-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-2001r1"></a> <!--l. 58-->
+      <p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/autoencoder.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">An autoencoder. Source: <a href="http://ufldl.stanford.edu/tutorial/images/Autoencoder636.png"><span class="cmtt-10">http://ufldl.stanford.edu/tutorial/images/Autoencoder636.png</span></a>.</span>
+      </div><!--tex4ht:label?: x1-2001r1 -->
+      <!--l. 62-->
+      <p class="noindent"></p>
+    </div>
+    <div class="quote">
+      <!--l. 65-->
+      <p class="noindent">See <a href="/autoencoders">Autoencoders</a></p>
+    </div><!--l. 67-->
+    <p class="noindent">On the following pages, we will mainly discuss applications of the <span class="cmti-10"><a href="/autoencoders">autoencoder</a></span> (AE) in NLP. An autoencoder is a good example of a representation learning algorithm. It combines an encoder function and a decoder function, but is trained in such a way to preserve the input as much as possible, whilst making the new representation have useful properties. <span class="cite">[<a href="#XNg">3</a>]</span></p>
+    <h4 class="subsectionHead"><span class="titlemark">1.2</span> <a id="x1-30001.2"></a>The <span class="cmti-10">Recursive Autoencoder</span></h4><!--l. 77-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-3001r2"></a> <!--l. 79-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/rae.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">A recursive autoencoder.</span>
+      </div><!--tex4ht:label?: x1-3001r2 -->
+      <!--l. 83-->
+      <p class="noindent"></p>
+    </div>
+    <div class="quote">
+      <!--l. 86-->
+      <p class="noindent">See <a href="/nlp/recursive.html">Recursive Autoencoders</a></p>
+    </div><!--l. 88-->
+    <p class="noindent">Many of the examples that follow make use of <span class="cmti-10"><a href="/nlp/recursive.html">recursive autoencoders</a></span> (RAE). Say we have a representation for words, and want to deduce from this a representation for a sentence. We first build a binary tree structure for our sentence. From this, we generate a <span class="cmti-10">sequence</span> of &#8216;hidden&#8217; representations. For the first step, an autoencoder attempts to reconstruct two &#8216;leaf&#8217; inputs. At each further step, the autoencoder attempts to reconstruct both the input vector and the hidden vector from the previous step. This should result in a final encoding that has been built in such a way as to allow as much as possible the reconstruction of every input of the sequence. <span class="cite">[<a href="#XTan2014">4</a>]</span></p>
+    <h4 class="subsectionHead"><span class="titlemark">1.3</span> <a id="x1-40001.3"></a>Deep Learning with <span class="cmti-10">Stacked Autoencoders</span></h4><!--l. 103-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-4001r3"></a> <!--l. 105-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/stacked-autoencoder.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;3:</span> <span class="content">A stacked autoencoder. Each layer comes from an individually trained autoencoder. Source: <a href="http://ufldl.stanford.edu/wiki/images/thumb/5/5c/Stacked_Combined.png/500px-Stacked_Combined.png">http://ufldl.stanford.edu/wiki/images/thumb/5/5c/Stacked_Combined.png/500px-Stacked_Combined.png</a>.</span>
+      </div><!--tex4ht:label?: x1-4001r3 -->
+      <!--l. 110-->
+      <p class="noindent"></p>
+    </div>
+    <div class="quote">
+      <!--l. 113-->
+      <p class="noindent">See <a href="/autoencoders">Stacked Autoencoders</a> and ***Pretraining</p>
+    </div><!--l. 115-->
+    <p class="noindent">We will demonstrate how deep networks can be built with stacked autoencoders. This is done by training individual autoencoders in turn, fine-tuning using backpropogation, then adding a final layer, such as for example a softmax layer for classification problems. <span class="cite">[<a href="#XAndrewNg">5</a>]</span> The method of training layers individually has been shown to lead to a considerable increase in accuracy. <span class="cite">[<a href="#XVincent2008">6</a>]</span> However, it should be noted that the use of rectified linear units (ReLUs), as proposed by Glorot et al in 2011, has made this form of <span class="cmti-10">pre-training</span> largely unnecessary in recent years. <span class="cite">[<a href="#XGlorot2011">7</a>]</span></p>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-50002"></a>Applications in Natural Language Processing</h3><!--l. 128-->
+    <p class="noindent"><span class="cmti-10">Natural Language Processing</span> (NLP) is a field of study which is interested in problems that involve computers understanding human language. NLP encompasses some of the oldest and most-difficult problems in computer science. In recent yeras, deep learning has allowed for promising advancements in some of these semingly intractable problems, as demonstrated below. <span class="cite">[<a href="#XSocher2016">8</a>]</span> And indeed, autoencoders have been used in attempts to solve all of the following problems: <!--l. 137--></p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">2.1</span> <a id="x1-60002.1"></a>Word Embeddings</h4><!--l. 139-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-6001r4"></a> <!--l. 141-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/word-embedding.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;4:</span> <span class="content">Some example word vectors mapped to two dimensions. Source: <a href="http://suriyadeepan.github.io/img/seq2seq/we1.png"><span class="cmtt-10">http://suriyadeepan.github.io/img/seq2seq/we1.png</span></a>.</span>
+      </div><!--tex4ht:label?: x1-6001r4 -->
+      <!--l. 145-->
+      <p class="noindent"></p>
+    </div>
+    <div class="quote">
+      <!--l. 148-->
+      <p class="noindent">See <a href="/nlp/word-phrase.html">Word Embeddings and Phrase Representation</a></p>
+    </div><!--l. 150-->
+    <p class="noindent">In order to model a language, we need to be able to take words, sentences, and paragraphs and map them to vectors. Here, we consider the process of converting words to vectors. There are several methods for doing so. <!--l. 155--></p>
+    <p class="indent">The simplest method is arguably a one-hot representation. This is where each word is represented by a vector containing a single entry of 1 and all other entries are 0. Clearly, this is an extremely wasteful representation (we would need many thousands of dimensions for even a simple model). Furthermore, such a representation is not able to show when words have similar meanings. <!--l. 162--></p>
+    <p class="indent">A solution to this is representing a word in terms of its most common neighbours. For example the words &#8216;screen&#8217; and &#8216;display&#8217; are always used in similar contexts and so should end up with similar representations. We may either consider a window of <span class="cmmi-10">n</span> neighbouring words, where <span class="cmmi-10">n</span> generally ranges between 5 and 10, or consider all the words within a document. We can then reduce the dimension of vectors, usually by singular value decomposition (SVD), in order to produce a small representation (usually to the order of 100 dimensions) which encaptures much of the meaning of a word. <!--l. 172--></p>
+    <p class="indent">Currently the most popular implementations use neural networks which attempt to predict surrounding words (called the <span class="cmti-10">skip-gram</span> model) paired with <span class="cmti-10">negative sampling</span>. <span class="cite">[<a href="#XChaubard2016">9</a>]</span> <!--l. 176--></p>
+    <p class="indent">We will consider a very simple implementation, proposed by Lebret and Collobert in 2015, which uses autoencoders to jointly learn representations for words and phrases.</p>
+    <h4 class="subsectionHead"><span class="titlemark">2.2</span> <a id="x1-70002.2"></a>Machine Translation</h4><!--l. 183-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-7001r5"></a> <!--l. 185-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/pyramid.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;5:</span> <span class="content">The Vauquois Pyramid. Source: <a href="https://noramachinetranslation.files.wordpress.com/2015/02/pyramid.png"><span class="cmtt-10">https://noramachinetranslation.files.wordpress.com/2015/02/pyramid.png</span></a>.</span>
+      </div><!--tex4ht:label?: x1-7001r5 -->
+      <!--l. 189-->
+      <p class="noindent"></p>
+    </div>
+    <div class="quote">
+      <!--l. 192-->
+      <p class="noindent">See <a href="/nlp/bilingual.html">Bilingual Phrase Embeddings</a></p>
+    </div><!--l. 194-->
+    <p class="noindent">Machine translation (MT) is an incredibely difficult problem, which has been studied since the 1950s and is believed to be &#8216;AI-complete&#8217; (equivalent to creating artificial general intelligence). The aim is to accurately translate text from one human language to another. <!--l. 199--></p>
+    <p class="indent">Traditional approaches included word-for-word (direct) translation. This, as you might expect, produced very poor results, due in part to significant syntactic (structural) differences between most modern languages. The solution to this was to analyse the syntax in the input language, produce a parse tree, and then perform the translation producing a new parse tree which can be used to generate the text in the output language. <!--l. 207--></p>
+    <p class="indent">Still, errors occur due to homonyms: words can take very different meanings in different contexts. The solution to this is to analyse the semantics (meaning) in the source language, and then generate the target text from this meaning. This meaning can be encoded in the form of word, sentence and paragraph vectors. <!--l. 213--></p>
+    <p class="indent">These different methods are shown by a Vauquois pyramid. In general, the greater the depth of the intermediary representation, the higher the quality of translation. <span class="cite">[<a href="#XSocher2016">8</a>]</span> <!--l. 217--></p>
+    <p class="indent">We will discuss how autoencoders can be used to build bilingual word and phrase representations, as proposed by Chandar and Lauly in 2014.</p>
+    <h4 class="subsectionHead"><span class="titlemark">2.3</span> <a id="x1-80002.3"></a>Document Clustering</h4><!--l. 223-->
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-8001r6"></a> <!--l. 225-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/clustering.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;6:</span> <span class="content">Clustering documents using (B) LSA and (C) an autoencoder. Source: <span class="cite">[<a href="#XHinton2006">10</a>]</span>.</span>
+      </div><!--tex4ht:label?: x1-8001r6 -->
+      <!--l. 230-->
+      <p class="noindent"></p>
+    </div>
+    <!--l. 233-->
+    <p class="indent">Document classification is the problem of assigning documents (such as a web page or news story) to categories. In particular, we will discuss unsupervised document classification (document clustering). The challenge here is to represent documents in such a way that they can be easily and accurately clustered. <!--l. 239--></p>
+    <p class="indent">Approaches generally involve producing a vector with an entry for each word, set to the number of times for which that word occurs in a given document. This vector will of course have a very high dimensionality (one dimension for each possible word), so its dimensionality will be reduced by means of, for example, principle component analysis (PCA) along with various other optimisations. <span class="cite">[<a href="#XAndrews2007">11</a>]</span> <!--l. 246--></p>
+    <p class="indent">In 2006, Hinton used an autoencoder to reduce the dimensionality of 804 414 vectors, each of 2000 dimensions, representing specific word probabilities in newswire stories. As can be seen by the results shown above, autoencoders significantly outperformed the standard method of latent semantic analysis, which is based on PCA, as well as a nonlinear dimensionality reduction algorithm proposed by Roweis in 2000. <span class="cite">[<a href="#XHinton2006">10</a>]</span></p>
+    <h4 class="subsectionHead"><span class="titlemark">2.4</span> <a id="x1-90002.4"></a>Sentiment Analysis</h4><!--l. 255-->
+    <p class="noindent"></p>
+    <div class="quote">
+      <!--l. 256-->
+      <p class="noindent">See <a href="/nlp/recursive.html">Recursive Autoencoders</a> and <a href="/nlp/sentiment.html">Sentiment Analysis</a></p>
+    </div><!--l. 258-->
+    <p class="noindent">We will look at the most basic task in sentiment analysis: determining the <span class="cmti-10">polarity</span> of a statement. In other words, we want to tell whether a given text is positive, neutral or negative. This kind of sentiment analysis has significant applications in business, such as for stock prediction and in product research and marketing. <!--l. 264--></p>
+    <p class="indent">Early approaches simply look for positive or negative words and predict the sentiment from this alone. For example a review containing the word &#8220;good&#8221; is likely to be positive. This approach can be implemented to be very fast, and for this reason is still used by several companies that perform sentiment analysis on large amounts of data in real time. However, such strategies can be innaccurate (most studies have found this method to be accurate for approximately 60-80% of the test data). For example, they may fail to make the correct conclusion for texts with negation. <span class="cite">[<a href="#XTurney2002">12</a>]</span> <!--l. 274--></p>
+    <p class="indent">We will discuss how approaches using vector word representations and recursive autoencoders can achieve a much greater accuracy. <!--l. 278--></p>
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">2.5</span> <a id="x1-100002.5"></a>Paraphrase Detection</h4><!--l. 279-->
+    <p class="noindent"></p>
+    <div class="quote">
+      <!--l. 280-->
+      <p class="noindent">See <a href="/nlp/paraphrase.html">Paraphrase Detection</a></p>
+    </div><!--l. 282-->
+    <p class="noindent">Often in English, two phrases that look very different can have exactly the same meaning. We will continue from the previous section, showing how deep learning allows for accurate detection of such phrases. <!--l. 1--></p>
+    <p class="noindent"></p>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-110002.5"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XGoodfellow2016"></a>Goodfellow I, Bengio Y, Courville A. Deep Learning. MIT Press; 2016. Available from: <a class="url" href="http://www.deeplearningbook.org"><span class="cmtt-10">http://www.deeplearningbook.org</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XSocher2014"></a>Socher R, Manning C, Bengio Y. Machine Learning Summer School Lisbon; 2014. Available from: <a class="url" href="http://lxmls.it.pt/2014/socher-lxmls.pdf"><span class="cmtt-10">http://lxmls.it.pt/2014/socher-_lxmls.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XNg"></a>Ng A. Unsupervised Feature Learning and Deep Learning: Autoencoders;. Available from: <a class="url" href="http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/"><span class="cmtt-10">http://ufldl.stanford.edu/tutorial/unsupervised/Autoencoders/</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XTan2014"></a>Tan S. Recursive Auto-encoders: An Introduction; 2014. Available from: <a class="url" href="https://blog.wtf.sg/2014/05/10/recursive-auto-encoders-an-introduction/"><span class="cmtt-10">https://blog.wtf.sg/2014/05/10/recursive-_auto-_encoders-_an-_introduction/</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XAndrewNg"></a>Andrew&#x00A0;Ng CYFYMCS Jiquan&#x00A0;Ngiam. Stacked Autoencoders;. Available from: <a class="url" href="http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders"><span class="cmtt-10">http://ufldl.stanford.edu/wiki/index.php/Stacked_Autoencoders</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[6]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XVincent2008"></a>Vincent P, Larochelle H, Bengio Y, Manzagol PA. Extracting and Composing Robust Features with Denoising Autoencoders. In: Proceedings of the Twenty-fifth International Conference on Machine Learning (ICML&#8217;08); 2008. p. 1096&#8211;1103. Available from: <a class="url" href="https://www.iro.umontreal.ca/~vincentp/Publications/denoising_autoencoders_tr1316.pdf"><span class="cmtt-10">https://www.iro.umontreal.ca/</span><span class="cmtt-10">~</span><span class="cmtt-10">vincentp/Publications/denoising_autoencoders_tr1316.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[7]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XGlorot2011"></a>Glorot X, Bordes A, Bengio Y. Deep Sparse Rectifier Neural Networks. In: Gordon GJ, Dunson DB, editors. Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics (AISTATS-11). vol.&#x00A0;15. Journal of Machine Learning Research - Workshop and Conference Proceedings; 2011. p. 315&#8211;323. Available from: <a class="url" href="http://www.jmlr.org/proceedings/papers/v15/glorot11a/glorot11a.pdf"><span class="cmtt-10">http://www.jmlr.org/proceedings/papers/v15/glorot11a/glorot11a.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[8]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XSocher2016"></a>Socher R. CS224d: Deep Learning for Natural Language Processing; 2016. Available from: <a class="url" href="http://cs224d.stanford.edu/lectures/CS224d-Lecture1.pdf"><span class="cmtt-10">http://cs224d.stanford.edu/lectures/CS224d-_Lecture1.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[9]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XChaubard2016"></a>Chaubard F, Mundra R, Socher R. CS224d: Deep Learning for NLP: Lecture Notes: Part I; 2016. Available from: <a class="url" href="http://cs224d.stanford.edu/lecture_notes/notes1.pdf"><span class="cmtt-10">http://cs224d.stanford.edu/lecture_notes/notes1.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[10]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XHinton2006"></a>Hinton G, Salakhutdinov R. Reducing the Dimensionality of Data with Neural Networks. Science. 2006;313(5786):504 &#8211; 507. Available from: <a class="url" href="https://www.cs.toronto.edu/~hinton/science.pdf"><span class="cmtt-10">https://www.cs.toronto.edu/</span><span class="cmtt-10">~</span><span class="cmtt-10">hinton/science.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[11]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XAndrews2007"></a>Andrews N, Fox E. Recent Developments in Document Clustering; 2007. Available from: <a class="url" href="http://eprints.cs.vt.edu/archive/00001000/01/docclust.pdf"><span class="cmtt-10">http://eprints.cs.vt.edu/archive/00001000/01/docclust.pdf</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[12]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XTurney2002"></a>Turney PD. Thumbs Up or Thumbs Down? Semantic Orientation Applied to Unsupervised Classification of Reviews. CoRR. 2002;cs.LG/0212032. Available from: <a class="url" href="http://arxiv.org/abs/cs.LG/0212032"><span class="cmtt-10">http://arxiv.org/abs/cs.LG/0212032</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

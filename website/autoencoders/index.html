@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Introduction</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+  <!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="#" content="neural-networks">Neural Networks</a></li>
+      <li class="hidden" content="neural-networks">
+        <ul>
+          <li><a href="/neural-networks">Introduction</a></li>
+          <li><a href="/neural-networks/neurons.html">Artificial Neurons</a></li>
+          <li><a href="/neural-networks/learning.html">Learning</a></li>
+          <li><a href="/neural-networks/regularisation.html">Regularisation</a></li>
+          <li><a href="/neural-networks/optimisers.html">Optimisers</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="autoencoders">Autoencoders</a></li>
+      <li class="hidden" content="autoencoders">
+        <ul>
+          <li><a href="/autoencoders">Introduction</a></li>
+          <li><a href="/autoencoders/history.html">History</a></li>
+          <li><a href="/autoencoders/denoising.html">Autoencoders for Denoising</a></li>
+          <li><a href="/autoencoders/variational.html">Variational Autoencoders</a></li>
+          <li><a href="/autoencoders/sparse.html">Sparse Autoencoders</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="uses-autoencoders">Uses of Autoencoders</a></li>
+      <li class="hidden" content="uses-autoencoders">
+        <ul>
+          <li><a href="/autoencoders/ip.html">Image Processing</a></li>
+          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+        </ul>
+      </li>
+      <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
+      <li class="hidden last" content="nlp">
+        <ul>
+          <li><a href="/nlp">Introduction</a></li>
+          <li><a href="/nlp/word-phrase.html">Word and Phrase Representations</a></li>
+          <li><a href="/nlp/bilingual.html">Bilingual Phrase Representations</a></li>
+          <li><a href="/nlp/recursive.html">Recursive Autoencoders</a></li>
+          <li><a href="/nlp/sentiment.html">Sentiment Analysis</a></li>
+          <li><a href="/nlp/paraphrase.html">Paraphrase Detection</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Introduction to Autoencoders</h2>
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Introduction</h3><!--l. 32-->
+    <p class="noindent">An autoencoder is a neural network that is trained to copy its input to its output, with the typical purpose of dimension reduction - the process of reducing the number of random variables under consideration. It features an encoder function to create a hidden layer (or multiple layers) which contains a code to describe the input. There is then a decoder which creates a reconstruction of the input from the hidden layer. An autoencoder can then become useful by having a hidden layer smaller than the input layer, forcing it to create a compressed representation of the data in the hidden layer by learning correlations in the data. This facilitates the classification, visualization, communication and storage of data <span class="cite">[<a href="#XG.E.Hinton2006">1</a>]</span>. Autoencoders are a form of unsupervised learning, meaning that an autoencoder only needs unlabeled data - a set of input data rather than input-output pairs. <!--l. 46--></p>
+    <p class="noindent">Through an unsupervised learning algorithm, for linear reconstructions the autoencoder will try to learn a function $h_{W,b}(x)\approx x$, so as to minimize the mean square difference:</p>
+    <center class="par-math-display">
+      $L(x,y)=\sum(x-h_{W,b}(x))^{2}$
+    </center><!--l. 52-->
+    <p class="nopar"><!--l. 55--></p>
+    <p class="noindent">where x is the input data and y is the reconstruction. However, when the decoder&#8217;s activation function is the Sigmoid function, the cross-entropy loss function is typically used:</p>
+    <center class="par-math-display">
+      $L(x,y)=-\sum_{i=1}^{d_{x}}x_{i}log(y_{i})+(1-x_{i})log(1-y_{i})$
+    </center><!--l. 61-->
+    <p class="nopar"><!--l. 64--></p>
+    <p class="noindent">We can obtain optimum weights for this by starting with random weights and calculating a gradient. This is done by using the chain rule to ***back-propagate*** error derivatives through the decoder network and then the encoder network. <!--l. 69--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-1001r1"></a> <!--l. 70-->
+      <p class="noindent"><img alt="PIC" src="../img/autoencoders/autoencoder.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Layers in a autoencoder <span class="cite">[<a href="#Xautoencoder_visualization">2</a>]</span>.</span>
+      </div><!--tex4ht:label?: x1-1001r1 -->
+      <!--l. 75-->
+      <p class="noindent"></p>
+    </div>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Uses</h3><!--l. 81-->
+    <p class="noindent">The most intuitive application of autoencoders is ***data compression***. Given an 256 x 256px image for example, a representation of a 28 x 28px may be learned, which is easier to handle. <!--l. 85--></p>
+    <p class="noindent">We can also use denoising ***autoencoders*** to reconstruct corrupted data, often in the form of images. <!--l. 88--></p>
+    <p class="noindent">Another use is to ***pre-train*** ***deep networks*** with stacked denoising autoencoders. This is allows us to optimize deep learning solutions and avoid being stuck in local minima as we might be with random initialization of weights. <!--l. 94--></p>
+    <p class="noindent"></p>
+    <h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-30003"></a>History</h3><!--l. 96-->
+    <p class="noindent">The idea of autoencoders was first mentioned in 1986, in an article extensively analyzing back-propagation <span class="cite">[<a href="#XRumelhrt1986">3</a>]</span>. In following years, the idea resurfaced in more research papers. A 1989 paper by Baldi and Hornik helped further introduce autoencoders by offering &#8220;a precise description of the salient features of the surface attached to E [the error function] when the units are linear&#8221; <span class="cite">[<a href="#XBaldi1989">4</a>]</span>. Another notable paper is by Hinton and Zemel from 1994 which describes a new objective function for training autoencoders that allows them to discover non-linear, factorial representations <span class="cite">[<a href="#XHinton1994">5</a>]</span>. However, it is hard to attribute the ideas about autoencoders because the literature is diverse and terminology has evolved over time. A currently emerging learning algorithm is the extreme learning machine, where the hidden node parameters are randomly generated and the output weights are computed thus learning a linear model, in a way faster than with back-propagation. It is worth noting how all currently used variants of autoencoders have been defined in only the last 10 years:</p>
+    <ul class="itemize1">
+      <li class="itemize">Vincent et al 2008 - <a href="/autoencoders/denoising.html">Denoising autoencoders</a></li>
+      <li class="itemize">Goodfellow et al 2009 - <a href="/autoencoders/sparse.html">Sparse autoencoders</a></li>
+      <li class="itemize">Rifai et al 2011 - <a href="/autoencoders/contractive.html">Contractive autoencoders</a></li>
+      <li class="itemize">Kingma et al 2013 - <a href="/autoencoders/variational.html">Variational autoencoders</a></li>
+    </ul><!--l. 1-->
+    <p class="noindent"></p>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-40003"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XG.E.Hinton2006"></a>Hinton GE, Salakhutdinov RR. Reducing the Dimensionality of Data with Neural Networks. In: Science; 2006. .</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="Xautoencoder_visualization"></a>et&#x00A0;al N. A dynamic programming approach to missing data estimation using neural networks;. Available from: <a class="url" href="https://www.researchgate.net/figure/222834127_fig1"><span class="cmtt-10">https://www.researchgate.net/figure/222834127_fig1</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XRumelhrt1986"></a>Rumelhrt, Hinton, Williams. Learning internal representations by error propogation. Parallel distributed processing:; explorations in the microstructure of congition;Available from: <a class="url" href="http://dl.acm.org/citation.cfm?id=104293"><span class="cmtt-10">http://dl.acm.org/citation.cfm?id=104293</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XBaldi1989"></a>Baldi, Hornik. Neural Networks and Principal Component Analysis: Learning from Examples Without Local Minima;. Available from: <a class="url" href="https://www.researchgate.net/publication/222438485"><span class="cmtt-10">https://www.researchgate.net/publication/222438485</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XHinton1994"></a>Hinton, Zemel. Autoencoders, Minimum Description Length, and Helmholtz Free Energy. Advances in Neural Information Processsing Systems;Available from: <a class="url" href="https://www.cs.toronto.edu/~hinton/absps/cvq.pdf"><span class="cmtt-10">https://www.cs.toronto.edu/</span><span class="cmtt-10">~</span><span class="cmtt-10">hinton/absps/cvq.pdf</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

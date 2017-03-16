@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Usage in Image Processing</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+  <!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="#" content="neural-networks">Neural Networks</a></li>
+      <li class="hidden" content="neural-networks">
+        <ul>
+          <li><a href="/neural-networks">Introduction</a></li>
+          <li><a href="/neural-networks/neurons.html">Artificial Neurons</a></li>
+          <li><a href="/neural-networks/learning.html">Learning</a></li>
+          <li><a href="/neural-networks/regularisation.html">Regularisation</a></li>
+          <li><a href="/neural-networks/optimisers.html">Optimisers</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="autoencoders">Autoencoders</a></li>
+      <li class="hidden" content="autoencoders">
+        <ul>
+          <li><a href="/autoencoders">Introduction</a></li>
+          <li><a href="/autoencoders/denoising.html">Autoencoders for Denoising</a></li>
+          <li><a href="/autoencoders/variational.html">Variational Autoencoders</a></li>
+          <li><a href="/autoencoders/sparse.html">Sparse Autoencoders</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="uses-autoencoders">Uses of Autoencoders</a></li>
+      <li class="hidden" content="uses-autoencoders">
+        <ul>
+          <li><a href="/autoencoders/ip.html">Image Processing</a></li>
+          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+        </ul>
+      </li>
+      <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
+      <li class="hidden last" content="nlp">
+        <ul>
+          <li><a href="/nlp">Introduction</a></li>
+          <li><a href="/nlp/word-phrase.html">Word and Phrase Representations</a></li>
+          <li><a href="/nlp/bilingual.html">Bilingual Phrase Representations</a></li>
+          <li><a href="/nlp/recursive.html">Recursive Autoencoders</a></li>
+          <li><a href="/nlp/sentiment.html">Sentiment Analysis</a></li>
+          <li><a href="/nlp/paraphrase.html">Paraphrase Detection</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Using Autoencoders in Image Processing</h2>
+    <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Visualising Trained Autoencoders</h3><!--l. 31-->
+    <p class="noindent">Consider the case of a trained autoencoder on 20x20 black and white images, so the number of input neurons to the network is 400. The network has been trained to output the same image but has a constraint on the number of hidden neurons in order to force the image to be compressed to a more efficient internal representation. This would be useful for other applications as reducing the input parameters with minimal loss in reconstruction error (information loss) means that other systems have less redundant inputs. To gain a better understanding on the inner workings of the network we can try to visualize the input which maximizes any given hidden layer neuron. This will reveal exactly what kind of input each hidden neuron is responding too, and so how the network has learned to represent the input. We can now derive a formula for generating these images. <!--l. 45--></p>
+    <p class="noindent">Let $a_{i}$ be the state of each hidden layer neuron, $x_{j}$ the input neuron, $W_{ij}$ the weight between input $j$ and hidden $i$, $b_{i}$ the bias for hidden $i$ and $f(x)$ the chosen increasing activation function. Each hidden neuron computes its inner state to be:</p>
+    <div class="center">
+      <!--l. 51-->
+      <p class="noindent"><!--l. 52--></p>
+      <p class="noindent">
+        $a_{i}=f(\sum_{j=1}^{400}W_{ij}x_{j})+b_{i}$
+      </p>
+    </div><!--l. 55-->
+    <p class="noindent">Assuming the input to be constrained between -1 and 1 and ignoring the bias term we can see that letting</p>
+    <div class="center">
+      <!--l. 58-->
+      <p class="noindent"><!--l. 59--></p>
+      <p class="noindent">
+        $x_{j}=\frac{W_{ij}}{\sqrt{\sum_{j=1}^{400}(W_{ij})^{2}}}$
+      </p>
+    </div><!--l. 62-->
+    <p class="noindent">Will lead to a highly activated function, as $(W_{ij})^{2}$ is guaranteed to be positive and dividing by the squared allows $x_{j}$ to maintain the constraint between -1 and 1 and offers a useful comparison between inputs <span class="cite">[<a href="#XvisualizingStanford">1</a>]</span>. We can then plot $x_{j}$ (the input) for each hidden layer to show what the neuron responds to from the input. In this case on a network trained on images of natural images with 100 hidden neurons can be visualized as this: <!--l. 70--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-1001r1"></a> <!--l. 71-->
+      <p class="noindent"><img alt="PIC" src="../img/autoencoders/example-sparse-ae-weights.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Visualization of the hidden layers in an autoencoder</span>
+      </div><!--tex4ht:label?: x1-1001r1 -->
+      <!--l. 72-->
+      <p class="noindent"></p>
+    </div>
+    <!--l. 75-->
+    <p class="noindent">Each square shows the input required to activate each hidden layer neuron, we can see that the network has trained to respond strongly to straight edges of different sizes and orientations <span class="cite">[<a href="#XplottingMathworks">2</a>]</span>. These features are not surprising as representing an image by a combination of edges is a useful representation for the real world. When trained on different images or other inputs (such as audio or some abstract input type) the network will also learn a useful representation like this. This kind of representation of images can be found in many other types of neural networks, particularly convolution neural networks as they are also tasked with processing natural image data and so develop similar latent representations of the input image <span class="cite">[<a href="#XkarpathyStanford">3</a>]</span>.</p>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Image In-painting</h3><!--l. 90-->
+    <p class="noindent">Image in-painting is the problem of restoring lost information from images, classically a black square has been overlayed on a random region of the image causing permanent loss of information from the image. The objective of image in-painting is to restore this information by &#8220;painting&#8221; the lost region back in, so not only does the region of image loss need to be identified it also needs to be restored by using information about the surrounding regions of the image. This problem has large scale applications in video and photo editing as well as compression and image processing <span class="cite">[<a href="#Xinpainting">4</a>]</span>. <!--l. 100--></p>
+    <p class="noindent">Autoencoders can be applied to solve this problem due to their abilities in image processing and unsupervised training. By stacking autoencoders into multiple layers (e.g. having 2 or more layers in the encoding section of the network) this allows the network to learn more abstract features and can be trained quickly by training the first layer as an autoencoder, and then training the second layer separately before finally joining them together <span class="cite">[<a href="#XinpaintingAutoEncoders">5</a>]</span>. <!--l. 108--></p>
+    <p class="noindent">The results of training on a 5 layer are shown below (right) with other techniques in the middle and the original and corrupted image on the left. The network has not only filled in the correct colour but has also re-established basic features such as the shape of the eye. <!--l. 114--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-2001r2"></a> <!--l. 115-->
+      <p class="noindent"><img alt="PIC" src="../img/autoencoders/inpainting.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">In-painting results for portrait photos. From left to right, original image, corrupted image, iterative training (3 layers), normal training (3 layer), iterative training (5 layer), normal training (5 layer).</span>
+      </div><!--tex4ht:label?: x1-2001r2 -->
+      <!--l. 122-->
+      <p class="noindent"></p>
+    </div>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-30002"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XvisualizingStanford"></a>Stanford. Visualizing the inner working of autoencoders;. Available from: <a class="url" href="http://deeplearning.stanford.edu/wiki/index.php/Visualizing_a_Trained_Autoencoder"><span class="cmtt-10">http://deeplearning.stanford.edu/wiki/index.php/Visualizing_a_Trained_Autoencoder</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XplottingMathworks"></a>Mathworks. Plotting autoencoders weights;. Available from: <a class="url" href="https://uk.mathworks.com/help/nnet/ref/autoencoder.plotweights.html"><span class="cmtt-10">https://uk.mathworks.com/help/nnet/ref/autoencoder.plotweights.html</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[3]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XkarpathyStanford"></a>karpathy@cs[dot]stanford[dot]edu. Visualizing what ConvNets learn;. Available from: <a class="url" href="http://cs231n.github.io/understanding-cnn/"><span class="cmtt-10">http://cs231n.github.io/understanding-_cnn/</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[4]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="Xinpainting"></a>Peterson I. Filling in Blanks;. Available from: <a class="url" href="https://www.jstor.org/stable/4013521?seq=1#page_scan_tab_contents"><span class="cmtt-10">https://www.jstor.org/stable/4013521?seq=1#page_scan_tab_contents</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[5]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XinpaintingAutoEncoders"></a>Shcherbakov O, Batishcheva V. Image inpainting based on stacked autoencoders;. Available from: <a class="url" href="http://iopscience.iop.org/article/10.1088/1742-6596/536/1/012020/pdf"><span class="cmtt-10">http://iopscience.iop.org/article/10.1088/1742-_6596/536/1/012020/pdf</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

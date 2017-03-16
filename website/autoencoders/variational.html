@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Variational Autoencoders</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+  <!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="#" content="neural-networks">Neural Networks</a></li>
+      <li class="hidden" content="neural-networks">
+        <ul>
+          <li><a href="/neural-networks">Introduction</a></li>
+          <li><a href="/neural-networks/neurons.html">Artificial Neurons</a></li>
+          <li><a href="/neural-networks/learning.html">Learning</a></li>
+          <li><a href="/neural-networks/regularisation.html">Regularisation</a></li>
+          <li><a href="/neural-networks/optimisers.html">Optimisers</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="autoencoders">Autoencoders</a></li>
+      <li class="hidden" content="autoencoders">
+        <ul>
+          <li><a href="/autoencoders">Introduction</a></li>
+          <li><a href="/autoencoders/denoising.html">Autoencoders for Denoising</a></li>
+          <li><a href="/autoencoders/variational.html">Variational Autoencoders</a></li>
+          <li><a href="/autoencoders/sparse.html">Sparse Autoencoders</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="uses-autoencoders">Uses of Autoencoders</a></li>
+      <li class="hidden" content="uses-autoencoders">
+        <ul>
+          <li><a href="/autoencoders/ip.html">Image Processing</a></li>
+          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+        </ul>
+      </li>
+      <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
+      <li class="hidden last" content="nlp">
+        <ul>
+          <li><a href="/nlp">Introduction</a></li>
+          <li><a href="/nlp/word-phrase.html">Word and Phrase Representations</a></li>
+          <li><a href="/nlp/bilingual.html">Bilingual Phrase Representations</a></li>
+          <li><a href="/nlp/recursive.html">Recursive Autoencoders</a></li>
+          <li><a href="/nlp/sentiment.html">Sentiment Analysis</a></li>
+          <li><a href="/nlp/paraphrase.html">Paraphrase Detection</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Variational Autoencoders</h2>
+    A variational autoencoder (VAE) resembles a classical autoencoder and is a neural network consisting of an encoder, a decoder and a loss function. They let us design generative models of data and fit them to large data-sets, and can also be used for image generation and reinforcement learning. For example, a practical application may be to generate trees for a forest in a video game, which are all similar but not the same. They are a recent advancement in machine learning, having only been defined in 2013. However, they solve a long standing problem in machine-learning and do so with weak assumptions and fast training via back-propagation, which explains their fast rise in popularity <span class="cite">[<a href="#XDoersch2016">1</a>]</span>. <!--l. 41-->
+    <p class="noindent">The first layer of the VAE is the encoder which will take the input and convert it into a latent vector. This could be done by reducing the mean squared error of the input and output, like a standard autoencoder. With images for example, we can now represent something like a picture of a cat as the vector [1.9, 8.2, 2.1]. The vector is called latent because given just an output from the model, we don&#8217;t necessarily know which settings of the variables in the latent vector generated this output, without inferring it using something like computer vision. <!--l. 50--></p>
+    <p class="noindent">However to make the VAE a generative model, we must add a constraint on the encoding network that forces it to generate latent vectors that roughly follow a Gaussian distribution. This is the key feature of variational autoencoders, and allows the user to generate an output similar to the database the VAE was trained on by inputting a latent vector straight to the decoder. The problem now, is to make the network&#8217;s latent variables match the unit Gaussian distribution as closely as possible while also accurately providing an output similar to the input. <!--l. 60--></p>
+    <p class="noindent">For a mathematically simplified explanation, this is done by changing our loss term to be the sum of the mean squared error and a latent loss. The mean squared error as usual, allows us to measure how accurately the network reconstructs images. The latent loss however, is the Kullback-Liebler divergence (KL divergence), which can measure how closely the variables match a unit Gaussian distribution. The encoder can now be changed to generate a vector of means and a vector of standard deviations, rather than a vector of real variables. From this the KL divergence can be calculated. <!--l. 70--></p>
+    <p class="noindent"></p>
+    <div class="figure">
+      <a id="x1-2r1"></a> <!--l. 72-->
+      <p class="noindent"><img alt="PIC" src="../img/autoencoders/vae-diagram.jpg"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Simplification of layers in a variational autoencoder <span class="cite">[<a href="#Xkvfrans">2</a>]</span>.</span>
+      </div><!--tex4ht:label?: x1-2r1 -->
+      <!--l. 76-->
+      <p class="noindent"></p>
+    </div>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-1000"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XDoersch2016"></a>Doersch C. Tutorial on Variational Autoencoders;. Available from: <a class="url" href="https://arxiv.org/abs/1606.05908"><span class="cmtt-10">https://arxiv.org/abs/1606.05908</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="Xkvfrans"></a>Frans K. Variational Autoencoders Explained;. Available from: <a class="url" href="http://kvfrans.com/variational-autoencoders-explained/"><span class="cmtt-10">http://kvfrans.com/variational-_autoencoders-_explained/</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>

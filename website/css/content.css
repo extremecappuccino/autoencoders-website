@@ -81,3 +81,16 @@ img.smaller {
 .navigation {
   margin-top: 50px;
 }
+
+.cmti-10 {
+  font-style: italic;
+}
+
+.cmbx-10 {
+  font-weight: bold;
+}
+
+.paragraphHead,
+.likeparagraphHead {
+  display: block;
+}

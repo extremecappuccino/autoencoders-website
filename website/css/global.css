@@ -166,3 +166,7 @@ li.last {
   background-color: rgba(86, 86, 86, 0.075);
   color: black !important;
 }
+
+hr {
+  display: none;
+}

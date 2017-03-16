@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Autoencoders: Contractive Autoencoders</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/normalise.css">
+  <link rel="stylesheet" type="text/css" href="../css/global.css">
+  <link rel="stylesheet" type="text/css" href="../css/content.css">
+</head>
+<body>
+  <!-- Menu -->
+  <span class="hamburger"></span>
+  <nav class="hidden">
+    <div class="brand">
+      <a href="/"><img src="../img/logo.svg"> AUTOENCODERS</a>
+    </div>
+    <ul>
+      <li><a href="#" content="neural-networks">Neural Networks</a></li>
+      <li class="hidden" content="neural-networks">
+        <ul>
+          <li><a href="/neural-networks">Introduction</a></li>
+          <li><a href="/neural-networks/neurons.html">Artificial Neurons</a></li>
+          <li><a href="/neural-networks/learning.html">Learning</a></li>
+          <li><a href="/neural-networks/regularisation.html">Regularisation</a></li>
+          <li><a href="/neural-networks/optimisers.html">Optimisers</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="autoencoders">Autoencoders</a></li>
+      <li class="hidden" content="autoencoders">
+        <ul>
+          <li><a href="/autoencoders">Introduction</a></li>
+          <li><a href="/autoencoders/denoising.html">Autoencoders for Denoising</a></li>
+          <li><a href="/autoencoders/variational.html">Variational Autoencoders</a></li>
+          <li><a href="/autoencoders/sparse.html">Sparse Autoencoders</a></li>
+        </ul>
+      </li>
+      <li><a href="#" content="uses-autoencoders">Uses of Autoencoders</a></li>
+      <li class="hidden" content="uses-autoencoders">
+        <ul>
+          <li><a href="/autoencoders/ip.html">Image Processing</a></li>
+          <li><a href="/autoencoders/pretraining.html">Pretraining</a></li>
+        </ul>
+      </li>
+      <li class="last"><a href="#" content="nlp">Autoencoders in NLP</a></li>
+      <li class="hidden last" content="nlp">
+        <ul>
+          <li><a href="/nlp">Introduction</a></li>
+          <li><a href="/nlp/word-phrase.html">Word and Phrase Representations</a></li>
+          <li><a href="/nlp/bilingual.html">Bilingual Phrase Representations</a></li>
+          <li><a href="/nlp/recursive.html">Recursive Autoencoders</a></li>
+          <li><a href="/nlp/sentiment.html">Sentiment Analysis</a></li>
+          <li><a href="/nlp/paraphrase.html">Paraphrase Detection</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div class="close"></div>
+  </nav>
+  <div class="overlay hidden"></div>
+  
+  <div class="container">
+    <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Contractive Autoencoders</h2>
+    The aim of a contractive autoencoder is to make the learned representation be robust towards small changes around its training examples. As with most other autoencoder variations, this is done by adding a penalty term to the cost function that we are trying to minimize, which penalizes the representation&#8217;s sensitivity to the training input. The first part of the cost function is the mean squared error, for linear reconstructions, as usual but the Frobenius norm of the Jacobian matrix is also added <span class="cite">[<a href="#XAgustinus_Kristiadi_Blog">1</a>]</span>. We can calculate it from the formula:
+    <center class="par-math-display">
+      $||J_{h}(x)||_{F}^{2}=\sum_{ij}\left(\frac{\delta h_{j}(x)}{\delta x_{i}}\right)$
+    </center><!--l. 38-->
+    <p class="nopar"><!--l. 41--></p>
+    <p class="noindent">The formula contains a partial derivative of the activation value of a neuron with respect to the input value, and so it is possible to see how a large increase in the activation value will correspond to an increase in the Jacobian, penalizing the representation. <!--l. 46--></p>
+    <p class="noindent">From this formula we can see that sparse autoencoders are likely to correspond to a contractive mapping while not explicitly learning it through their learning criterion. This is due to the low activation values of the neurons in sparse autoencoders being likely to occur in the left part of the Sigmoid activation function, which is almost flat. The neurons will therefore have a small first derivative which corresponds to a small entry in the Jacobian. <!--l. 54--></p>
+    <p class="noindent">Contractive autoencoders are also very similar to denoising autoencoders. Both encourage robustness but while denoising autoencoders encourage it with the reconstruction $(f\circ g)(x)$, contractive autoencoders do so with the encoder function $f(x)$. This is important when relying on the robustness of the encoder function rather than the reconstruction, for example for classification which only uses the encoder. Denoising autoencoders also obtain robustness stochastically, by randomly adding noise to the input, while contractive autoencoders obtain robustness analytically, by penalizing the magnitude of the first derivative <span class="cite">[<a href="#XRifai_et_al_2011">2</a>]</span>.</p>
+    <!-- END: LyX Generated HTML -->
+  </div>
+  <div class="well">
+    <div class="container">
+      <!-- BEGIN: LyX Generated HTML -->
+      <h3 class="likesectionHead"><a id="x1-1000"></a>References</h3><!--l. 1-->
+      <p class="noindent"></p>
+      <div class="thebibliography">
+        <p class="bibitem"><span class="biblabel">[1]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XAgustinus_Kristiadi_Blog"></a>Kristiadi A. Deriving Contractive Autoencoder and Implementing it in Keras;. Available from: <a class="url" href="http://wiseodd.github.io/techblog/2016/12/05/contractive-autoencoder/"><span class="cmtt-10">http://wiseodd.github.io/techblog/2016/12/05/contractive-_autoencoder/</span></a>.</p>
+        <p class="bibitem"><span class="biblabel">[2]<span class="bibsp">&#x00A0;&#x00A0;&#x00A0;</span></span><a id="XRifai_et_al_2011"></a>et&#x00A0;al R. Contractive Auto-Encoders: Explicit Invariance During Feature Extraction. Proceedings of the 28th International Conference on Machine Learning. 2011;Available from: <a class="url" href="http://machinelearning.wustl.edu/mlpapers/paper_files/ICML2011Rifai_455.pdf"><span class="cmtt-10">http://machinelearning.wustl.edu/mlpapers/paper_files/ICML2011Rifai_455.pdf</span></a>.</p>
+      </div>
+      <!-- END: LyX Generated HTML -->
+    </div>
+  </div>
+  <script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/global.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+  </script>
+  <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+</body>
+</html>
