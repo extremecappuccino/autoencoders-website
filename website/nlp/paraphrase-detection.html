@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Autoencoders: Word and Phrase Representations</title>
+  <title>Autoencoders: Paraphrase Detection</title>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300|Source+Code+Pro" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="../css/normalise.css">
   <link rel="stylesheet" type="text/css" href="../css/global.css">
@@ -59,77 +59,78 @@
 
   <div class="container">
     <!-- BEGIN: LyX Generated HTML -->
+    <h2 class="titleHead">Paraphrase Detection</h2>
     <h3 class="sectionHead"><span class="titlemark">1</span> <a id="x1-10001"></a>Improving Recursive Autoencoders</h3><!--l. 34-->
-  	<p class="noindent"></p>
-  	<hr class="figure">
-  	<div class="figure">
-  		<a id="x1-1001r1"></a> <!--l. 36-->
-  		<p class="noindent"><img alt="PIC" src="../img/nlp/unfolding-rae.png"><br></p>
-  		<div class="caption">
-  			<span class="id">Figure&#x00A0;1:</span> <span class="content">Unfolding recursive autoencoder.</span>
-  		</div><!--tex4ht:label?: x1-1001r1 -->
-  		<!--l. 40-->
-  		<p class="noindent"></p>
-  	</div>
-  	<hr class="endfigure">
-  	<!--l. 43-->
-  	<p class="indent">We will now propose various improvements to the recursive autoencoders on the previous page:</p>
-  	<ol class="enumerate1">
-  		<li class="enumerate" id="x1-1003x1"><span class="cmbx-10">Unfolding Recursive Autoencoders:</span> We make a change to the standard recursive autoencoder model, by now asking the autoencoder to reconstruct the entire sequence so far, and calculating the error accordingly. This means the RAE can capture the increased importance of a child node when this child represents a larger subtree.</li>
-  		<li class="enumerate" id="x1-1005x2"><span class="cmbx-10">Deep Recursive Autoencoders:</span> It is also possible to allow multiple encoding layers at each node, by adding an extra hidden layer.</li>
-  		<li class="enumerate" id="x1-1007x3"><span class="cmbx-10">Using Parse Tree:</span> Instead of choosing any random tree structure, or greedily finding a tree structure to use for our recursive autoencoder, we use the parse tree for the given phrase as the base for our RAE structure.</li>
-  	</ol>
-  	<h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Testing Similarity</h3><!--l. 62-->
-  	<p class="noindent"></p>
-  	<h4 class="subsectionHead"><span class="titlemark">2.1</span> <a id="x1-30002.1"></a>Producing a Similarity Matrix</h4><!--l. 64-->
-  	<p class="noindent"></p>
-  	<hr class="figure">
-  	<div class="figure">
-  		<a id="x1-3001r2"></a> <!--l. 66-->
-  		<p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/sim-matrix.png"><br></p>
-  		<div class="caption">
-  			<span class="id">Figure&#x00A0;2:</span> <span class="content">Similarity matrix.</span>
-  		</div><!--tex4ht:label?: x1-3001r2 -->
-  		<!--l. 70-->
-  		<p class="noindent"></p>
-  	</div>
-  	<hr class="endfigure">
-  	<!--l. 73-->
-  	<p class="indent">We use unfolding recursive autoencoders to generate phrase representations for two given phrases. To give the best representation, we use the parse tree of the phrase as the RAE tree. <!--l. 77--></p>
-  	<p class="indent">We then create a variable-sized similarity matrix. The rows are &#8216;labelled&#8217; with each word vector, followed by each non-terminal RAE tree node vector, for the first phrase, and the columns similarly for the second phrase. It is filled with Euclidean distances between the respective vectors.</p>
-  	<h4 class="subsectionHead"><span class="titlemark">2.2</span> <a id="x1-40002.2"></a>Dynamic Pooling</h4><!--l. 86-->
-  	<p class="noindent"></p>
-  	<hr class="figure">
-  	<div class="figure">
-  		<a id="x1-4001r3"></a> <!--l. 88-->
-  		<p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/dynamic-pooling.png"><br></p>
-  		<div class="caption">
-  			<span class="id">Figure&#x00A0;3:</span> <span class="content">Example of the dynamic min-pooling layer. Source: <span class="cite">[<a href="#XSocher2014">1</a>]</span>.</span>
-  		</div><!--tex4ht:label?: x1-4001r3 -->
-  		<!--l. 92-->
-  		<p class="noindent"></p>
-  	</div>
-  	<hr class="endfigure">
-  	<!--l. 95-->
-  	<p class="indent">Although there are already tell-tale signs for paraphrases at this point (e.g. low distances close to the diagonal, from similar word vectors), is not extremely useful since the dimensions of the matrix are variable, depending on the size of the RAE trees. <!--l. 100--></p>
-  	<p class="indent">We want to convert our similarity matrix $S$ into a matrix $S'$ with fixed dimensions $n \times n$. We do this simply by partitioning the rows and columns of $S$ into $n$ parts. $S'$ is then defined as the matrix of minimum values of each respective region formed by the previous step. <!--l. 106--></p>
-  	<p class="indent">Note that other approaches are possible, such as using an average, but this is more likely to lose important correlations. <!--l. 109--></p>
-  	<p class="indent">We can then determine whether two phrases are paraphrases simply by considering this final matrix $S'$. <span class="cite">[<a href="#XSocher2014">1</a>,&#x00A0;<a href="#XRSEHJPANCM2011">2</a>]</span></p>
-  	<h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-50003"></a>Implementation</h3><!--l. 115-->
-  	<p class="noindent"></p>
-  	<hr class="figure">
-  	<div class="figure">
-  		<a id="x1-5001r4"></a> <!--l. 117-->
-  		<p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/paraphrase-detection.png"><br></p>
-  		<div class="caption">
-  			<span class="id">Figure&#x00A0;4:</span> <span class="content">The results achieved by Socher et al using this implementation. Table shows nearest neighbours of randomly chosen phrases. Source: <span class="cite">[<a href="#XSocher2014">1</a>]</span>.</span>
-  		</div><!--tex4ht:label?: x1-5001r4 -->
-  		<!--l. 122-->
-  		<p class="noindent"></p>
-  	</div>
-  	<hr class="endfigure">
-  	<!--l. 125-->
-  	<p class="indent">Code that implements this method can be found at <a href="http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection">http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection</a>.</p>
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-1001r1"></a> <!--l. 36-->
+      <p class="noindent"><img alt="PIC" src="../img/nlp/unfolding-rae.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;1:</span> <span class="content">Unfolding recursive autoencoder.</span>
+      </div><!--tex4ht:label?: x1-1001r1 -->
+      <!--l. 40-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 43-->
+    <p class="indent">We will now propose various improvements to the recursive autoencoders on the previous page:</p>
+    <ol class="enumerate1">
+      <li class="enumerate" id="x1-1003x1"><span class="cmbx-10">Unfolding Recursive Autoencoders:</span> We make a change to the standard recursive autoencoder model, by now asking the autoencoder to reconstruct the entire sequence so far, and calculating the error accordingly. This means the RAE can capture the increased importance of a child node when this child represents a larger subtree.</li>
+      <li class="enumerate" id="x1-1005x2"><span class="cmbx-10">Deep Recursive Autoencoders:</span> It is also possible to allow multiple encoding layers at each node, by adding an extra hidden layer.</li>
+      <li class="enumerate" id="x1-1007x3"><span class="cmbx-10">Using Parse Tree:</span> Instead of choosing any random tree structure, or greedily finding a tree structure to use for our recursive autoencoder, we use the parse tree for the given phrase as the base for our RAE structure.</li>
+    </ol>
+    <h3 class="sectionHead"><span class="titlemark">2</span> <a id="x1-20002"></a>Testing Similarity</h3><!--l. 62-->
+    <p class="noindent"></p>
+    <h4 class="subsectionHead"><span class="titlemark">2.1</span> <a id="x1-30002.1"></a>Producing a Similarity Matrix</h4><!--l. 64-->
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-3001r2"></a> <!--l. 66-->
+      <p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/sim-matrix.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;2:</span> <span class="content">Similarity matrix.</span>
+      </div><!--tex4ht:label?: x1-3001r2 -->
+      <!--l. 70-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 73-->
+    <p class="indent">We use unfolding recursive autoencoders to generate phrase representations for two given phrases. To give the best representation, we use the parse tree of the phrase as the RAE tree. <!--l. 77--></p>
+    <p class="indent">We then create a variable-sized similarity matrix. The rows are &#8216;labelled&#8217; with each word vector, followed by each non-terminal RAE tree node vector, for the first phrase, and the columns similarly for the second phrase. It is filled with Euclidean distances between the respective vectors.</p>
+    <h4 class="subsectionHead"><span class="titlemark">2.2</span> <a id="x1-40002.2"></a>Dynamic Pooling</h4><!--l. 86-->
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-4001r3"></a> <!--l. 88-->
+      <p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/dynamic-pooling.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;3:</span> <span class="content">Example of the dynamic min-pooling layer. Source: <span class="cite">[<a href="#XSocher2014">1</a>]</span>.</span>
+      </div><!--tex4ht:label?: x1-4001r3 -->
+      <!--l. 92-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 95-->
+    <p class="indent">Although there are already tell-tale signs for paraphrases at this point (e.g. low distances close to the diagonal, from similar word vectors), is not extremely useful since the dimensions of the matrix are variable, depending on the size of the RAE trees. <!--l. 100--></p>
+    <p class="indent">We want to convert our similarity matrix $S$ into a matrix $S'$ with fixed dimensions $n \times n$. We do this simply by partitioning the rows and columns of $S$ into $n$ parts. $S'$ is then defined as the matrix of minimum values of each respective region formed by the previous step. <!--l. 106--></p>
+    <p class="indent">Note that other approaches are possible, such as using an average, but this is more likely to lose important correlations. <!--l. 109--></p>
+    <p class="indent">We can then determine whether two phrases are paraphrases simply by considering this final matrix $S'$. <span class="cite">[<a href="#XSocher2014">1</a>,&#x00A0;<a href="#XRSEHJPANCM2011">2</a>]</span></p>
+    <h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-50003"></a>Implementation</h3><!--l. 115-->
+    <p class="noindent"></p>
+    <hr class="figure">
+    <div class="figure">
+      <a id="x1-5001r4"></a> <!--l. 117-->
+      <p class="noindent"><img class="smaller" alt="PIC" src="../img/nlp/paraphrase-detection.png"><br></p>
+      <div class="caption">
+        <span class="id">Figure&#x00A0;4:</span> <span class="content">The results achieved by Socher et al using this implementation. Table shows nearest neighbours of randomly chosen phrases. Source: <span class="cite">[<a href="#XSocher2014">1</a>]</span>.</span>
+      </div><!--tex4ht:label?: x1-5001r4 -->
+      <!--l. 122-->
+      <p class="noindent"></p>
+    </div>
+    <hr class="endfigure">
+    <!--l. 125-->
+    <p class="indent">Code that implements this method can be found at <a href="http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection">http://www.socher.org/index.php/Main/DynamicPoolingAndUnfoldingRecursiveAutoencodersForParaphraseDetection</a>.</p>
 
       <!-- END: LyX Generated HTML -->
   </div>
