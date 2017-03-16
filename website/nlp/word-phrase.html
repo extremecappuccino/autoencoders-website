@@ -203,7 +203,7 @@
     <p class="noindent"></p>
     <h4 class="subsectionHead"><span class="titlemark">1.3</span> <a id="x1-40001.3"></a>Generating Word Vectors</h4><!--l. 173-->
     <p class="noindent">The model we have so far is fine, except for the fact that each probabibility distribution $\mathbf{p}_{w}$ will generate a vector containing hundreds of thousands of entries (potentially as large as the number of words in $W$). A common approach to reducing the dimensionality of this vector (generally to 50 or 100 dimensions) is to consider a co-occurence matrix that only includes the most relevant context words, and use principal component analysis (PCA) to reduce dimensionality without losing too much meaning. <span class="cite">[<a href="#XWeb1">2</a>]</span> The use of autoencoders is an alternative method. <!--l. 184--></p>
-    <p class="noindent"><span class="paragraphHead"><a id="x1-50001.3"></a><span class="cmbx-10">An Approach using Autoencoders</span></span> As the input, we provide an <a href="/autoencoders">autoencoder</a> with a probability distribution $\sqrt{\mathbf{p}_{w}}$. We use a standard squared difference cost function:</p>
+    <p class="noindent"><span class="paragraphHead"><a id="x1-50001.3"></a><span class="cmbx-10">An Approach using Autoencoders</span></span> As the input, we provide an <a href="../autoencoders">autoencoder</a> with a probability distribution $\sqrt{\mathbf{p}_{w}}$. We use a standard squared difference cost function:</p>
     <center class="math-display">
       <a id="x1-5001r1"></a>$\Vert g(f(\mathbf{p}_{w}))-\sqrt{\mathbf{p}_{w}}\Vert ^{2}$
     </center><!--l. 191-->
@@ -227,7 +227,7 @@
     <p class="noindent"><span class="paragraphHead"><a id="x1-90002"></a><span class="cmbx-10">Improving Phrase Representations</span></span></p>
     <div class="quote">
       <!--l. 246-->
-      <p class="noindent">See <a href="/nlp/recursive.html">Recursive Autoencoders</a>, <a href="/nlp/sentiment.html">Sentiment Analysis</a> and <a href="/nlp/paraphrase.html">Paraphrase Detection</a></p>
+      <p class="noindent">See <a href="recursive.html">Recursive Autoencoders</a>, <a href="sentiment.html">Sentiment Analysis</a> and <a href="paraphrase.html">Paraphrase Detection</a></p>
     </div>As we discussed earlier, this is a relitavely poor method for representing phrases. We discuss a much better method on the pages for sentiment analysis and paraphrase detection, which uses recursive autoencoders. <!--l. 254-->
     <p class="noindent"></p>
     <h3 class="sectionHead"><span class="titlemark">3</span> <a id="x1-100003"></a>Implementation</h3><!--l. 256-->
@@ -246,6 +246,11 @@
     <!--l. 271-->
     <p class="indent">An example implementation in Python, using TensorFlow can be found at <a href="https://github.com/ParallelDots/WordEmbeddingAutoencoder">https://github.com/ParallelDots/WordEmbeddingAutoencoder</a>.</p>
     <!-- END: LyX Generated HTML -->
+    <div class="navigation">
+      <a class="button" href="index.html">Previous</a>
+      <a class="button dark next" href="bilingual.html">Next</a>
+      <div class="clearfix"></div>
+    </div>
   </div>
   <div class="well">
     <div class="container">
